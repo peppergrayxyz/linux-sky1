@@ -1,0 +1,751 @@
+From 848a5b720f5619b7343fa226a2f3a1c10dd407a0 Mon Sep 17 00:00:00 2001
+From: Entrpi <entrpi@proton.me>
+Date: Fri, 5 Dec 2025 10:52:58 +0800
+Subject: [PATCH 41/53] Enable Cix Sky1 PDC, Thermal, and Device Tree nodes
+
+This commit integrates critical vendor drivers required for power management,
+thermal safety, and proper interrupt routing on the Radxa Orion O6 (Cix Sky1 SoC).
+
+Key Changes:
+1.  **Power Domain Controller (PDC):**
+    *   Ported drivers/irqchip/irq-sky1-pdc.c from vendor kernel.
+    *   This driver is ESSENTIAL for the GPU (Panthor) and other peripherals to
+        receive interrupts. Without it, the GPU hangs on job submission.
+    *   Added CONFIG_SKY1_PDC to Kconfig/Makefile.
+
+2.  **Thermal Management:**
+    *   Ported drivers/thermal/cix/cix_scmi_em.c (SCMI Energy Model).
+    *   Ported drivers/thermal/cix/cix_cpu_ipa.c (Intelligent Power Allocation).
+    *   Created include/linux/cix/cix_scmi_em.h.
+    *   Added CONFIG_CIX_SCMI_ENERGY_MODEL and CONFIG_CIX_CPU_IPA.
+    *   This enables thermal zones, preventing hardware overheating.
+
+3.  **Device Tree (DTS):**
+    *   Updated sky1.dtsi: Changed root interrupt parent to &pdc.
+    *   Updated sky1-orion-o6.dts: Enabled &npu, &sensorhub, and &sfh_scp.
+
+4.  **Architecture:**
+    *   Added CONFIG_ARCH_CIX to arch/arm64/Kconfig to guard these new drivers.
+
+5.  **Ethernet:**
+    *   Patched macb_main.c to support cdns,sky1-gem, fixing probe failure.
+
+This state provides a functional base for GPU acceleration and safe operation.
+---
+ arch/arm64/Kconfig                        |   5 +-
+ arch/arm64/boot/dts/cix/sky1-orion-o6.dts |  12 +
+ arch/arm64/boot/dts/cix/sky1.dtsi         |   2 +-
+ drivers/irqchip/Kconfig                   |   8 +
+ drivers/irqchip/Makefile                  |   3 +-
+ drivers/irqchip/irq-sky1-pdc.c            | 267 ++++++++++++++++++++++
+ drivers/net/ethernet/cadence/macb_main.c  |   1 +
+ drivers/thermal/Kconfig                   |  14 ++
+ drivers/thermal/Makefile                  |   1 +
+ drivers/thermal/cix/Makefile              |   3 +
+ drivers/thermal/cix/cix_cpu_ipa.c         | 127 ++++++++++
+ drivers/thermal/cix/cix_scmi_em.c         | 106 +++++++++
+ include/linux/cix/cix_scmi_em.h           |  30 +++
+ 13 files changed, 575 insertions(+), 4 deletions(-)
+ create mode 100644 drivers/irqchip/irq-sky1-pdc.c
+ create mode 100644 drivers/thermal/cix/Makefile
+ create mode 100644 drivers/thermal/cix/cix_cpu_ipa.c
+ create mode 100644 drivers/thermal/cix/cix_scmi_em.c
+ create mode 100644 include/linux/cix/cix_scmi_em.h
+
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index 6663ffd23f25..0a3ede870df8 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -1593,10 +1593,11 @@ config ARCH_SUPPORTS_KEXEC_SIG
+ config ARCH_SUPPORTS_KEXEC_IMAGE_VERIFY_SIG
+ 	def_bool y
+ 
+-config ARCH_DEFAULT_KEXEC_IMAGE_VERIFY_SIG
++config ARCH_SUPPORTS_KEXEC_HANDOVER
+ 	def_bool y
+ 
+-config ARCH_SUPPORTS_KEXEC_HANDOVER
++config ARCH_CIX
++	bool "Cix Technology Group SoC Support"
+ 	def_bool y
+ 
+ config ARCH_SUPPORTS_CRASH_DUMP
+diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
+index fe40ac3d5731..38c7b61976e2 100644
+--- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
++++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
+@@ -2392,3 +2392,15 @@ map1 {
+ &cix_ipa {
+ 	status = "okay";
+ };
++
++&npu {
++	status = "okay";
++};
++
++&sensorhub {
++	status = "okay";
++};
++
++&sfh_scp {
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
+index 0962fc251a72..13081115b0ea 100644
+--- a/arch/arm64/boot/dts/cix/sky1.dtsi
++++ b/arch/arm64/boot/dts/cix/sky1.dtsi
+@@ -21,7 +21,7 @@
+ /memreserve/ 0x80000000 0x6000000;
+ 
+ / {
+-	interrupt-parent = <&gic>;
++	interrupt-parent = <&pdc>;
+ 	#address-cells = <2>;
+ 	#size-cells = <2>;
+ 
+diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
+index a61c6dc63c29..dd1432f7cb55 100644
+--- a/drivers/irqchip/Kconfig
++++ b/drivers/irqchip/Kconfig
+@@ -413,6 +413,14 @@ config IMX_GPCV2
+ 	help
+ 	  Enables the wakeup IRQs for IMX platforms with GPCv2 block
+ 
++config SKY1_PDC
++	bool
++	depends on ARM_GIC
++	default y
++	select IRQ_DOMAIN
++	help
++	  Enables the wakeup IRQs for SKY1 platforms with PDC block
++
+ config IRQ_MXS
+ 	def_bool y if MACH_ASM9260 || ARCH_MXS
+ 	select IRQ_DOMAIN
+diff --git a/drivers/irqchip/Makefile b/drivers/irqchip/Makefile
+index 3de083f5484c..b2b07a891c35 100644
+--- a/drivers/irqchip/Makefile
++++ b/drivers/irqchip/Makefile
+@@ -86,7 +86,8 @@ obj-$(CONFIG_MVEBU_GICP)		+= irq-mvebu-gicp.o
+ obj-$(CONFIG_MVEBU_ICU)			+= irq-mvebu-icu.o
+ obj-$(CONFIG_MVEBU_ODMI)		+= irq-mvebu-odmi.o
+ obj-$(CONFIG_MVEBU_PIC)			+= irq-mvebu-pic.o
+-obj-$(CONFIG_MVEBU_SEI)			+= irq-mvebu-sei.o
++obj-$(CONFIG_MVEBU_SEI)		+= irq-mvebu-sei.o
++obj-$(CONFIG_SKY1_PDC)			+= irq-sky1-pdc.o
+ obj-$(CONFIG_LS_EXTIRQ)			+= irq-ls-extirq.o
+ obj-$(CONFIG_LS_SCFG_MSI)		+= irq-ls-scfg-msi.o
+ obj-$(CONFIG_ARCH_ASPEED)		+= irq-aspeed-vic.o irq-aspeed-i2c-ic.o irq-aspeed-scu-ic.o
+diff --git a/drivers/irqchip/irq-sky1-pdc.c b/drivers/irqchip/irq-sky1-pdc.c
+new file mode 100644
+index 000000000000..5e53387cf781
+--- /dev/null
++++ b/drivers/irqchip/irq-sky1-pdc.c
+@@ -0,0 +1,267 @@
++// SPDX-License-Identifier: GPL-2.0-only
++
++#include <linux/of_address.h>
++#include <linux/of_irq.h>
++#include <linux/slab.h>
++#include <linux/irqchip.h>
++#include <linux/syscore_ops.h>
++#include <linux/arm-smccc.h>
++
++#define SKY1_SIP_PDC                     0xC2000009
++#define SKY1_SIP_CONFIG_PDC_SET_WAKE     0x02
++
++#define PDC_MAX_IRQS            1000
++
++struct irq_domain *cix_domain;
++
++struct pdcv1_irqchip_data {
++	struct raw_spinlock     rlock;
++	void __iomem            *pdc_base;
++};
++
++static int pdcv1_wakeup_source_save(void)
++{
++	return 0;
++}
++
++static void pdcv1_wakeup_source_restore(void)
++{
++	return;
++}
++
++static struct syscore_ops sky1_pdc_syscore_ops = {
++	.suspend        = pdcv1_wakeup_source_save,
++	.resume         = pdcv1_wakeup_source_restore,
++};
++
++static int sky1_pdc_irq_set_wake(struct irq_data *d, unsigned int on)
++{
++	struct pdcv1_irqchip_data *cd = d->chip_data;
++	struct arm_smccc_res res;
++	unsigned long flags;
++
++	raw_spin_lock_irqsave(&cd->rlock, flags);
++	arm_smccc_smc(SKY1_SIP_PDC, SKY1_SIP_CONFIG_PDC_SET_WAKE,
++		d->hwirq - 32, on, 0, 0, 0, 0, &res);
++	raw_spin_unlock_irqrestore(&cd->rlock, flags);
++
++	return 0;
++}
++
++static struct irq_chip pdcv1_irqchip_data_chip = {
++	.name                   = "PDCv1",
++	.irq_eoi                = irq_chip_eoi_parent,
++	.irq_mask               = irq_chip_mask_parent,
++	.irq_unmask             = irq_chip_unmask_parent,
++	.irq_set_wake           = sky1_pdc_irq_set_wake,
++	.irq_retrigger          = irq_chip_retrigger_hierarchy,
++	.irq_set_type           = irq_chip_set_type_parent,
++#ifdef CONFIG_SMP
++	.irq_set_affinity       = irq_chip_set_affinity_parent,
++#endif
++};
++
++static int sky1_pdc_domain_translate(struct irq_domain *d,
++				      struct irq_fwspec *fwspec,
++				      unsigned long *hwirq,
++				      unsigned int *type)
++{
++	if (is_of_node(fwspec->fwnode)) {
++		if (fwspec->param_count != 3)
++			return -EINVAL;
++
++		/* No PPI should point to this domain */
++		if (fwspec->param[0] != 0)
++			return -EINVAL;
++
++		*hwirq = fwspec->param[1] + 32;
++		*type = fwspec->param[2];
++		return 0;
++	} else if (is_acpi_device_node(fwspec->fwnode)) {
++		if(fwspec->param_count != 2)
++			return -EINVAL;
++
++		if (fwspec->param[0] < 32) {
++			pr_err(FW_BUG "Illegal GSI%d translation request\n",
++			       fwspec->param[0]);
++			return -EINVAL;
++		}
++		*hwirq = fwspec->param[0];
++		*type = fwspec->param[1];
++
++		WARN_ON(*type == IRQ_TYPE_NONE);
++		return 0;
++	}
++
++	return -EINVAL;
++}
++
++static int sky1_pdc_domain_alloc(struct irq_domain *domain,
++				  unsigned int irq, unsigned int nr_irqs,
++				  void *data)
++{
++	struct irq_fwspec *fwspec = data;
++	struct irq_fwspec parent_fwspec;
++	irq_hw_number_t hwirq;
++	unsigned int type;
++	int err;
++	int i;
++
++	err = sky1_pdc_domain_translate(domain, fwspec, &hwirq, &type);
++	if (err)
++		return err;
++
++	if (hwirq >= PDC_MAX_IRQS)
++		return -EINVAL;
++
++	for (i = 0; i < nr_irqs; i++) {
++		irq_domain_set_hwirq_and_chip(domain, irq + i, hwirq + i,
++				&pdcv1_irqchip_data_chip, domain->host_data);
++	}
++
++	parent_fwspec = *fwspec;
++	parent_fwspec.fwnode = domain->parent->fwnode;
++
++	return irq_domain_alloc_irqs_parent(domain, irq, nr_irqs,
++					    &parent_fwspec);
++}
++
++static const struct irq_domain_ops pdcv1_irqchip_data_domain_ops = {
++	.translate      = sky1_pdc_domain_translate,
++	.alloc          = sky1_pdc_domain_alloc,
++	.free           = irq_domain_free_irqs_common,
++};
++
++static const struct of_device_id pdcv1_of_match[] = {
++	{ .compatible = "cix,sky1-pdc",  .data = (const void *) 2 },
++	{ /* END */ }
++};
++
++static int __init sky1_pdc_irqchip_init(struct device_node *node,
++			       struct device_node *parent)
++{
++	struct irq_domain *parent_domain, *domain;
++	struct pdcv1_irqchip_data *cd;
++	const struct of_device_id *id;
++
++	if (!parent) {
++		pr_err("%pOF: no parent, giving up\n", node);
++		return -ENODEV;
++	}
++
++	id = of_match_node(pdcv1_of_match, node);
++	if (!id) {
++		pr_err("%pOF: unknown compatibility string\n", node);
++		return -ENODEV;
++	}
++
++	parent_domain = irq_find_host(parent);
++	if (!parent_domain) {
++		pr_err("%pOF: unable to get parent domain\n", node);
++		return -ENXIO;
++	}
++
++	cd = kzalloc(sizeof(struct pdcv1_irqchip_data), GFP_KERNEL);
++	if (!cd) {
++		pr_err("%pOF: kzalloc failed!\n", node);
++		return -ENOMEM;
++	}
++
++	raw_spin_lock_init(&cd->rlock);
++
++	cd->pdc_base = of_iomap(node, 0);
++	if (!cd->pdc_base) {
++		pr_err("%pOF: unable to map pdc registers\n", node);
++		kfree(cd);
++		return -ENOMEM;
++	}
++
++	domain = irq_domain_add_hierarchy(parent_domain, 0, PDC_MAX_IRQS,
++					node, &pdcv1_irqchip_data_domain_ops, cd);
++	if (!domain) {
++		iounmap(cd->pdc_base);
++		kfree(cd);
++		return -ENOMEM;
++	}
++	irq_set_default_host(domain);
++
++	cix_domain = domain;
++
++	register_syscore_ops(&sky1_pdc_syscore_ops);
++
++	/*
++	 * Clear the OF_POPULATED flag set in of_irq_init so that
++	 * later the pdc power domain driver will not be skipped.
++	 */
++	of_node_clear_flag(node, OF_POPULATED);
++
++	return 0;
++}
++
++#ifdef CONFIG_ACPI
++static int __init sky1_acpi_pdc_irqchip_init(struct platform_device *pdev)
++{
++	struct irq_domain *domain;
++	struct pdcv1_irqchip_data *cd;
++
++	cd = kzalloc(sizeof(struct pdcv1_irqchip_data), GFP_KERNEL);
++	if (!cd) {
++		pr_err("%pACPI: kzalloc failed!\n", pdev);
++		return -ENOMEM;
++	}
++
++	raw_spin_lock_init(&cd->rlock);
++	struct resource *res_dp = platform_get_resource(pdev, IORESOURCE_MEM, 0);
++	cd->pdc_base = devm_ioremap_resource(&pdev->dev, res_dp);
++	if (!cd->pdc_base) {
++		pr_err("%pACPI: unable to map pdc registers\n", pdev);
++		kfree(cd);
++		return -ENOMEM;
++	}
++
++	domain = acpi_irq_create_hierarchy(0, PDC_MAX_IRQS, pdev->dev.fwnode,
++					   &pdcv1_irqchip_data_domain_ops, cd);
++
++	if (!domain) {
++		iounmap(cd->pdc_base);
++		kfree(cd);
++		return -ENOMEM;
++	}
++
++	irq_set_default_host(domain);
++	cix_domain = domain;
++
++	register_syscore_ops(&sky1_pdc_syscore_ops);
++
++	return 0;
++}
++
++static const struct acpi_device_id pdcv1_acpi_match[] = {
++	{ .id = "CIXHA019", .driver_data = 0 },
++	{ /* END */ },
++};
++
++static int pdc_probe(struct platform_device *p_dev)
++{
++	return sky1_acpi_pdc_irqchip_init(p_dev);
++}
++
++static struct platform_driver pdc_platform_driver = {
++	.probe = pdc_probe,
++	.driver = { .name = "sky1-pdc",
++		    .owner = THIS_MODULE,
++		    .acpi_match_table = ACPI_PTR(pdcv1_acpi_match) },
++};
++
++static int __init sky1_pdc_init(void) {
++	return platform_driver_register(&pdc_platform_driver);
++}
++
++core_initcall(sky1_pdc_init);
++#endif
++
++IRQCHIP_DECLARE(sky1_pdc, "cix,sky1-pdc", sky1_pdc_irqchip_init);
++
++MODULE_AUTHOR("Copyright 2024 Cix Technology Group Co., Ltd.");
++MODULE_DESCRIPTION("Cix Sky1 irq pdc driver");
++MODULE_LICENSE("GPL v2");
+diff --git a/drivers/net/ethernet/cadence/macb_main.c b/drivers/net/ethernet/cadence/macb_main.c
+index ca2386b83473..c891fae62d6b 100644
+--- a/drivers/net/ethernet/cadence/macb_main.c
++++ b/drivers/net/ethernet/cadence/macb_main.c
+@@ -5387,6 +5387,7 @@ static const struct of_device_id macb_dt_ids[] = {
+ 	{ .compatible = "cdns,np4-macb", .data = &np4_config },
+ 	{ .compatible = "cdns,pc302-gem", .data = &pc302gem_config },
+ 	{ .compatible = "cdns,gem", .data = &pc302gem_config },
++	{ .compatible = "cdns,sky1-gem", .data = &pc302gem_config },
+ 	{ .compatible = "cdns,sam9x60-macb", .data = &at91sam9260_config },
+ 	{ .compatible = "atmel,sama5d2-gem", .data = &sama5d2_config },
+ 	{ .compatible = "atmel,sama5d29-gem", .data = &sama5d29_config },
+diff --git a/drivers/thermal/Kconfig b/drivers/thermal/Kconfig
+index a09c188b9ad1..5e9c70d11441 100644
+--- a/drivers/thermal/Kconfig
++++ b/drivers/thermal/Kconfig
+@@ -517,4 +517,18 @@ config LOONGSON2_THERMAL
+ 	  is higher than the high temperature threshold or lower than the low
+ 	  temperature threshold, the interrupt will occur.
+ 
++config CIX_SCMI_ENERGY_MODEL
++	tristate "Cix SCMI Energy Model driver"
++	depends on ARM_SCMI_PROTOCOL && ARCH_CIX
++	help
++	  This driver provides support for Energy Model using SCMI protocol
++	  on Cix platforms.
++
++config CIX_CPU_IPA
++	tristate "Cix CPU IPA driver"
++	depends on ARCH_CIX
++	help
++	  This driver provides support for Intelligent Power Allocation (IPA)
++	  power numbers on Cix platforms.
++
+ endif
+diff --git a/drivers/thermal/Makefile b/drivers/thermal/Makefile
+index d7718978db24..6865331c677f 100644
+--- a/drivers/thermal/Makefile
++++ b/drivers/thermal/Makefile
+@@ -67,4 +67,5 @@ obj-$(CONFIG_AMLOGIC_THERMAL)     += amlogic_thermal.o
+ obj-$(CONFIG_SPRD_THERMAL)	+= sprd_thermal.o
+ obj-$(CONFIG_KHADAS_MCU_FAN_THERMAL)	+= khadas_mcu_fan.o
+ obj-$(CONFIG_LOONGSON2_THERMAL)	+= loongson2_thermal.o
++obj-$(CONFIG_ARCH_CIX)		+= cix/
+ obj-$(CONFIG_THERMAL_CORE_TESTING)	+= testing/
+diff --git a/drivers/thermal/cix/Makefile b/drivers/thermal/cix/Makefile
+new file mode 100644
+index 000000000000..fc75deeca9e4
+--- /dev/null
++++ b/drivers/thermal/cix/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0-only
++obj-$(CONFIG_CIX_SCMI_ENERGY_MODEL)	+= cix_scmi_em.o
++obj-$(CONFIG_CIX_CPU_IPA)		+= cix_cpu_ipa.o
+\ No newline at end of file
+diff --git a/drivers/thermal/cix/cix_cpu_ipa.c b/drivers/thermal/cix/cix_cpu_ipa.c
+new file mode 100644
+index 000000000000..103bf5463b18
+--- /dev/null
++++ b/drivers/thermal/cix/cix_cpu_ipa.c
+@@ -0,0 +1,127 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Generic Cix IPA support driver
++ *
++ * Copyright 2024 Cix Technology Group Co., Ltd.All Rights Reserved.
++ */
++
++#include <linux/device.h>
++#include <linux/export.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/platform_device.h>
++
++#define REG_OFFSET 0x40
++
++typedef struct {
++	volatile uint32_t off_cnt;
++	uint32_t rsvd[13];
++	int32_t dynamic_power;
++	int32_t static_power;
++} CPU_IPA_INFO;
++
++struct cpu_ipa {
++	struct device *dev;
++	void __iomem *regs;
++} *ci;
++
++static int cix_get_static_power(int cpu)
++{
++	int pcpu = MPIDR_AFFINITY_LEVEL(cpu_logical_map(cpu), 1);
++
++	CPU_IPA_INFO *info = ci->regs + pcpu * REG_OFFSET;
++
++	return info->static_power;
++}
++
++static int cix_get_dynamic_power(int cpu)
++{
++	int pcpu = MPIDR_AFFINITY_LEVEL(cpu_logical_map(cpu), 1);
++
++	CPU_IPA_INFO *info = ci->regs + pcpu * REG_OFFSET;
++
++	return info->dynamic_power;
++}
++
++int cix_get_static_power_cpus(cpumask_var_t cpus)
++{
++	int cpu;
++	int total_power = 0;
++
++	for_each_cpu(cpu, cpus) {
++		total_power += cix_get_static_power(cpu);
++	}
++	return total_power;
++}
++EXPORT_SYMBOL(cix_get_static_power_cpus);
++
++int cix_get_dynamic_power_cpus(cpumask_var_t cpus)
++{
++	int cpu;
++	int total_power = 0;
++
++	for_each_cpu(cpu, cpus) {
++		total_power += cix_get_dynamic_power(cpu);
++	}
++	return total_power;
++}
++EXPORT_SYMBOL(cix_get_dynamic_power_cpus);
++
++static int cpu_ipa_probe(struct platform_device *pdev)
++{
++	struct device *dev = &pdev->dev;
++
++	ci = devm_kzalloc(&pdev->dev, sizeof(*ci), GFP_KERNEL);
++	if (!ci)
++		return -ENOMEM;
++
++	ci->regs = devm_platform_ioremap_resource(pdev, 0);
++	if (IS_ERR(ci->regs))
++		return PTR_ERR(ci->regs);
++
++	ci->dev = dev;
++	platform_set_drvdata(pdev, ci);
++	return 0;
++}
++
++static void cpu_ipa_shutdown(struct platform_device *pdev)
++{
++	return;
++}
++
++#ifdef CONFIG_PM_SLEEP
++static int cpu_ipa_resume(struct device *dev)
++{
++	return 0;
++}
++
++static int cpu_ipa_suspend(struct device *dev)
++{
++	return 0;
++}
++#endif
++
++static const struct dev_pm_ops cpu_ipa_pm = {
++	SET_SYSTEM_SLEEP_PM_OPS(cpu_ipa_suspend, cpu_ipa_resume)
++};
++
++static const struct of_device_id cpu_ipa_of_match[] = {
++	{ .compatible = "cix,cpu-ipa", },
++	{ /* sentinel */ },
++};
++MODULE_DEVICE_TABLE(of, cpu_ipa_of_match);
++
++static struct platform_driver cpu_ipa_platdrv = {
++	.probe		= cpu_ipa_probe,
++	.shutdown	= cpu_ipa_shutdown,
++	.driver = {
++		.name	= "cpu-ipa",
++		.pm	= &cpu_ipa_pm,
++		.of_match_table = of_match_ptr(cpu_ipa_of_match),
++	},
++};
++module_platform_driver(cpu_ipa_platdrv);
++
++MODULE_DESCRIPTION("Generic Cix IPA support driver");
++MODULE_AUTHOR("Cixtech,Inc.");
++MODULE_LICENSE("GPL v2");
+diff --git a/drivers/thermal/cix/cix_scmi_em.c b/drivers/thermal/cix/cix_scmi_em.c
+new file mode 100644
+index 000000000000..474d5db2b76f
+--- /dev/null
++++ b/drivers/thermal/cix/cix_scmi_em.c
+@@ -0,0 +1,106 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * SCMI based Cix Energy Model driver
++ *
++ * Copyright 2024 Cix Technology Group Co., Ltd.All Rights Reserved.
++ */
++
++#include <linux/energy_model.h>
++#include <linux/module.h>
++#include <linux/pm_opp.h>
++#include <linux/scmi_protocol.h>
++#include <linux/units.h>
++#include <linux/cix/cix_scmi_em.h>
++
++static struct scmi_protocol_handle *ph;
++static const struct scmi_perf_proto_ops *perf_ops;
++
++static int __maybe_unused
++cix_scmi_get_em_power(struct device *dev, unsigned long *power,
++		   unsigned long *KHz)
++{
++	enum scmi_power_scale power_scale = perf_ops->power_scale_get(ph);
++	unsigned long Hz;
++	int ret, domain;
++
++	domain = perf_ops->device_domain_id(dev);
++	if (domain < 0)
++		return domain;
++
++	/* Get the power from SCMI performance domain. */
++	Hz = *KHz * 1000;
++	ret = perf_ops->est_power_get(ph, domain, &Hz, power);
++	if (ret)
++		return ret;
++
++	if (power_scale == SCMI_POWER_MILLIWATTS)
++		*power *= MICROWATT_PER_MILLIWATT;
++
++	*KHz = Hz / 1000;
++
++	return 0;
++}
++
++int cix_scmi_register_em(struct device *dev)
++{
++	struct em_data_callback em_cb = EM_DATA_CB(cix_scmi_get_em_power);
++	enum scmi_power_scale power_scale = perf_ops->power_scale_get(ph);
++	bool em_power_scale = false;
++	int ret, nr_opp;
++
++	if (power_scale == SCMI_POWER_MILLIWATTS
++	    || power_scale == SCMI_POWER_MICROWATTS)
++		em_power_scale = true;
++
++	nr_opp = dev_pm_opp_get_opp_count(dev);
++	if (nr_opp <= 0) {
++		dev_err(dev, "Failed to get OPP counts\n");
++		return -EINVAL;
++	}
++
++	ret = em_dev_register_perf_domain(dev, nr_opp, &em_cb, NULL, em_power_scale);
++	if (ret) {
++		dev_dbg(dev, "Couldn't register Energy Model %d\n", ret);
++	}
++	return ret;
++}
++EXPORT_SYMBOL_GPL(cix_scmi_register_em);
++
++int cix_scmi_em_probe(struct scmi_device *sdev)
++{
++	const struct scmi_handle *handle;
++
++	handle = sdev->handle;
++
++	if (!handle)
++		return -ENODEV;
++
++	perf_ops = handle->devm_protocol_get(sdev, SCMI_PROTOCOL_PERF, &ph);
++	if (IS_ERR(perf_ops))
++		return PTR_ERR(perf_ops);
++
++	return 0;
++}
++
++static void cix_scmi_em_remove(struct scmi_device *sdev)
++{
++	/* Nothing need to be done now */
++}
++
++static const struct scmi_device_id scmi_id_table[] = {
++	{ SCMI_PROTOCOL_PERF, "cix_em_perf" },
++	{ },
++};
++MODULE_DEVICE_TABLE(scmi, scmi_id_table);
++
++static struct scmi_driver cix_scmi_em_drv = {
++	.name		= "cix-scmi-em",
++	.probe		= cix_scmi_em_probe,
++	.remove		= cix_scmi_em_remove,
++	.id_table	= scmi_id_table,
++};
++module_scmi_driver(cix_scmi_em_drv);
++
++MODULE_AUTHOR("Cixtech,Inc.");
++MODULE_DESCRIPTION("CIX SCMI Energy Model interface driver");
++MODULE_LICENSE("GPL v2");
+diff --git a/include/linux/cix/cix_scmi_em.h b/include/linux/cix/cix_scmi_em.h
+new file mode 100644
+index 000000000000..9e194478c72b
+--- /dev/null
++++ b/include/linux/cix/cix_scmi_em.h
+@@ -0,0 +1,30 @@
++// SPDX-License-Identifier: GPL-2.0
++/* Copyright 2024 Cix Technology Group Co., Ltd.*/
++/**
++ * Cix Energy Model driver
++ */
++
++#ifndef __CIX_SCMI_EM_H
++#define __CIX_SCMI_EM_H
++
++#ifdef CONFIG_CIX_SCMI_ENERGY_MODEL
++/**
++ * cix_scmi_register_em() - Register an energy model using
++ *              SCMI Message Protocol
++ *
++ * @dev: Device for which the EM is to register
++ *
++ * Return: 0 for success; else the error code is returned
++ */
++int cix_scmi_register_em(struct device *dev);
++
++#else /* !CONFIG_CIX_SCMI_ENERGY_MODEL */
++
++static inline int cix_scmi_register_em(struct device *dev)
++{
++	return -EINVAL;
++}
++
++#endif /* CONFIG_CIX_SCMI_ENERGY_MODEL */
++
++#endif /* __CIX_SCMI_EM_H */
+\ No newline at end of file
+-- 
+2.51.0
+

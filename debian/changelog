@@ -1,0 +1,13 @@
+linux-sky1 (6.18.0-sky1.1) unstable; urgency=medium
+
+  * Initial release for CIX Sky1 SoC
+  * Based on Linux 6.18 LTS with 56 Sky1 patches
+  * Panthor GPU support (Mali-G720-Immortalis)
+  * Display: linlon-dp, trilin-dpsub drivers
+  * PCIe: Cadence controller with MSI-X support
+  * USB: CDNSP, RTS5453 Type-C PD controller
+  * Audio: HDA, DMA-350, DSP support
+  * Power: SCMI domains, PDC IRQ chip
+  * Misc: hwspinlock, eFuse, SoC info drivers
+
+ -- Entrpi <entrpi@proton.me>  Thu, 12 Dec 2025 19:00:00 +0800
