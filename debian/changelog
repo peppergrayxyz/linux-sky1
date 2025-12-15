@@ -1,6 +1,7 @@
 linux-sky1 (6.18.1-sky1.1) unstable; urgency=medium
 
-  * Rebase to Linux 6.18.1 stable with 55 Sky1 patches
+  * Rebase to Linux 6.18.1 stable with 56 Sky1 patches
+  * cpufreq: Fix schedutil not using boost frequencies
   * PCIe: Fix portdrv AER/PME IRQ conflicts during hotplug
   * WiFi: Add rtw89 scan offload robustness for hotplug
 
