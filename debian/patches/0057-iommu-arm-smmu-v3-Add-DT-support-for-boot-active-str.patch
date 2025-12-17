@@ -1,6 +1,6 @@
-From 63306e886fcb9f4d503a59f356674de458d8d81a Mon Sep 17 00:00:00 2001
+From 8a34ae6abd928e40538caf0d4c845997882312ec Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
-Date: Tue, 16 Dec 2025 09:31:43 +1100
+Date: Wed, 17 Dec 2025 15:29:37 +1100
 Subject: [PATCH 57/57] iommu/arm-smmu-v3: Add DT support for boot-active
  stream IDs
 

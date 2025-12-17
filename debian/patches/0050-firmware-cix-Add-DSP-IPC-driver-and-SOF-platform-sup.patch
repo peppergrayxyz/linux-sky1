@@ -1,4 +1,4 @@
-From d127a46643cc59b4e22edfe1bab913e5300a0315 Mon Sep 17 00:00:00 2001
+From 74c7fb4d2a1157b87e9b64778849ea1e41f52c74 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 10 Dec 2025 19:53:03 +0800
 Subject: [PATCH 50/57] firmware: cix: Add DSP IPC driver and SOF platform

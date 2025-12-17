@@ -1,4 +1,4 @@
-From c1643b0fb6f11b4ff34d9419fb003926e6edf5c7 Mon Sep 17 00:00:00 2001
+From e33a47296d5cf57acc11ae0b09dde47d6f173119 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 19:51:46 +0800
 Subject: [PATCH 12/57] drm: cix: Add CIX Sky1 display drivers (linlon-dp,
@@ -65,16 +65,12 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  drivers/gpu/drm/cix/dptx/trilin_phy.h         |  126 +
  drivers/gpu/drm/cix/dptx/trilin_usbdp_phy.c   |  595 +++
  drivers/gpu/drm/cix/dptx/trilin_usbdp_phy.h   |   66 +
- drivers/gpu/drm/cix/linlon-dp/Makefile        |   28 +
+ drivers/gpu/drm/cix/linlon-dp/Makefile        |   24 +
  drivers/gpu/drm/cix/linlon-dp/hw/dp_axi.c     |  261 ++
  .../gpu/drm/cix/linlon-dp/hw/dp_component.c   | 1696 +++++++++
  drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c     |  694 ++++
  drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.h     |   63 +
  drivers/gpu/drm/cix/linlon-dp/hw/dp_regs.h    |  562 +++
- .../drm/cix/linlon-dp/include/linlondp_drm.h  |   26 +
- .../drm/cix/linlon-dp/include/linlondp_io.h   |   46 +
- .../cix/linlon-dp/include/linlondp_product.h  |   36 +
- .../cix/linlon-dp/include/linlondp_utils.h    |   43 +
  .../gpu/drm/cix/linlon-dp/linlondp_coeffs.c   |  120 +
  .../gpu/drm/cix/linlon-dp/linlondp_coeffs.h   |   75 +
  .../drm/cix/linlon-dp/linlondp_color_mgmt.c   |  270 ++
@@ -82,6 +78,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c | 1015 +++++
  drivers/gpu/drm/cix/linlon-dp/linlondp_dev.c  |  832 +++++
  drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h  |  303 ++
+ drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h  |   26 +
  drivers/gpu/drm/cix/linlon-dp/linlondp_drv.c  |  360 ++
  .../gpu/drm/cix/linlon-dp/linlondp_event.c    |  159 +
  .../drm/cix/linlon-dp/linlondp_format_caps.c  |  149 +
@@ -99,7 +96,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  .../gpu/drm/cix/linlon-dp/linlondp_product.h  |   37 +
  .../gpu/drm/cix/linlon-dp/linlondp_utils.h    |   43 +
  .../drm/cix/linlon-dp/linlondp_wb_connector.c |  391 ++
- 78 files changed, 27583 insertions(+)
+ 75 files changed, 27454 insertions(+)
  create mode 100644 drivers/gpu/drm/cix/Kconfig
  create mode 100644 drivers/gpu/drm/cix/Makefile
  create mode 100644 drivers/gpu/drm/cix/cix_display.c
@@ -148,10 +145,6 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.h
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/hw/dp_regs.h
- create mode 100644 drivers/gpu/drm/cix/linlon-dp/include/linlondp_drm.h
- create mode 100644 drivers/gpu/drm/cix/linlon-dp/include/linlondp_io.h
- create mode 100644 drivers/gpu/drm/cix/linlon-dp/include/linlondp_product.h
- create mode 100644 drivers/gpu/drm/cix/linlon-dp/include/linlondp_utils.h
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_coeffs.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_coeffs.h
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c
@@ -159,6 +152,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_dev.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h
+ create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_drv.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_event.c
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_format_caps.c
@@ -15664,15 +15658,11 @@ index 000000000000..64797255ac39
 +#endif
 diff --git a/drivers/gpu/drm/cix/linlon-dp/Makefile b/drivers/gpu/drm/cix/linlon-dp/Makefile
 new file mode 100644
-index 000000000000..b9e9f816e5b6
+index 000000000000..f1e10e44e8ed
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/Makefile
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,24 @@
 +# SPDX-License-Identifier: GPL-2.0
-+
-+ccflags-y := \
-+    -I $(srctree)/$(src)/include \
-+    -I $(srctree)/$(src)
 +
 +linlon-dp-y := \
 +    linlondp_drv.o \
@@ -15698,7 +15688,7 @@ index 000000000000..b9e9f816e5b6
 +obj-$(CONFIG_DRM_LINLONDP) += linlon-dp.o
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_axi.c b/drivers/gpu/drm/cix/linlon-dp/hw/dp_axi.c
 new file mode 100644
-index 000000000000..b555500a9528
+index 000000000000..4bc5c850e91c
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_axi.c
 @@ -0,0 +1,261 @@
@@ -15712,7 +15702,7 @@ index 000000000000..b555500a9528
 +#include <linux/of.h>
 +#include <drm/drm_print.h>
 +#include "dp_dev.h"
-+#include "linlondp_io.h"
++#include "../linlondp_io.h"
 +
 +enum dp_property_id {
 +	LW_AWCACHE,
@@ -15965,7 +15955,7 @@ index 000000000000..b555500a9528
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c b/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c
 new file mode 100644
-index 000000000000..ba1a80f81987
+index 000000000000..434248ab0796
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c
 @@ -0,0 +1,1696 @@
@@ -15976,10 +15966,10 @@ index 000000000000..ba1a80f81987
 + *
 + */
 +#include "dp_dev.h"
-+#include "linlondp_kms.h"
-+#include "linlondp_io.h"
-+#include "linlondp_framebuffer.h"
-+#include "linlondp_color_mgmt.h"
++#include "../linlondp_kms.h"
++#include "../linlondp_io.h"
++#include "../linlondp_framebuffer.h"
++#include "../linlondp_color_mgmt.h"
 +
 +static void get_resources_id(u32 hw_id, u32 *pipe_id, u32 *comp_id)
 +{
@@ -17667,7 +17657,7 @@ index 000000000000..ba1a80f81987
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c
 new file mode 100644
-index 000000000000..cb68ee8fc0e5
+index 000000000000..5156fcdf50bc
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c
 @@ -0,0 +1,694 @@
@@ -17681,7 +17671,7 @@ index 000000000000..cb68ee8fc0e5
 +#include <drm/drm_blend.h>
 +#include <drm/drm_print.h>
 +#include "dp_dev.h"
-+#include "linlondp_io.h"
++#include "../linlondp_io.h"
 +
 +static u64 get_lpu_event(struct dp_pipeline *dp_pipeline)
 +{
@@ -18367,7 +18357,7 @@ index 000000000000..cb68ee8fc0e5
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.h b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.h
 new file mode 100644
-index 000000000000..03c66eaed9fa
+index 000000000000..7380889075b1
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.h
 @@ -0,0 +1,63 @@
@@ -18380,8 +18370,8 @@ index 000000000000..03c66eaed9fa
 +#ifndef _DP_DEV_H_
 +#define _DP_DEV_H_
 +
-+#include "linlondp_dev.h"
-+#include "linlondp_pipeline.h"
++#include "../linlondp_dev.h"
++#include "../linlondp_pipeline.h"
 +#include "dp_regs.h"
 +
 +struct dp_pipeline {
@@ -19002,181 +18992,6 @@ index 000000000000..1adbfb5ab52f
 +}
 +
 +#endif /* !_DP_REG_H_ */
-diff --git a/drivers/gpu/drm/cix/linlon-dp/include/linlondp_drm.h b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_drm.h
-new file mode 100644
-index 000000000000..f7f3800dddfa
---- /dev/null
-+++ b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_drm.h
-@@ -0,0 +1,26 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ *
-+ * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
-+ * ALL RIGHTS RESERVED
-+ *
-+ * This program is free software and is provided to you under the terms of the
-+ * GNU General Public License version 2 as published by the Free Software
-+ * Foundation, and any use by you of this program is subject to the terms
-+ * of such GNU licence.
-+ *
-+ */
-+
-+#ifndef _LINLONDP_DRM_H_
-+#define _LINLONDP_DRM_H_
-+
-+enum linlondp_hdr_eotf {
-+	LINLONDP_HDR_NONE,
-+	LINLONDP_HDR_ST2084,
-+	LINLONDP_HDR_HLG,
-+};
-+
-+struct color_ctm_ext {
-+	uint64_t matrix[12];
-+};
-+#endif
-diff --git a/drivers/gpu/drm/cix/linlon-dp/include/linlondp_io.h b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_io.h
-new file mode 100644
-index 000000000000..602c5731269b
---- /dev/null
-+++ b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_io.h
-@@ -0,0 +1,46 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
-+ * ALL RIGHTS RESERVED
-+ *
-+ */
-+#ifndef _LINLONDP_IO_H_
-+#define _LINLONDP_IO_H_
-+
-+#include <linux/io.h>
-+
-+static inline u32 linlondp_read32(u32 __iomem *base, u32 offset)
-+{
-+	return readl((base + (offset >> 2)));
-+}
-+
-+static inline void linlondp_write32(u32 __iomem *base, u32 offset, u32 v)
-+{
-+	writel(v, (base + (offset >> 2)));
-+}
-+
-+static inline void linlondp_write64(u32 __iomem *base, u32 offset, u64 v)
-+{
-+	writel(lower_32_bits(v), (base + (offset >> 2)));
-+	writel(upper_32_bits(v), (base + (offset >> 2) + 1));
-+}
-+
-+static inline void linlondp_write32_mask(u32 __iomem *base, u32 offset, u32 m,
-+					 u32 v)
-+{
-+	u32 tmp = linlondp_read32(base, offset);
-+
-+	tmp &= (~m);
-+	linlondp_write32(base, offset, v | tmp);
-+}
-+
-+static inline void linlondp_write_group(u32 __iomem *base, u32 offset, int num,
-+					const u32 *values)
-+{
-+	int i;
-+
-+	for (i = 0; i < num; i++)
-+		linlondp_write32(base, offset + i * 4, values[i]);
-+}
-+
-+#endif /*_LINLONDP_IO_H_*/
-diff --git a/drivers/gpu/drm/cix/linlon-dp/include/linlondp_product.h b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_product.h
-new file mode 100644
-index 000000000000..7c6028f21339
---- /dev/null
-+++ b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_product.h
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
-+ * ALL RIGHTS RESERVED
-+ *
-+ */
-+#ifndef _LINLONDP_PRODUCT_H_
-+#define _LINLONDP_PRODUCT_H_
-+
-+/* Product identification */
-+#define LINLONDP_CORE_ID(__product, __major, __minor, __status)   \
-+	((((__product)&0xFFFF) << 16) | (((__major)&0xF) << 12) | \
-+	 (((__minor)&0xF) << 8) | ((__status)&0xFF))
-+
-+#define LINLONDP_CORE_ID_PRODUCT_ID(__core_id) ((__u32)(__core_id) >> 16)
-+#define LINLONDP_CORE_ID_MAJOR(__core_id) (((__u32)(__core_id) >> 12) & 0xF)
-+#define LINLONDP_CORE_ID_MINOR(__core_id) (((__u32)(__core_id) >> 8) & 0xF)
-+#define LINLONDP_CORE_ID_STATUS(__core_id) (((__u32)(__core_id)) & 0xFF)
-+
-+/* Linlon-display product IDs */
-+#define LINLONDP_D8_PRODUCT_ID 0x0080
-+#define LINLONDP_D6_PRODUCT_ID 0x0060
-+#define LINLONDP_D2_PRODUCT_ID 0x0020
-+union linlondp_config_id {
-+	struct {
-+		__u32 max_line_sz : 16, n_pipelines : 2,
-+			n_scalers : 2, /* number of scalers per pipeline */
-+			n_layers : 3, /* number of layers per pipeline */
-+			n_richs : 3, /* number of rich layers per pipeline */
-+			side_by_side : 1, /* if HW works on side_by_side mode */
-+			reserved_bits : 5;
-+	};
-+	__u32 value;
-+};
-+
-+#endif /* _LINLONDP_PRODUCT_H_ */
-diff --git a/drivers/gpu/drm/cix/linlon-dp/include/linlondp_utils.h b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_utils.h
-new file mode 100644
-index 000000000000..a3f3a852e565
---- /dev/null
-+++ b/drivers/gpu/drm/cix/linlon-dp/include/linlondp_utils.h
-@@ -0,0 +1,43 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
-+ * ALL RIGHTS RESERVED
-+ *
-+ */
-+#ifndef _LINLONDP_UTILS_
-+#define _LINLONDP_UTILS_
-+
-+#include <linux/delay.h>
-+#include <linux/errno.h>
-+
-+#define has_bit(nr, mask) (BIT(nr) & (mask))
-+#define has_bits(bits, mask) (((bits) & (mask)) == (bits))
-+
-+#define dp_wait_cond(__cond, __tries, __min_range, __max_range) \
-+	({                                                      \
-+		int num_tries = __tries;                        \
-+		while (!__cond && (num_tries > 0)) {            \
-+			usleep_range(__min_range, __max_range); \
-+			num_tries--;                            \
-+		}                                               \
-+		(__cond) ? 0 : -ETIMEDOUT;                      \
-+	})
-+
-+/* the restriction of range is [start, end] */
-+struct linlondp_range {
-+	u32 start;
-+	u32 end;
-+};
-+
-+static inline void set_range(struct linlondp_range *rg, u32 start, u32 end)
-+{
-+	rg->start = start;
-+	rg->end = end;
-+}
-+
-+static inline bool in_range(struct linlondp_range *rg, u32 v)
-+{
-+	return (v >= rg->start) && (v <= rg->end);
-+}
-+
-+#endif /* _LINLONDP_UTILS_ */
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_coeffs.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_coeffs.c
 new file mode 100644
 index 000000000000..a1c6b45db14a
@@ -19386,7 +19201,7 @@ index 000000000000..1077c56f1ae9
 +#endif /*_LINLONDP_COEFFS_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c
 new file mode 100644
-index 000000000000..54c006324b66
+index 000000000000..6e811e11c986
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c
 @@ -0,0 +1,270 @@
@@ -19400,7 +19215,7 @@ index 000000000000..54c006324b66
 +
 +#include "linlondp_utils.h"
 +#include "linlondp_color_mgmt.h"
-+#include "include/linlondp_drm.h"
++#include "linlondp_drm.h"
 +
 +/* 10bit precision YUV2RGB matrix */
 +static const s32 yuv2rgb_bt601_narrow[LINLONDP_N_YUV2RGB_COEFFS] = {
@@ -21882,6 +21697,38 @@ index 000000000000..5cae6bc33664
 +#endif
 +
 +#endif /*_LINLONDP_DEV_H_*/
+diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h b/drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h
+new file mode 100644
+index 000000000000..f7f3800dddfa
+--- /dev/null
++++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ *
++ * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
++ * ALL RIGHTS RESERVED
++ *
++ * This program is free software and is provided to you under the terms of the
++ * GNU General Public License version 2 as published by the Free Software
++ * Foundation, and any use by you of this program is subject to the terms
++ * of such GNU licence.
++ *
++ */
++
++#ifndef _LINLONDP_DRM_H_
++#define _LINLONDP_DRM_H_
++
++enum linlondp_hdr_eotf {
++	LINLONDP_HDR_NONE,
++	LINLONDP_HDR_ST2084,
++	LINLONDP_HDR_HLG,
++};
++
++struct color_ctm_ext {
++	uint64_t matrix[12];
++};
++#endif
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_drv.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_drv.c
 new file mode 100644
 index 000000000000..933c09b9bb6f

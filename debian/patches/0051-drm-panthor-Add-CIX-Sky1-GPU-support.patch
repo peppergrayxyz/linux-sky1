@@ -1,4 +1,4 @@
-From 0f6057e7a89fb5d6daf45f10fb59070edabd7122 Mon Sep 17 00:00:00 2001
+From 9b2c2c04728757365da5ceb7a07144321728e5c7 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 11 Dec 2025 22:57:43 +0800
 Subject: [PATCH 51/57] drm/panthor: Add CIX Sky1 GPU support

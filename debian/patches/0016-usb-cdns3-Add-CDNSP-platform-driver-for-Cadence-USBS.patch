@@ -1,4 +1,4 @@
-From dbb3cb4af7d9f4dadb157cdb77e25dcf97d48d95 Mon Sep 17 00:00:00 2001
+From 7e19731d931a325b8deaa2ee1a72540bb23bade6 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 22:06:41 +0800
 Subject: [PATCH 16/57] usb: cdns3: Add CDNSP platform driver for Cadence

@@ -1,4 +1,4 @@
-From fa78f0011ab1e328ac24f9ff6bad23ea587b831f Mon Sep 17 00:00:00 2001
+From 67324ab5fad032c83f92be68882cf5893c4e6d40 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 15 Dec 2025 09:17:37 +0800
 Subject: [PATCH 55/57] wifi: rtw89: Add scan offload robustness for hotplug

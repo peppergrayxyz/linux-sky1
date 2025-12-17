@@ -1,4 +1,4 @@
-From 13650f04c06d6ca8c2b55eed76b92d52785ade68 Mon Sep 17 00:00:00 2001
+From 0a6cc0e942d8fbf574a7f4bd44f94f7b84860739 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 5 Dec 2025 10:52:58 +0800
 Subject: [PATCH 41/57] Enable Cix Sky1 PDC, Thermal, and Device Tree nodes
