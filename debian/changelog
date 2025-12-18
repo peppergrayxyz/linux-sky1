@@ -1,3 +1,13 @@
+linux-sky1 (6.18.1-sky1.4) unstable; urgency=medium
+
+  * Remove dead thermal drivers (cix_scmi_em, cix_cpu_ipa)
+    - Mainline SCMI cpufreq handles energy model registration
+  * Fix linlon-dp include structure for Nix builds
+    - Remove implicit -I flags, use explicit include paths
+  * Add kernel configuration guide (debian/config/README.md)
+
+ -- Entrpi <entrpi@proton.me>  Thu, 19 Dec 2025 00:00:00 +1100
+
 linux-sky1 (6.18.1-sky1.3) unstable; urgency=medium
 
   * iommu/arm-smmu-v3: Add DT support for boot-active stream IDs
