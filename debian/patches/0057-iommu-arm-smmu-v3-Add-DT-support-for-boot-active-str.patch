@@ -1,8 +1,7 @@
-From 8a34ae6abd928e40538caf0d4c845997882312ec Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 17 Dec 2025 15:29:37 +1100
-Subject: [PATCH 57/57] iommu/arm-smmu-v3: Add DT support for boot-active
- stream IDs
+Subject: [PATCH] iommu/arm-smmu-v3: Add DT support for boot-active stream IDs
 
 Some devices (e.g., display controllers) may be left running by the
 bootloader and issue DMA transactions before the kernel driver attaches

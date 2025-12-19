@@ -1,3 +1,12 @@
+linux-sky1 (6.18.1-sky1.5) unstable; urgency=medium
+
+  * Change core Sky1 Kconfig entries from tristate to bool
+    - Core SoC infrastructure (mailbox, reset, pinctrl, clk, pci,
+      hwspinlock, PHYs) must be built-in
+    - Board-specific drivers (PWM, watchdog, socinfo, Type-C) stay tristate
+
+ -- Entrpi <entrpi@proton.me>  Thu, 19 Dec 2025 12:00:00 +1100
+
 linux-sky1 (6.18.1-sky1.4) unstable; urgency=medium
 
   * Remove dead thermal drivers (cix_scmi_em, cix_cpu_ipa)

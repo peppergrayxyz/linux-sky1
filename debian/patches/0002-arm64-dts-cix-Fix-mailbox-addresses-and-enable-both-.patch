@@ -1,8 +1,8 @@
-From 91e3c0ebebcb082eeca781bd535ad011fca8c362 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 09:32:58 +0800
-Subject: [PATCH 02/57] arm64: dts: cix: Fix mailbox addresses and enable both
- SCMI transports
+Subject: [PATCH] arm64: dts: cix: Fix mailbox addresses and enable both SCMI
+ transports
 
 Fix AP-PM SCMI mailbox register addresses to match vendor 6.6 kernel:
 - mbox_ap2pm: 0x6590080 -> 0x6590000 (size 0xff80 -> 0x10000)

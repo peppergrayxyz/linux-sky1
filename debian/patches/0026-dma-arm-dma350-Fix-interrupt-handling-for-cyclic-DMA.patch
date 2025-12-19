@@ -1,7 +1,7 @@
-From 30306a2e082d640830ea2662fbe3f315a14b6cfb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 4 Dec 2025 19:08:25 +0800
-Subject: [PATCH 26/57] dma: arm-dma350: Fix interrupt handling for cyclic DMA
+Subject: [PATCH] dma: arm-dma350: Fix interrupt handling for cyclic DMA
 
 Fix DMA-350 cyclic transfers not generating interrupts despite successful
 audio playback. The issue was a multi-stage interrupt routing problem

@@ -405,6 +405,3 @@ index ca2386b83473..c891fae62d6b 100644
  	{ .compatible = "cdns,sam9x60-macb", .data = &at91sam9260_config },
  	{ .compatible = "atmel,sama5d2-gem", .data = &sama5d2_config },
  	{ .compatible = "atmel,sama5d29-gem", .data = &sama5d29_config },
--- 
-2.51.0
-

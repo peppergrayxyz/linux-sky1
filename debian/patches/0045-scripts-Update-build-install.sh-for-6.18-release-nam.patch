@@ -1,8 +1,7 @@
-From 2b132e603d5f484dc0910bfaa74926e356f7bb92 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 10 Dec 2025 10:49:11 +0800
-Subject: [PATCH 45/57] scripts: Update build-install.sh for 6.18 release
- naming
+Subject: [PATCH] scripts: Update build-install.sh for 6.18 release naming
 
 ---
  scripts/build-install.sh | 4 ++--
