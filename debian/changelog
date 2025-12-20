@@ -1,3 +1,12 @@
+linux-sky1 (6.18.1-sky1.6) unstable; urgency=medium
+
+  * Fix linux-headers package to not conflict with linux-libc-dev
+    - Install kernel build headers to /usr/src/ instead of UAPI headers
+    - Properly supports DKMS module building
+    - Add /lib/modules build symlink for module compilation
+
+ -- Entrpi <entrpi@proton.me>  Fri, 20 Dec 2025 02:00:00 +1100
+
 linux-sky1 (6.18.1-sky1.5) unstable; urgency=medium
 
   * Change core Sky1 Kconfig entries from tristate to bool

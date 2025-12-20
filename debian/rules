@@ -50,10 +50,25 @@ override_dh_auto_install:
 	# Install DTBs
 	install -D -m 644 $(KSRC)/arch/arm64/boot/dts/cix/sky1-orion-o6.dtb \
 		$(CURDIR)/debian/linux-dtbs-$(PKG_VERSION)/boot/dtbs/$(FULL_VERSION)/cix/sky1-orion-o6.dtb
-	# Install headers
-	$(MAKE) -C $(KSRC) ARCH=$(ARCH) \
-		INSTALL_HDR_PATH=$(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr \
-		headers_install
+	# Install kernel headers for building external modules (DKMS)
+	# Note: DO NOT use headers_install here - that's for linux-libc-dev (UAPI headers)
+	# Instead, install the kernel build headers to /usr/src/
+	install -d $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)
+	# Copy necessary files for building modules
+	cp $(KSRC)/.config $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/
+	cp $(KSRC)/Makefile $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/
+	cp $(KSRC)/Module.symvers $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/
+	cp -a $(KSRC)/include $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/
+	install -d $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/arch/arm64
+	cp -a $(KSRC)/arch/arm64/include $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/arch/arm64/
+	cp -a $(KSRC)/arch/arm64/Makefile $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/arch/arm64/
+	cp -a $(KSRC)/scripts $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/
+	install -d $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/tools
+	cp -a $(KSRC)/tools/objtool $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/usr/src/linux-headers-$(FULL_VERSION)/tools/ 2>/dev/null || true
+	# Create symlink in /lib/modules for DKMS
+	install -d $(CURDIR)/debian/linux-headers-$(PKG_VERSION)/lib/modules/$(FULL_VERSION)
+	ln -sf /usr/src/linux-headers-$(FULL_VERSION) \
+		$(CURDIR)/debian/linux-headers-$(PKG_VERSION)/lib/modules/$(FULL_VERSION)/build
 
 override_dh_auto_clean:
 	rm -rf $(KSRC)
