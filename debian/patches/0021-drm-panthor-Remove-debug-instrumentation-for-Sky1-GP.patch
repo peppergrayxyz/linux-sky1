@@ -21,7 +21,7 @@ Next step: Implement HCTL-like dynamic core notification.
  3 files changed, 11 insertions(+), 79 deletions(-)
 
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index b867009816b5..1c4240345c37 100644
+index bb6f5fc4df14..15fd4cefdc39 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -73,9 +73,6 @@ static int panthor_clk_init(struct panthor_device *ptdev)

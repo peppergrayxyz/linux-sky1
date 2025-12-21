@@ -59,7 +59,7 @@ index f601329aaaf3..e4dd690113bf 100644
  			physical-memory-group-manager = <&gpu_physical_memory_group_manager>;
  			protected-memory-allocator = <&gpu_protected_memory_allocator>;
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index 5ec87e4e8df6..7e3dd6aea69e 100644
+index 6073ef0e4858..e3b212c5ecef 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -4,6 +4,7 @@

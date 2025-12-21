@@ -35,7 +35,7 @@ index 38c7b61976e2..51236cf7ff94 100644
  
  /* PCIe X16 Slot */
 diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-index 2a8b46b948f0..35dbcac8aacf 100644
+index 9780f40ba3e6..73ac157b481d 100644
 --- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
 +++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
 @@ -4652,6 +4652,43 @@ static void __iomem *arm_smmu_ioremap(struct device *dev, resource_size_t start,

@@ -60,7 +60,7 @@ index 3686515d368d..47bdcf28bf58 100644
  	spin_lock_init(&pdevfreq->lock);
  
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index 81df49880bd8..27bcba8a1ba2 100644
+index 962a10e00848..832506afe55b 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -4,6 +4,7 @@

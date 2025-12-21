@@ -1,3 +1,30 @@
+linux-sky1 (6.18.2-sky1.1) unstable; urgency=medium
+
+  * Rebase to Linux 6.18.2 stable with 58 Sky1 patches
+
+ -- Entrpi <entrpi@proton.me>  Mon, 22 Dec 2025 00:01:00 +1100
+
+linux-sky1 (6.18.1-sky1.9) unstable; urgency=medium
+
+  * Fix kernel version string consistency
+    - Remove CONFIG_LOCALVERSION="-mainline-cix" from config
+    - Disable CONFIG_LOCALVERSION_AUTO
+    - Version now consistently 6.18.1-sky1 everywhere
+  * Fix initramfs generation - use proper maintainer scripts
+    - Create debian/linux-image-*.postinst with #DEBHELPER# marker
+    - postinst properly calls update-initramfs -c
+
+ -- Entrpi <entrpi@proton.me>  Sat, 21 Dec 2025 04:00:00 +1100
+
+linux-sky1 (6.18.1-sky1.7) unstable; urgency=medium
+
+  * Add initramfs generation hooks to kernel package
+    - postinst: run update-initramfs -c on install
+    - postrm: run update-initramfs -d on remove
+    - Fixes missing initrd in live-build ISO
+
+ -- Entrpi <entrpi@proton.me>  Sat, 21 Dec 2025 02:00:00 +1100
+
 linux-sky1 (6.18.1-sky1.6) unstable; urgency=medium
 
   * Fix linux-headers package to not conflict with linux-libc-dev

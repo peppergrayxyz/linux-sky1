@@ -4,7 +4,7 @@ export DH_VERBOSE = 1
 export ARCH = arm64
 export CROSS_COMPILE =
 
-KERNEL_VERSION = 6.18.1
+KERNEL_VERSION = 6.18.2
 LOCALVERSION = -sky1
 FULL_VERSION = $(KERNEL_VERSION)$(LOCALVERSION)
 # Package names use major.minor only
@@ -38,6 +38,9 @@ override_dh_auto_install:
 	$(MAKE) -C $(KSRC) ARCH=$(ARCH) \
 		INSTALL_MOD_PATH=$(CURDIR)/debian/linux-image-$(PKG_VERSION) \
 		modules_install
+	# Remove build/source symlinks - these are provided by linux-headers
+	rm -f $(CURDIR)/debian/linux-image-$(PKG_VERSION)/lib/modules/$(FULL_VERSION)/build
+	rm -f $(CURDIR)/debian/linux-image-$(PKG_VERSION)/lib/modules/$(FULL_VERSION)/source
 	# Install kernel image
 	install -D -m 644 $(KSRC)/arch/arm64/boot/Image \
 		$(CURDIR)/debian/linux-image-$(PKG_VERSION)/boot/vmlinuz-$(FULL_VERSION)
@@ -76,3 +79,29 @@ override_dh_auto_clean:
 override_dh_strip:
 	# Skip stripping kernel modules
 	@true
+
+override_dh_installdeb:
+	dh_installdeb
+	# Add initramfs hooks to postinst
+	@echo '#!/bin/sh' > $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo 'set -e' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo 'KERNEL_VERSION="$(FULL_VERSION)"' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo 'if [ "$$1" = "configure" ]; then' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '    if [ -e /boot/System.map-$$KERNEL_VERSION ]; then' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '        depmod -a -F /boot/System.map-$$KERNEL_VERSION $$KERNEL_VERSION || true' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '    fi' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '    if command -v update-initramfs >/dev/null 2>&1; then' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '        update-initramfs -c -k $$KERNEL_VERSION || true' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo '    fi' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo 'fi' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@echo 'exit 0' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	@chmod 755 $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postinst
+	# Add initramfs cleanup to postrm
+	@echo '#!/bin/sh' > $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo 'set -e' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo 'KERNEL_VERSION="$(FULL_VERSION)"' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo 'if [ "$$1" = "remove" ] || [ "$$1" = "purge" ]; then' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo '    rm -f /boot/initrd.img-$$KERNEL_VERSION' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo 'fi' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@echo 'exit 0' >> $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm
+	@chmod 755 $(CURDIR)/debian/linux-image-$(PKG_VERSION)/DEBIAN/postrm

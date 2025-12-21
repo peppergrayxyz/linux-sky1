@@ -111,7 +111,7 @@ index 3a1611008e48..4dee61242cc8 100644
  source "drivers/clk/imgtec/Kconfig"
  source "drivers/clk/imx/Kconfig"
 diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index b74a1767ca27..84d1564c6a1f 100644
+index 61ec08404442..cfc5930b339e 100644
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
 @@ -119,6 +119,7 @@ obj-$(CONFIG_ARCH_ARTPEC)		+= axis/
