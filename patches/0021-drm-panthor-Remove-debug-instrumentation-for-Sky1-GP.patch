@@ -21,7 +21,7 @@ Next step: Implement HCTL-like dynamic core notification.
  3 files changed, 11 insertions(+), 79 deletions(-)
 
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index bb6f5fc4df14..15fd4cefdc39 100644
+index bb6f5fc4df143..15fd4cefdc39e 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -73,9 +73,6 @@ static int panthor_clk_init(struct panthor_device *ptdev)
@@ -63,7 +63,7 @@ index bb6f5fc4df14..15fd4cefdc39 100644
  }
  
 diff --git a/drivers/gpu/drm/panthor/panthor_fw.c b/drivers/gpu/drm/panthor/panthor_fw.c
-index 49f22e6e638f..60a6bdf64f5c 100644
+index 49f22e6e638fb..60a6bdf64f5c8 100644
 --- a/drivers/gpu/drm/panthor/panthor_fw.c
 +++ b/drivers/gpu/drm/panthor/panthor_fw.c
 @@ -5,7 +5,6 @@
@@ -159,7 +159,7 @@ index 49f22e6e638f..60a6bdf64f5c 100644
  
  	fw->vm = panthor_vm_create(ptdev, true,
 diff --git a/drivers/gpu/drm/panthor/panthor_gpu.c b/drivers/gpu/drm/panthor/panthor_gpu.c
-index 749b56ab0f04..952fe7cb9760 100644
+index 749b56ab0f04e..952fe7cb9760c 100644
 --- a/drivers/gpu/drm/panthor/panthor_gpu.c
 +++ b/drivers/gpu/drm/panthor/panthor_gpu.c
 @@ -374,11 +374,8 @@ int panthor_gpu_g720_shader_power_on(struct panthor_device *ptdev)

@@ -29,7 +29,7 @@ host/gadget mode support.
  create mode 100644 drivers/usb/cdns3/cdnsp-plat.c
 
 diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
-index e7031190eefe..276d3c3d4da4 100644
+index e7031190eefe3..276d3c3d4da4a 100644
 --- a/drivers/usb/cdns3/Kconfig
 +++ b/drivers/usb/cdns3/Kconfig
 @@ -89,39 +89,38 @@ config USB_CDNS3_STARFIVE
@@ -122,7 +122,7 @@ index e7031190eefe..276d3c3d4da4 100644
 +
 +endif
 diff --git a/drivers/usb/cdns3/Makefile b/drivers/usb/cdns3/Makefile
-index 0c43f9c9c7dd..39acaed893e9 100644
+index 0c43f9c9c7dd2..39acaed893e95 100644
 --- a/drivers/usb/cdns3/Makefile
 +++ b/drivers/usb/cdns3/Makefile
 @@ -25,15 +25,36 @@ obj-$(CONFIG_USB_CDNS3_PCI_WRAP)		+= cdns3-pci-wrap.o
@@ -165,7 +165,7 @@ index 0c43f9c9c7dd..39acaed893e9 100644
  
 diff --git a/drivers/usb/cdns3/cdnsp-plat.c b/drivers/usb/cdns3/cdnsp-plat.c
 new file mode 100644
-index 000000000000..cc7bb4b7ba6d
+index 0000000000000..cc7bb4b7ba6d4
 --- /dev/null
 +++ b/drivers/usb/cdns3/cdnsp-plat.c
 @@ -0,0 +1,346 @@

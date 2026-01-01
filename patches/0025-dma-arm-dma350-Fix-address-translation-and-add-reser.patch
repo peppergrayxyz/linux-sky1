@@ -27,7 +27,7 @@ Interrupt handling still needs work.
  2 files changed, 49 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 53290d9c4939..b36c100aee06 100644
+index 53290d9c49397..b36c100aee064 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -1109,6 +1109,7 @@ audss_dmac: dma-controller@07010000 {
@@ -39,7 +39,7 @@ index 53290d9c4939..b36c100aee06 100644
  		};
  
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index b17797e256a7..d85cea1952f5 100644
+index b17797e256a75..d85cea1952f57 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -10,6 +10,7 @@

@@ -33,7 +33,7 @@ compatibility with standard virtio rpmsg devices.
  1 file changed, 133 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-index ad67bba2721c..4ca980dfc1bd 100644
+index ad67bba2721cd..4ca980dfc1bdd 100644
 --- a/drivers/rpmsg/virtio_rpmsg_bus.c
 +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
 @@ -76,6 +76,12 @@ struct virtproc_info {

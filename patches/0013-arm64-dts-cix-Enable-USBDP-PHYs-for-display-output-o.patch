@@ -21,7 +21,7 @@ Also add build-install.sh helper script.
  create mode 100755 scripts/build-install.sh
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 354e639e34fd..a1eca8415360 100644
+index 354e639e34fd4..a1eca84153608 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -1359,11 +1359,11 @@ &macb1 {
@@ -50,7 +50,7 @@ index 354e639e34fd..a1eca8415360 100644
  &usb3_phy1 {
 diff --git a/scripts/build-install.sh b/scripts/build-install.sh
 new file mode 100755
-index 000000000000..80f27c3b9a7d
+index 0000000000000..80f27c3b9a7d2
 --- /dev/null
 +++ b/scripts/build-install.sh
 @@ -0,0 +1,72 @@

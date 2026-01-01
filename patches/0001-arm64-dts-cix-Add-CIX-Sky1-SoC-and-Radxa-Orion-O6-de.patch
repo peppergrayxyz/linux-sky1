@@ -133,7 +133,7 @@ Tested on Radxa Orion O6 with CIX Sky1 SoC, BIOS 1.0.0-5.
  create mode 100644 include/dt-bindings/thermal/sky1-thermal.h
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index d74964d53c3b..6a5cde860275 100644
+index d74964d53c3bc..6a5cde860275e 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -1,39 +1,2397 @@
@@ -2553,7 +2553,7 @@ index d74964d53c3b..6a5cde860275 100644
  };
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts.mainline b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts.mainline
 new file mode 100644
-index 000000000000..d74964d53c3b
+index 0000000000000..d74964d53c3bc
 --- /dev/null
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts.mainline
 @@ -0,0 +1,39 @@
@@ -2597,7 +2597,7 @@ index 000000000000..d74964d53c3b
 +	status = "okay";
 +};
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 2fb2c99c0796..363c3fc65eef 100644
+index 2fb2c99c0796d..363c3fc65eefd 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -1,183 +1,579 @@
@@ -7252,7 +7252,7 @@ index 2fb2c99c0796..363c3fc65eef 100644
 +
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi.mainline b/arch/arm64/boot/dts/cix/sky1.dtsi.mainline
 new file mode 100644
-index 000000000000..2fb2c99c0796
+index 0000000000000..2fb2c99c0796d
 --- /dev/null
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi.mainline
 @@ -0,0 +1,430 @@
@@ -7687,7 +7687,7 @@ index 000000000000..2fb2c99c0796
 +	};
 +};
 diff --git a/drivers/firmware/arm_scmi/shmem.c b/drivers/firmware/arm_scmi/shmem.c
-index 11c347bff766..4f1b2b65b195 100644
+index 11c347bff7667..4f1b2b65b1950 100644
 --- a/drivers/firmware/arm_scmi/shmem.c
 +++ b/drivers/firmware/arm_scmi/shmem.c
 @@ -205,9 +205,14 @@ static void __iomem *shmem_setup_iomap(struct scmi_chan_info *cinfo,
@@ -7707,7 +7707,7 @@ index 11c347bff766..4f1b2b65b195 100644
  	if (!of_device_is_compatible(shmem, "arm,scmi-shmem"))
  		return IOMEM_ERR_PTR(-ENXIO);
 diff --git a/drivers/firmware/arm_scmi/transports/smc.c b/drivers/firmware/arm_scmi/transports/smc.c
-index 21abb571e4f2..b4d5ebbfb692 100644
+index 21abb571e4f2f..b4d5ebbfb6927 100644
 --- a/drivers/firmware/arm_scmi/transports/smc.c
 +++ b/drivers/firmware/arm_scmi/transports/smc.c
 @@ -139,6 +139,11 @@ static int smc_chan_setup(struct scmi_chan_info *cinfo, struct device *dev,
@@ -7743,7 +7743,7 @@ index 21abb571e4f2..b4d5ebbfb692 100644
  	if (of_device_is_compatible(dev->of_node, "qcom,scmi-smc")) {
  		resource_size_t size = resource_size(&res);
 diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
-index 3de351e66ee8..47f74a9daaa4 100644
+index 3de351e66ee84..47f74a9daaa4b 100644
 --- a/drivers/irqchip/irq-gic-v3.c
 +++ b/drivers/irqchip/irq-gic-v3.c
 @@ -2314,6 +2314,7 @@ static int __init gic_of_init(struct device_node *node, struct device_node *pare
@@ -7773,7 +7773,7 @@ index 3de351e66ee8..47f74a9daaa4 100644
  
  	if (of_property_read_u64(node, "redistributor-stride", &redist_stride))
 diff --git a/drivers/mailbox/cix-mailbox.c b/drivers/mailbox/cix-mailbox.c
-index 5bb1416c26a5..1859768015cb 100644
+index 5bb1416c26a50..1859768015cb1 100644
 --- a/drivers/mailbox/cix-mailbox.c
 +++ b/drivers/mailbox/cix-mailbox.c
 @@ -1,79 +1,73 @@
@@ -8590,7 +8590,7 @@ index 5bb1416c26a5..1859768015cb 100644
 -MODULE_LICENSE("GPL");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/pci/controller/cadence/Kconfig b/drivers/pci/controller/cadence/Kconfig
-index 02a639e55fd8..a04a38e54c06 100644
+index 02a639e55fd8c..a04a38e54c06c 100644
 --- a/drivers/pci/controller/cadence/Kconfig
 +++ b/drivers/pci/controller/cadence/Kconfig
 @@ -77,4 +77,15 @@ config PCI_J721E_EP
@@ -8610,7 +8610,7 @@ index 02a639e55fd8..a04a38e54c06 100644
 +
  endmenu
 diff --git a/drivers/pci/controller/cadence/Makefile b/drivers/pci/controller/cadence/Makefile
-index 5e23f8539ecc..d582dfb8ff5a 100644
+index 5e23f8539ecc1..d582dfb8ff5a9 100644
 --- a/drivers/pci/controller/cadence/Makefile
 +++ b/drivers/pci/controller/cadence/Makefile
 @@ -5,3 +5,5 @@ obj-$(CONFIG_PCIE_CADENCE_EP) += pcie-cadence-ep.o
@@ -8621,7 +8621,7 @@ index 5e23f8539ecc..d582dfb8ff5a 100644
 +obj-$(CONFIG_PCI_SKY1) += pcie-sky1.o
 diff --git a/drivers/pci/controller/cadence/pci-sky1-debugfs.c b/drivers/pci/controller/cadence/pci-sky1-debugfs.c
 new file mode 100644
-index 000000000000..38d62dad637a
+index 0000000000000..38d62dad637a2
 --- /dev/null
 +++ b/drivers/pci/controller/cadence/pci-sky1-debugfs.c
 @@ -0,0 +1,1340 @@
@@ -9967,7 +9967,7 @@ index 000000000000..38d62dad637a
 +#endif
 diff --git a/drivers/pci/controller/cadence/pci-sky1-debugfs.h b/drivers/pci/controller/cadence/pci-sky1-debugfs.h
 new file mode 100644
-index 000000000000..f8b53056102f
+index 0000000000000..f8b53056102f1
 --- /dev/null
 +++ b/drivers/pci/controller/cadence/pci-sky1-debugfs.h
 @@ -0,0 +1,17 @@
@@ -9990,7 +9990,7 @@ index 000000000000..f8b53056102f
 +#endif // _PCI_SKY1_DEBUGFS_H
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
 new file mode 100644
-index 000000000000..7a2e640072d5
+index 0000000000000..7a2e640072d5a
 --- /dev/null
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -0,0 +1,2571 @@
@@ -12567,7 +12567,7 @@ index 000000000000..7a2e640072d5
 +MODULE_LICENSE("GPL");
 diff --git a/drivers/pci/controller/cadence/pci-sky1.h b/drivers/pci/controller/cadence/pci-sky1.h
 new file mode 100644
-index 000000000000..bfa1052b4381
+index 0000000000000..bfa1052b43812
 --- /dev/null
 +++ b/drivers/pci/controller/cadence/pci-sky1.h
 @@ -0,0 +1,196 @@
@@ -12768,7 +12768,7 @@ index 000000000000..bfa1052b4381
 +
 +#endif // _PCIE_SKY1_H
 diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-index 678dd0452f0a..97e0c4af5f0e 100644
+index 678dd0452f0aa..97e0c4af5f0eb 100644
 --- a/drivers/phy/Kconfig
 +++ b/drivers/phy/Kconfig
 @@ -105,6 +105,7 @@ source "drivers/phy/allwinner/Kconfig"
@@ -12780,7 +12780,7 @@ index 678dd0452f0a..97e0c4af5f0e 100644
  source "drivers/phy/hisilicon/Kconfig"
  source "drivers/phy/ingenic/Kconfig"
 diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
-index bfb27fb5a494..69b83715f024 100644
+index bfb27fb5a4942..69b83715f0244 100644
 --- a/drivers/phy/Makefile
 +++ b/drivers/phy/Makefile
 @@ -17,6 +17,7 @@ obj-y					+= allwinner/	\
@@ -12793,7 +12793,7 @@ index bfb27fb5a494..69b83715f024 100644
  					   ingenic/	\
 diff --git a/drivers/phy/cix/Kconfig b/drivers/phy/cix/Kconfig
 new file mode 100644
-index 000000000000..0b649df0a0ce
+index 0000000000000..0b649df0a0cef
 --- /dev/null
 +++ b/drivers/phy/cix/Kconfig
 @@ -0,0 +1,36 @@
@@ -12835,7 +12835,7 @@ index 000000000000..0b649df0a0ce
 +	  This PHY supports both USB3 and DisplayPort alternate mode.
 diff --git a/drivers/phy/cix/Makefile b/drivers/phy/cix/Makefile
 new file mode 100644
-index 000000000000..8ab9af6e060b
+index 0000000000000..8ab9af6e060b1
 --- /dev/null
 +++ b/drivers/phy/cix/Makefile
 @@ -0,0 +1,5 @@
@@ -12846,7 +12846,7 @@ index 000000000000..8ab9af6e060b
 +obj-$(CONFIG_PHY_CIX_USBDP)	+= phy-cix-usbdp.o
 diff --git a/drivers/phy/cix/phy-cix-pcie.c b/drivers/phy/cix/phy-cix-pcie.c
 new file mode 100644
-index 000000000000..21115f2204b6
+index 0000000000000..21115f2204b6d
 --- /dev/null
 +++ b/drivers/phy/cix/phy-cix-pcie.c
 @@ -0,0 +1,631 @@
@@ -13483,7 +13483,7 @@ index 000000000000..21115f2204b6
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/phy/cix/phy-cix-usb2.c b/drivers/phy/cix/phy-cix-usb2.c
 new file mode 100644
-index 000000000000..5757d543f83d
+index 0000000000000..5757d543f83d9
 --- /dev/null
 +++ b/drivers/phy/cix/phy-cix-usb2.c
 @@ -0,0 +1,58 @@
@@ -13547,7 +13547,7 @@ index 000000000000..5757d543f83d
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/phy/cix/phy-cix-usb3.c b/drivers/phy/cix/phy-cix-usb3.c
 new file mode 100644
-index 000000000000..adec9bb4438c
+index 0000000000000..adec9bb4438cb
 --- /dev/null
 +++ b/drivers/phy/cix/phy-cix-usb3.c
 @@ -0,0 +1,477 @@
@@ -14030,7 +14030,7 @@ index 000000000000..adec9bb4438c
 +
 diff --git a/drivers/phy/cix/phy-cix-usbdp.c b/drivers/phy/cix/phy-cix-usbdp.c
 new file mode 100644
-index 000000000000..548b2b856f76
+index 0000000000000..548b2b856f769
 --- /dev/null
 +++ b/drivers/phy/cix/phy-cix-usbdp.c
 @@ -0,0 +1,1616 @@
@@ -15652,7 +15652,7 @@ index 000000000000..548b2b856f76
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/phy/cix/phy-cix-usbdp.h b/drivers/phy/cix/phy-cix-usbdp.h
 new file mode 100644
-index 000000000000..18a11f920f35
+index 0000000000000..18a11f920f356
 --- /dev/null
 +++ b/drivers/phy/cix/phy-cix-usbdp.h
 @@ -0,0 +1,347 @@
@@ -16004,7 +16004,7 @@ index 000000000000..18a11f920f35
 +
 +#endif
 diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index 4f8507ebbdac..cb84b2f9896c 100644
+index 4f8507ebbdacd..cb84b2f9896c8 100644
 --- a/drivers/pinctrl/Kconfig
 +++ b/drivers/pinctrl/Kconfig
 @@ -686,6 +686,7 @@ source "drivers/pinctrl/aspeed/Kconfig"
@@ -16016,7 +16016,7 @@ index 4f8507ebbdac..cb84b2f9896c 100644
  source "drivers/pinctrl/intel/Kconfig"
  source "drivers/pinctrl/mediatek/Kconfig"
 diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index e0cfb9b7c99b..a8f3c39681df 100644
+index e0cfb9b7c99ba..a8f3c39681df4 100644
 --- a/drivers/pinctrl/Makefile
 +++ b/drivers/pinctrl/Makefile
 @@ -67,6 +67,7 @@ obj-$(CONFIG_PINCTRL_ZYNQ)	+= pinctrl-zynq.o
@@ -16029,7 +16029,7 @@ index e0cfb9b7c99b..a8f3c39681df 100644
  obj-y				+= freescale/
 diff --git a/drivers/pinctrl/cix/Kconfig b/drivers/pinctrl/cix/Kconfig
 new file mode 100644
-index 000000000000..b711ed0eb5af
+index 0000000000000..b711ed0eb5af6
 --- /dev/null
 +++ b/drivers/pinctrl/cix/Kconfig
 @@ -0,0 +1,13 @@
@@ -16048,7 +16048,7 @@ index 000000000000..b711ed0eb5af
 +	  Say Y here to enable the sky1 pinctrl driver
 diff --git a/drivers/pinctrl/cix/Makefile b/drivers/pinctrl/cix/Makefile
 new file mode 100644
-index 000000000000..22685d6a107b
+index 0000000000000..22685d6a107b2
 --- /dev/null
 +++ b/drivers/pinctrl/cix/Makefile
 @@ -0,0 +1,4 @@
@@ -16058,7 +16058,7 @@ index 000000000000..22685d6a107b
 +obj-$(CONFIG_PINCTRL_SKY1)	+= pinctrl-sky1.o
 diff --git a/drivers/pinctrl/cix/pinctrl-sky1-base.c b/drivers/pinctrl/cix/pinctrl-sky1-base.c
 new file mode 100644
-index 000000000000..7efd50ce8a04
+index 0000000000000..7efd50ce8a04a
 --- /dev/null
 +++ b/drivers/pinctrl/cix/pinctrl-sky1-base.c
 @@ -0,0 +1,624 @@
@@ -16688,7 +16688,7 @@ index 000000000000..7efd50ce8a04
 +MODULE_LICENSE("GPL");
 diff --git a/drivers/pinctrl/cix/pinctrl-sky1.c b/drivers/pinctrl/cix/pinctrl-sky1.c
 new file mode 100644
-index 000000000000..c0649e283fdf
+index 0000000000000..c0649e283fdf2
 --- /dev/null
 +++ b/drivers/pinctrl/cix/pinctrl-sky1.c
 @@ -0,0 +1,562 @@
@@ -17256,7 +17256,7 @@ index 000000000000..c0649e283fdf
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/pinctrl/cix/pinctrl-sky1.h b/drivers/pinctrl/cix/pinctrl-sky1.h
 new file mode 100644
-index 000000000000..1c9b835634e6
+index 0000000000000..1c9b835634e60
 --- /dev/null
 +++ b/drivers/pinctrl/cix/pinctrl-sky1.h
 @@ -0,0 +1,60 @@
@@ -17322,7 +17322,7 @@ index 000000000000..1c9b835634e6
 +#endif /* __DRIVERS_PINCTRL_SKY1_H */
 diff --git a/drivers/pinctrl/pinctrl-acpi.h b/drivers/pinctrl/pinctrl-acpi.h
 new file mode 100644
-index 000000000000..53d0eb919b83
+index 0000000000000..53d0eb919b831
 --- /dev/null
 +++ b/drivers/pinctrl/pinctrl-acpi.h
 @@ -0,0 +1,101 @@
@@ -17428,7 +17428,7 @@ index 000000000000..53d0eb919b83
 +
 +#endif
 diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-index c2fd3f4b62d9..021441161fc7 100644
+index c2fd3f4b62d9e..021441161fc7d 100644
 --- a/drivers/pwm/Kconfig
 +++ b/drivers/pwm/Kconfig
 @@ -819,4 +819,13 @@ config PWM_XILINX
@@ -17446,7 +17446,7 @@ index c2fd3f4b62d9..021441161fc7 100644
 +
  endif
 diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-index dfa8b4966ee1..dac7a013d98b 100644
+index dfa8b4966ee19..dac7a013d98bc 100644
 --- a/drivers/pwm/Makefile
 +++ b/drivers/pwm/Makefile
 @@ -75,3 +75,4 @@ obj-$(CONFIG_PWM_TWL_LED)	+= pwm-twl-led.o
@@ -17456,7 +17456,7 @@ index dfa8b4966ee1..dac7a013d98b 100644
 +obj-$(CONFIG_PWM_SKY1) += pwm-sky1.o
 diff --git a/drivers/pwm/pwm-sky1.c b/drivers/pwm/pwm-sky1.c
 new file mode 100644
-index 000000000000..3b55c4000359
+index 0000000000000..3b55c4000359f
 --- /dev/null
 +++ b/drivers/pwm/pwm-sky1.c
 @@ -0,0 +1,291 @@
@@ -17752,7 +17752,7 @@ index 000000000000..3b55c4000359
 +MODULE_AUTHOR("Jerry Zhu <jerry.zhu@cixtech.com>");
 +MODULE_DESCRIPTION("CIX Sky1 PWM driver");
 diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 78b7078478d4..b74bd9243301 100644
+index 78b7078478d46..b74bd9243301b 100644
 --- a/drivers/reset/Kconfig
 +++ b/drivers/reset/Kconfig
 @@ -398,4 +398,11 @@ source "drivers/reset/sti/Kconfig"
@@ -17768,7 +17768,7 @@ index 78b7078478d4..b74bd9243301 100644
 +
  endif
 diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index f7934f9fb90b..8c3fb1e97acf 100644
+index f7934f9fb90bb..8c3fb1e97acf8 100644
 --- a/drivers/reset/Makefile
 +++ b/drivers/reset/Makefile
 @@ -49,3 +49,4 @@ obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
@@ -17778,7 +17778,7 @@ index f7934f9fb90b..8c3fb1e97acf 100644
 +obj-$(CONFIG_RESET_SKY1) += reset-sky1.o
 diff --git a/drivers/reset/reset-sky1.c b/drivers/reset/reset-sky1.c
 new file mode 100644
-index 000000000000..0a2871372118
+index 0000000000000..0a2871372118b
 --- /dev/null
 +++ b/drivers/reset/reset-sky1.c
 @@ -0,0 +1,421 @@
@@ -18204,7 +18204,7 @@ index 000000000000..0a2871372118
 +MODULE_DESCRIPTION("Cix Sky1 reset driver");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
-index 0a514b591527..e7031190eefe 100644
+index 0a514b5915272..e7031190eefe3 100644
 --- a/drivers/usb/cdns3/Kconfig
 +++ b/drivers/usb/cdns3/Kconfig
 @@ -89,6 +89,19 @@ config USB_CDNS3_STARFIVE
@@ -18228,7 +18228,7 @@ index 0a514b591527..e7031190eefe 100644
  
  if USB_CDNS_SUPPORT
 diff --git a/drivers/usb/cdns3/Makefile b/drivers/usb/cdns3/Makefile
-index 48dfae75b5aa..0c43f9c9c7dd 100644
+index 48dfae75b5aaf..0c43f9c9c7dd2 100644
 --- a/drivers/usb/cdns3/Makefile
 +++ b/drivers/usb/cdns3/Makefile
 @@ -25,6 +25,7 @@ obj-$(CONFIG_USB_CDNS3_PCI_WRAP)		+= cdns3-pci-wrap.o
@@ -18241,7 +18241,7 @@ index 48dfae75b5aa..0c43f9c9c7dd 100644
  
 diff --git a/drivers/usb/cdns3/cdnsp-sky1.c b/drivers/usb/cdns3/cdnsp-sky1.c
 new file mode 100644
-index 000000000000..01fa58510ff3
+index 0000000000000..01fa58510ff3e
 --- /dev/null
 +++ b/drivers/usb/cdns3/cdnsp-sky1.c
 @@ -0,0 +1,797 @@
@@ -19044,7 +19044,7 @@ index 000000000000..01fa58510ff3
 +MODULE_DESCRIPTION("Cdnsp Sky1 Glue Layer");
 diff --git a/drivers/usb/cdns3/cdnsp-sky1.h b/drivers/usb/cdns3/cdnsp-sky1.h
 new file mode 100644
-index 000000000000..767cc6581325
+index 0000000000000..767cc6581325d
 --- /dev/null
 +++ b/drivers/usb/cdns3/cdnsp-sky1.h
 @@ -0,0 +1,123 @@
@@ -19172,7 +19172,7 @@ index 000000000000..767cc6581325
 +
 +#endif /* __LINUX_CDNSP_SKY1_H */
 diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 05008d937e40..702a020644e5 100644
+index 05008d937e405..702a020644e52 100644
 --- a/drivers/watchdog/Kconfig
 +++ b/drivers/watchdog/Kconfig
 @@ -2354,4 +2354,14 @@ config KEEMBAY_WATCHDOG
@@ -19191,7 +19191,7 @@ index 05008d937e40..702a020644e5 100644
 +
  endif # WATCHDOG
 diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index b680e4d3c1bc..2e149fb08ae4 100644
+index b680e4d3c1bc2..2e149fb08ae46 100644
 --- a/drivers/watchdog/Makefile
 +++ b/drivers/watchdog/Makefile
 @@ -243,3 +243,4 @@ obj-$(CONFIG_MENZ069_WATCHDOG) += menz69_wdt.o
@@ -19201,7 +19201,7 @@ index b680e4d3c1bc..2e149fb08ae4 100644
 +obj-$(CONFIG_SKY1_WATCHDOG) += sky1_wdt.o
 diff --git a/drivers/watchdog/sky1_wdt.c b/drivers/watchdog/sky1_wdt.c
 new file mode 100644
-index 000000000000..0c40e2b5c787
+index 0000000000000..0c40e2b5c787c
 --- /dev/null
 +++ b/drivers/watchdog/sky1_wdt.c
 @@ -0,0 +1,431 @@
@@ -19638,7 +19638,7 @@ index 000000000000..0c40e2b5c787
 +MODULE_ALIAS("platform:" DRIVER_NAME);
 diff --git a/include/dt-bindings/clock/sky1-audss.h b/include/dt-bindings/clock/sky1-audss.h
 new file mode 100644
-index 000000000000..8d9a185581c9
+index 0000000000000..8d9a185581c99
 --- /dev/null
 +++ b/include/dt-bindings/clock/sky1-audss.h
 @@ -0,0 +1,71 @@
@@ -19715,7 +19715,7 @@ index 000000000000..8d9a185581c9
 +#endif
 diff --git a/include/dt-bindings/clock/sky1-clk.h b/include/dt-bindings/clock/sky1-clk.h
 new file mode 100644
-index 000000000000..87ff8183e2bd
+index 0000000000000..87ff8183e2bde
 --- /dev/null
 +++ b/include/dt-bindings/clock/sky1-clk.h
 @@ -0,0 +1,278 @@
@@ -19999,7 +19999,7 @@ index 000000000000..87ff8183e2bd
 +#endif
 diff --git a/include/dt-bindings/phy/phy-cadence-torrent.h b/include/dt-bindings/phy/phy-cadence-torrent.h
 new file mode 100644
-index 000000000000..987e8b7d788b
+index 0000000000000..987e8b7d788bb
 --- /dev/null
 +++ b/include/dt-bindings/phy/phy-cadence-torrent.h
 @@ -0,0 +1,62 @@
@@ -20067,7 +20067,7 @@ index 000000000000..987e8b7d788b
 +#endif /* _DT_BINDINGS_TORRENT_SERDES_H */
 diff --git a/include/dt-bindings/pinctrl/pads-sky1.h b/include/dt-bindings/pinctrl/pads-sky1.h
 new file mode 100644
-index 000000000000..e659db9b38a2
+index 0000000000000..e659db9b38a20
 --- /dev/null
 +++ b/include/dt-bindings/pinctrl/pads-sky1.h
 @@ -0,0 +1,587 @@
@@ -20660,7 +20660,7 @@ index 000000000000..e659db9b38a2
 +#endif
 diff --git a/include/dt-bindings/power/sky1-power.h b/include/dt-bindings/power/sky1-power.h
 new file mode 100644
-index 000000000000..c989bfbecb1e
+index 0000000000000..c989bfbecb1ee
 --- /dev/null
 +++ b/include/dt-bindings/power/sky1-power.h
 @@ -0,0 +1,48 @@
@@ -20714,7 +20714,7 @@ index 000000000000..c989bfbecb1e
 +#endif
 diff --git a/include/dt-bindings/reset/sky1-reset-audss.h b/include/dt-bindings/reset/sky1-reset-audss.h
 new file mode 100644
-index 000000000000..d5d1465a8bd8
+index 0000000000000..d5d1465a8bd8b
 --- /dev/null
 +++ b/include/dt-bindings/reset/sky1-reset-audss.h
 @@ -0,0 +1,23 @@
@@ -20743,7 +20743,7 @@ index 000000000000..d5d1465a8bd8
 +#endif
 diff --git a/include/dt-bindings/reset/sky1-reset-fch.h b/include/dt-bindings/reset/sky1-reset-fch.h
 new file mode 100644
-index 000000000000..d7e478face9f
+index 0000000000000..d7e478face9ff
 --- /dev/null
 +++ b/include/dt-bindings/reset/sky1-reset-fch.h
 @@ -0,0 +1,44 @@
@@ -20793,7 +20793,7 @@ index 000000000000..d7e478face9f
 +
 diff --git a/include/dt-bindings/reset/sky1-reset.h b/include/dt-bindings/reset/sky1-reset.h
 new file mode 100644
-index 000000000000..b43dbf39fdc7
+index 0000000000000..b43dbf39fdc7e
 --- /dev/null
 +++ b/include/dt-bindings/reset/sky1-reset.h
 @@ -0,0 +1,166 @@
@@ -20965,7 +20965,7 @@ index 000000000000..b43dbf39fdc7
 +
 diff --git a/include/dt-bindings/thermal/sky1-thermal.h b/include/dt-bindings/thermal/sky1-thermal.h
 new file mode 100644
-index 000000000000..a13e68c3daa8
+index 0000000000000..a13e68c3daa8a
 --- /dev/null
 +++ b/include/dt-bindings/thermal/sky1-thermal.h
 @@ -0,0 +1,29 @@

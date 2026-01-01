@@ -11,7 +11,7 @@ Name Service announcements.
  1 file changed, 5 deletions(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index eb4d220f9961..022a4aa57f5e 100644
+index eb4d220f9961b..022a4aa57f5ed 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -599,11 +599,6 @@ static int cix_dsp_rproc_addr_init(struct cix_dsp_rproc *rproc_priv)

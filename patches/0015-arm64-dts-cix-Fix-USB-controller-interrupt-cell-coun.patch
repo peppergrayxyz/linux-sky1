@@ -15,7 +15,7 @@ for all USB controllers (usbss_0 through usbhs_3).
  1 file changed, 40 insertions(+), 40 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 94f16aa9461a..2bbcc25b6970 100644
+index 94f16aa9461a2..2bbcc25b6970f 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -1460,10 +1460,10 @@ usbss_0: usb-controller@9010000 {

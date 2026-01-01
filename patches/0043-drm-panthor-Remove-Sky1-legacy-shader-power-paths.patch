@@ -24,7 +24,7 @@ vanilla mainline Panthor behavior.
  3 files changed, 5 insertions(+), 220 deletions(-)
 
 diff --git a/drivers/gpu/drm/panthor/panthor_fw.c b/drivers/gpu/drm/panthor/panthor_fw.c
-index 60a6bdf64f5c..3843630375aa 100644
+index 60a6bdf64f5c8..3843630375aa2 100644
 --- a/drivers/gpu/drm/panthor/panthor_fw.c
 +++ b/drivers/gpu/drm/panthor/panthor_fw.c
 @@ -978,36 +978,12 @@ static int panthor_fw_init_ifaces(struct panthor_device *ptdev)
@@ -155,7 +155,7 @@ index 60a6bdf64f5c..3843630375aa 100644
  				   0, SZ_4G,
  				   CSF_MCU_SHARED_REGION_START,
 diff --git a/drivers/gpu/drm/panthor/panthor_gpu.c b/drivers/gpu/drm/panthor/panthor_gpu.c
-index 952fe7cb9760..34bfb977bbbb 100644
+index 952fe7cb9760c..34bfb977bbbbb 100644
 --- a/drivers/gpu/drm/panthor/panthor_gpu.c
 +++ b/drivers/gpu/drm/panthor/panthor_gpu.c
 @@ -345,141 +345,6 @@ int panthor_gpu_l2_power_on(struct panthor_device *ptdev)
@@ -301,7 +301,7 @@ index 952fe7cb9760..34bfb977bbbb 100644
   * panthor_gpu_flush_caches() - Flush caches
   * @ptdev: Device.
 diff --git a/drivers/gpu/drm/panthor/panthor_gpu.h b/drivers/gpu/drm/panthor/panthor_gpu.h
-index 5db710e78e37..7c17a8c06858 100644
+index 5db710e78e37d..7c17a8c068581 100644
 --- a/drivers/gpu/drm/panthor/panthor_gpu.h
 +++ b/drivers/gpu/drm/panthor/panthor_gpu.h
 @@ -47,7 +47,6 @@ int panthor_gpu_block_power_off(struct panthor_device *ptdev,

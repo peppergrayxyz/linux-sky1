@@ -28,7 +28,7 @@ managed by RTS5453H controllers.
  create mode 100644 drivers/usb/typec/rts5453.c
 
 diff --git a/drivers/usb/typec/Kconfig b/drivers/usb/typec/Kconfig
-index 2f80c2792dbd..fb2814cac8a9 100644
+index 2f80c2792dbda..fb2814cac8a97 100644
 --- a/drivers/usb/typec/Kconfig
 +++ b/drivers/usb/typec/Kconfig
 @@ -110,6 +110,19 @@ config TYPEC_WUSB3801
@@ -52,7 +52,7 @@ index 2f80c2792dbd..fb2814cac8a9 100644
  
  source "drivers/usb/typec/altmodes/Kconfig"
 diff --git a/drivers/usb/typec/Makefile b/drivers/usb/typec/Makefile
-index 7a368fea61bc..432cadc6bf06 100644
+index 7a368fea61bc9..432cadc6bf060 100644
 --- a/drivers/usb/typec/Makefile
 +++ b/drivers/usb/typec/Makefile
 @@ -11,4 +11,5 @@ obj-$(CONFIG_TYPEC_HD3SS3220)	+= hd3ss3220.o
@@ -63,7 +63,7 @@ index 7a368fea61bc..432cadc6bf06 100644
  obj-$(CONFIG_TYPEC)		+= mux/
 diff --git a/drivers/usb/typec/rts5453.c b/drivers/usb/typec/rts5453.c
 new file mode 100644
-index 000000000000..f71b7a632b6c
+index 0000000000000..f71b7a632b6c4
 --- /dev/null
 +++ b/drivers/usb/typec/rts5453.c
 @@ -0,0 +1,611 @@

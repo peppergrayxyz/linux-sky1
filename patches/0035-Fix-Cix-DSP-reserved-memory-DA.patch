@@ -12,7 +12,7 @@ Updating the DA to 0xce000000 (identity map) resolves this.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index 022a4aa57f5e..b5cea1464f38 100644
+index 022a4aa57f5ed..b5cea1464f38c 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -87,7 +87,7 @@ static const struct cix_mem_region sky1_dsp_mems[CIX_MEM_REG_NUM] = {

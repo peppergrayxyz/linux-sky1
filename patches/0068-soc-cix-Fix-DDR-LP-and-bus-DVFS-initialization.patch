@@ -1,7 +1,7 @@
-From 82f5061bfd166f3de6dbc6fba22550dba76b8112 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 30 Dec 2025 19:37:34 +1100
-Subject: [PATCH 68/68] soc: cix: Fix DDR LP and bus DVFS initialization
+Subject: [PATCH] soc: cix: Fix DDR LP and bus DVFS initialization
 
 Fix two initialization issues in the power management drivers:
 
@@ -20,7 +20,7 @@ from driver load.
  2 files changed, 28 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/soc/cix/cix-bus-perf.c b/drivers/soc/cix/cix-bus-perf.c
-index 7badbef0a4a8..ec82a485dea5 100644
+index 7badbef0a4a83..ec82a485dea5d 100644
 --- a/drivers/soc/cix/cix-bus-perf.c
 +++ b/drivers/soc/cix/cix-bus-perf.c
 @@ -155,11 +155,20 @@ static int cix_bus_perf_probe(struct platform_device *pdev)
@@ -47,7 +47,7 @@ index 7badbef0a4a8..ec82a485dea5 100644
  
  	return 0;
 diff --git a/drivers/soc/cix/cix-ddr-lp.c b/drivers/soc/cix/cix-ddr-lp.c
-index 0db9a82d7618..09076f37a11c 100644
+index 0db9a82d7618b..09076f37a11c9 100644
 --- a/drivers/soc/cix/cix-ddr-lp.c
 +++ b/drivers/soc/cix/cix-ddr-lp.c
 @@ -121,17 +121,33 @@ ATTRIBUTE_GROUPS(ddrlp);
@@ -85,6 +85,3 @@ index 0db9a82d7618..09076f37a11c 100644
  	dev_info(&pdev->dev, "DDR low power control initialized\n");
  	return 0;
  }
--- 
-2.51.0
-

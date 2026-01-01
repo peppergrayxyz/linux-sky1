@@ -21,7 +21,7 @@ Also includes cix-mailbox use_shmem fix for SCMI transport.
  2 files changed, 111 insertions(+), 15 deletions(-)
 
 diff --git a/drivers/mailbox/cix-mailbox.c b/drivers/mailbox/cix-mailbox.c
-index 1859768015cb..c856eebe8c6a 100644
+index 1859768015cb1..c856eebe8c6a3 100644
 --- a/drivers/mailbox/cix-mailbox.c
 +++ b/drivers/mailbox/cix-mailbox.c
 @@ -16,6 +16,13 @@
@@ -113,7 +113,7 @@ index 1859768015cb..c856eebe8c6a 100644
  	platform_set_drvdata(pdev, priv);
  	ret = devm_mbox_controller_register(dev, &priv->mbox);
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index 7a2e640072d5..92ba583169fe 100644
+index 7a2e640072d5a..92ba583169feb 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -120,6 +120,73 @@ static atomic_t x211_phy_rst_finish_cnt = ATOMIC_INIT(0);

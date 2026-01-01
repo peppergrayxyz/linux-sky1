@@ -25,7 +25,7 @@ Fix two issues in the DMA-350 driver:
  1 file changed, 324 insertions(+), 130 deletions(-)
 
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index 7ae54f52b47d..54d703ab16ce 100644
+index 7ae54f52b47de..54d703ab16cef 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -6,6 +6,7 @@

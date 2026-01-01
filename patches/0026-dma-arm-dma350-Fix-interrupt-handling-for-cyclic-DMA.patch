@@ -28,7 +28,7 @@ Tested with speaker-test on Sky1 HDMI audio output.
  1 file changed, 72 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index d85cea1952f5..b2f28897451b 100644
+index d85cea1952f57..b2f28897451bd 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -8,12 +8,14 @@

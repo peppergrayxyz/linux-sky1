@@ -40,7 +40,7 @@ rendering verified working.
  5 files changed, 118 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index f601329aaaf3..e4dd690113bf 100644
+index f601329aaaf36..e4dd690113bf7 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -2898,10 +2898,11 @@ gpu: gpu@15010000 {
@@ -59,7 +59,7 @@ index f601329aaaf3..e4dd690113bf 100644
  			physical-memory-group-manager = <&gpu_physical_memory_group_manager>;
  			protected-memory-allocator = <&gpu_protected_memory_allocator>;
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index 6073ef0e4858..e3b212c5ecef 100644
+index 6073ef0e4858a..e3b212c5ecef6 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -4,6 +4,7 @@
@@ -189,7 +189,7 @@ index 6073ef0e4858..e3b212c5ecef 100644
  	if (ret)
  		goto err_rpm_put;
 diff --git a/drivers/gpu/drm/panthor/panthor_hw.c b/drivers/gpu/drm/panthor/panthor_hw.c
-index 291673cd6e47..791bcbe19df9 100644
+index 291673cd6e473..791bcbe19df95 100644
 --- a/drivers/gpu/drm/panthor/panthor_hw.c
 +++ b/drivers/gpu/drm/panthor/panthor_hw.c
 @@ -64,6 +64,7 @@ static void panthor_gpu_info_init(struct panthor_device *ptdev)
@@ -201,7 +201,7 @@ index 291673cd6e47..791bcbe19df9 100644
  	ptdev->gpu_info.csf_id = gpu_read(ptdev, GPU_CSF_ID);
  	ptdev->gpu_info.gpu_rev = gpu_read(ptdev, GPU_REVID);
 diff --git a/drivers/irqchip/irq-sky1-pdc.c b/drivers/irqchip/irq-sky1-pdc.c
-index f7d8e633eab5..044aff2015c0 100644
+index f7d8e633eab56..044aff2015c0f 100644
 --- a/drivers/irqchip/irq-sky1-pdc.c
 +++ b/drivers/irqchip/irq-sky1-pdc.c
 @@ -186,7 +186,7 @@ static int __init sky1_pdc_irqchip_init(struct device_node *node,
@@ -223,7 +223,7 @@ index f7d8e633eab5..044aff2015c0 100644
  
  	register_syscore_ops(&sky1_pdc_syscore_ops);
 diff --git a/drivers/pmdomain/arm/scmi_pm_domain.c b/drivers/pmdomain/arm/scmi_pm_domain.c
-index b5e2ffd5ea64..fcce7b7a1bcc 100644
+index b5e2ffd5ea64c..fcce7b7a1bccb 100644
 --- a/drivers/pmdomain/arm/scmi_pm_domain.c
 +++ b/drivers/pmdomain/arm/scmi_pm_domain.c
 @@ -24,9 +24,35 @@ struct scmi_pm_domain {

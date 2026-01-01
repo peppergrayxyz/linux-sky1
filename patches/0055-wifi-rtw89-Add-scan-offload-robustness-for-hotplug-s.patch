@@ -26,7 +26,7 @@ without affecting normal operation.
  1 file changed, 29 insertions(+)
 
 diff --git a/drivers/net/wireless/realtek/rtw89/fw.c b/drivers/net/wireless/realtek/rtw89/fw.c
-index 080c4f8a655a..cc9869875599 100644
+index 080c4f8a655a8..cc98698755997 100644
 --- a/drivers/net/wireless/realtek/rtw89/fw.c
 +++ b/drivers/net/wireless/realtek/rtw89/fw.c
 @@ -8210,6 +8210,20 @@ int rtw89_hw_scan_offload(struct rtw89_dev *rtwdev,

@@ -15,7 +15,7 @@ remoteproc framework.
  create mode 100644 drivers/remoteproc/cix_dsp_rproc.c
 
 diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 48a0d3a69ed0..c3aa7d012858 100644
+index 48a0d3a69ed08..c3aa7d0128580 100644
 --- a/drivers/remoteproc/Kconfig
 +++ b/drivers/remoteproc/Kconfig
 @@ -45,6 +45,17 @@ config IMX_DSP_REMOTEPROC
@@ -37,7 +37,7 @@ index 48a0d3a69ed0..c3aa7d012858 100644
  	tristate "Ingenic JZ47xx VPU remoteproc support"
  	depends on MIPS || COMPILE_TEST
 diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
-index 1c7598b8475d..6a13c9c408f1 100644
+index 1c7598b8475d6..6a13c9c408f1a 100644
 --- a/drivers/remoteproc/Makefile
 +++ b/drivers/remoteproc/Makefile
 @@ -38,5 +38,6 @@ obj-$(CONFIG_ST_SLIM_REMOTEPROC)	+= st_slim_rproc.o
@@ -50,7 +50,7 @@ index 1c7598b8475d..6a13c9c408f1 100644
  obj-$(CONFIG_XLNX_R5_REMOTEPROC)	+= xlnx_r5_remoteproc.o
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
 new file mode 100644
-index 000000000000..00fcc341f037
+index 0000000000000..00fcc341f0372
 --- /dev/null
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -0,0 +1,1024 @@

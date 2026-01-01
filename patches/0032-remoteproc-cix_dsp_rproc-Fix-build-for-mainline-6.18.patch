@@ -18,7 +18,7 @@ Tested: DSP boots successfully, firmware loads, rpmsg services register.
  1 file changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index 00fcc341f037..eb4d220f9961 100644
+index 00fcc341f0372..eb4d220f9961b 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -772,8 +772,8 @@ static int cix_dsp_rproc_probe(struct platform_device *pdev)

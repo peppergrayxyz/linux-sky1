@@ -43,7 +43,7 @@ Tested on Radxa Orion O6 with NVMe boot from mainline 6.18-rc7.
  5 files changed, 288 insertions(+), 134 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 8e6d84810a7d..7fca32ccc5b5 100644
+index 8e6d84810a7dc..7fca32ccc5b5f 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -1359,10 +1359,11 @@ &macb1 {
@@ -165,7 +165,7 @@ index 8e6d84810a7d..7fca32ccc5b5 100644
  
  &pcie1_phy {
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index 92ba583169fe..993ff61350b3 100644
+index 92ba583169feb..993ff61350b31 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -1184,13 +1184,19 @@ static int sky1_pcie_parse_mem(struct sky1_pcie *pcie)
@@ -223,7 +223,7 @@ index 92ba583169fe..993ff61350b3 100644
  	cdns_pcie = &rc->pcie;
  	cdns_pcie->dev = dev;
 diff --git a/drivers/pci/controller/cadence/pcie-cadence-host.c b/drivers/pci/controller/cadence/pcie-cadence-host.c
-index fffd63d6665e..84b11b2591f3 100644
+index fffd63d6665e8..84b11b2591f39 100644
 --- a/drivers/pci/controller/cadence/pcie-cadence-host.c
 +++ b/drivers/pci/controller/cadence/pcie-cadence-host.c
 @@ -33,7 +33,7 @@ void __iomem *cdns_pci_map_bus(struct pci_bus *bus, unsigned int devfn,
@@ -471,7 +471,7 @@ index fffd63d6665e..84b11b2591f3 100644
  	ret = cdns_pcie_host_link_setup(rc);
  	if (ret)
 diff --git a/drivers/pci/controller/cadence/pcie-cadence.c b/drivers/pci/controller/cadence/pcie-cadence.c
-index bd683d0fecb2..c5f35808de16 100644
+index bd683d0fecb22..c5f35808de16c 100644
 --- a/drivers/pci/controller/cadence/pcie-cadence.c
 +++ b/drivers/pci/controller/cadence/pcie-cadence.c
 @@ -23,6 +23,17 @@ u16 cdns_pcie_find_ext_capability(struct cdns_pcie *pcie, u8 cap)
@@ -617,7 +617,7 @@ index bd683d0fecb2..c5f35808de16 100644
  EXPORT_SYMBOL_GPL(cdns_pcie_reset_outbound_region);
  
 diff --git a/drivers/pci/controller/cadence/pcie-cadence.h b/drivers/pci/controller/cadence/pcie-cadence.h
-index e2a853d2c0ab..dc77e1f2df7b 100644
+index e2a853d2c0ab0..dc77e1f2df7bd 100644
 --- a/drivers/pci/controller/cadence/pcie-cadence.h
 +++ b/drivers/pci/controller/cadence/pcie-cadence.h
 @@ -18,8 +18,9 @@

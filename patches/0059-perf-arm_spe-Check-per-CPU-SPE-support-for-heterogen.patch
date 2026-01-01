@@ -1,4 +1,4 @@
-From c23d0fa231adf7898214b7ac0ece5d4a6b19bffc Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 23 Dec 2025 18:24:11 +1100
 Subject: [PATCH] perf: arm_spe: Check per-CPU SPE support for heterogeneous
@@ -24,7 +24,7 @@ current CPU, and skip SPE register access on CPUs where PMSVer is 0.
  1 file changed, 17 insertions(+)
 
 diff --git a/drivers/perf/arm_spe_pmu.c b/drivers/perf/arm_spe_pmu.c
-index fa50645fedda..fade9b93f615 100644
+index fa50645feddad..fade9b93f615f 100644
 --- a/drivers/perf/arm_spe_pmu.c
 +++ b/drivers/perf/arm_spe_pmu.c
 @@ -1191,6 +1191,15 @@ static void __arm_spe_pmu_dev_probe(void *info)
@@ -65,6 +65,3 @@ index fa50645fedda..fade9b93f615 100644
  	disable_percpu_irq(spe_pmu->irq);
  	__arm_spe_pmu_reset_local();
  }
--- 
-2.51.0
-

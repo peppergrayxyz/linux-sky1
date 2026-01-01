@@ -27,7 +27,7 @@ Changes:
  3 files changed, 51 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/mailbox/cix-mailbox.c b/drivers/mailbox/cix-mailbox.c
-index c856eebe8c6a..9cd5e8ffd4e6 100644
+index c856eebe8c6a3..9cd5e8ffd4e62 100644
 --- a/drivers/mailbox/cix-mailbox.c
 +++ b/drivers/mailbox/cix-mailbox.c
 @@ -174,7 +174,7 @@ static int cix_mbox_send_data_fifo(struct mbox_chan *chan, void *data)
@@ -54,7 +54,7 @@ index c856eebe8c6a..9cd5e8ffd4e6 100644
  }
  
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index c0fbd5b30861..5c96a65c6c5d 100644
+index c0fbd5b308615..5c96a65c6c5da 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -113,6 +113,7 @@ struct cix_dsp_rproc {
@@ -138,7 +138,7 @@ index c0fbd5b30861..5c96a65c6c5d 100644
  	rproc_vq_interrupt(rproc_priv->rproc, 1);
  
 diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-index 4ca980dfc1bd..7c6b25565aba 100644
+index 4ca980dfc1bdd..7c6b25565abaa 100644
 --- a/drivers/rpmsg/virtio_rpmsg_bus.c
 +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
 @@ -840,6 +840,10 @@ static int rpmsg_recv_from_avail(struct virtproc_info *vrp)

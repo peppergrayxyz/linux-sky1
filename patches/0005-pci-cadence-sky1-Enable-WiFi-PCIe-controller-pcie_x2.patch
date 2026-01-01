@@ -20,7 +20,7 @@ Tested with Realtek RTL8852BE WiFi 6 adapter on Radxa Orion O6.
  2 files changed, 6 insertions(+), 13 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 7fca32ccc5b5..4e7578a4f0ec 100644
+index 7fca32ccc5b5f..4e7578a4f0ec6 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -2087,9 +2087,13 @@ &pcie_x4_rc {
@@ -40,7 +40,7 @@ index 7fca32ccc5b5..4e7578a4f0ec 100644
  
  /* 5GBE-1 - disabled to avoid resource conflict during boot */
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index 993ff61350b3..efc5f1f08b71 100644
+index 993ff61350b31..efc5f1f08b711 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -2326,17 +2326,6 @@ static int sky1_pcie_probe(struct platform_device *pdev)

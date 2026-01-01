@@ -23,7 +23,7 @@ Ported from vendor kernel with mainline coding style improvements:
  create mode 100644 drivers/nvmem/sky1-nvmem.c
 
 diff --git a/drivers/nvmem/Kconfig b/drivers/nvmem/Kconfig
-index e0d88d3199c1..4c82593bff2f 100644
+index e0d88d3199c11..4c82593bff2f0 100644
 --- a/drivers/nvmem/Kconfig
 +++ b/drivers/nvmem/Kconfig
 @@ -364,6 +364,17 @@ config NVMEM_SPMI_SDAM
@@ -45,7 +45,7 @@ index e0d88d3199c1..4c82593bff2f 100644
  	tristate "Spreadtrum SoC eFuse Support"
  	depends on ARCH_SPRD || COMPILE_TEST
 diff --git a/drivers/nvmem/Makefile b/drivers/nvmem/Makefile
-index 70a4464dcb1e..4764d860f663 100644
+index 70a4464dcb1e2..4764d860f663a 100644
 --- a/drivers/nvmem/Makefile
 +++ b/drivers/nvmem/Makefile
 @@ -72,6 +72,8 @@ obj-$(CONFIG_NVMEM_SNVS_LPGPR)		+= nvmem_snvs_lpgpr.o
@@ -59,7 +59,7 @@ index 70a4464dcb1e..4764d860f663 100644
  obj-$(CONFIG_NVMEM_STM32_ROMEM)		+= nvmem_stm32_romem.o
 diff --git a/drivers/nvmem/sky1-nvmem.c b/drivers/nvmem/sky1-nvmem.c
 new file mode 100644
-index 000000000000..aaf55aa4db23
+index 0000000000000..aaf55aa4db236
 --- /dev/null
 +++ b/drivers/nvmem/sky1-nvmem.c
 @@ -0,0 +1,93 @@

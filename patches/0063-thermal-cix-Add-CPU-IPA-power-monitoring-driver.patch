@@ -1,7 +1,7 @@
-From 5caec6a2626755ba3477795e608f89410e06cbb5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 27 Dec 2025 23:27:58 +1100
-Subject: [PATCH 63/68] thermal: cix: Add CPU IPA power monitoring driver
+Subject: [PATCH] thermal: cix: Add CPU IPA power monitoring driver
 
 Add driver for reading per-CPU power measurements on CIX Sky1 SoC. The
 driver reads static (leakage) and dynamic power from a memory-mapped
@@ -19,7 +19,7 @@ showing per-CPU and total power consumption in milliwatts.
  create mode 100644 drivers/thermal/cix/cix_cpu_ipa.c
 
 diff --git a/drivers/thermal/Kconfig b/drivers/thermal/Kconfig
-index a09c188b9ad1..fd82787db9a6 100644
+index a09c188b9ad11..fd82787db9a6e 100644
 --- a/drivers/thermal/Kconfig
 +++ b/drivers/thermal/Kconfig
 @@ -517,4 +517,18 @@ config LOONGSON2_THERMAL
@@ -42,7 +42,7 @@ index a09c188b9ad1..fd82787db9a6 100644
 +
  endif
 diff --git a/drivers/thermal/Makefile b/drivers/thermal/Makefile
-index d7718978db24..2f19b1243979 100644
+index d7718978db245..2f19b12439799 100644
 --- a/drivers/thermal/Makefile
 +++ b/drivers/thermal/Makefile
 @@ -67,4 +67,5 @@ obj-$(CONFIG_AMLOGIC_THERMAL)     += amlogic_thermal.o
@@ -53,7 +53,7 @@ index d7718978db24..2f19b1243979 100644
  obj-$(CONFIG_THERMAL_CORE_TESTING)	+= testing/
 diff --git a/drivers/thermal/cix/Makefile b/drivers/thermal/cix/Makefile
 new file mode 100644
-index 000000000000..4f6d776b4c53
+index 0000000000000..4f6d776b4c536
 --- /dev/null
 +++ b/drivers/thermal/cix/Makefile
 @@ -0,0 +1,2 @@
@@ -61,7 +61,7 @@ index 000000000000..4f6d776b4c53
 +obj-$(CONFIG_CIX_CPU_IPA)	+= cix_cpu_ipa.o
 diff --git a/drivers/thermal/cix/cix_cpu_ipa.c b/drivers/thermal/cix/cix_cpu_ipa.c
 new file mode 100644
-index 000000000000..77d656826e07
+index 0000000000000..77d656826e071
 --- /dev/null
 +++ b/drivers/thermal/cix/cix_cpu_ipa.c
 @@ -0,0 +1,131 @@
@@ -196,6 +196,3 @@ index 000000000000..77d656826e07
 +
 +MODULE_DESCRIPTION("CIX CPU IPA Power Monitoring Driver");
 +MODULE_LICENSE("GPL");
--- 
-2.51.0
-

@@ -14,7 +14,7 @@ synchronization.
  1 file changed, 63 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/hwspinlock/sky1_hwspinlock.c b/drivers/hwspinlock/sky1_hwspinlock.c
-index a59021dd6cfb..c73ca035def8 100644
+index a59021dd6cfb7..c73ca035def8c 100644
 --- a/drivers/hwspinlock/sky1_hwspinlock.c
 +++ b/drivers/hwspinlock/sky1_hwspinlock.c
 @@ -7,6 +7,7 @@

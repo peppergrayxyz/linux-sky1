@@ -21,7 +21,7 @@ to be safely enabled in devicetree.
  1 file changed, 13 insertions(+)
 
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index 24a301d17e8d..0a9c9714bd5f 100644
+index 24a301d17e8d6..0a9c9714bd5f0 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -2318,6 +2318,8 @@ static int sky1_pci_host_probe(struct pci_host_bridge *bridge)

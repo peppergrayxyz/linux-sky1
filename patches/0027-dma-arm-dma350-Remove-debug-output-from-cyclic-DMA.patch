@@ -11,7 +11,7 @@ tracing that can be enabled via dynamic debug.
  1 file changed, 4 insertions(+), 37 deletions(-)
 
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index b2f28897451b..7ae54f52b47d 100644
+index b2f28897451bd..7ae54f52b47de 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -530,11 +530,8 @@ static enum dma_status d350_tx_status(struct dma_chan *chan, dma_cookie_t cookie

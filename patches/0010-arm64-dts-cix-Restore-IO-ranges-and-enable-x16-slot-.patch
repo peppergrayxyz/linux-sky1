@@ -23,7 +23,7 @@ Remove the pci=realloc bootarg as it's no longer required.
  2 files changed, 13 insertions(+), 23 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 688b95519ee7..354e639e34fd 100644
+index 688b95519ee7f..354e639e34fd4 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -16,12 +16,6 @@ / {
@@ -57,7 +57,7 @@ index 688b95519ee7..354e639e34fd 100644
  
  /* M.2 M-Key */
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index bb002d66d61d..94f16aa9461a 100644
+index bb002d66d61d9..94f16aa9461a2 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -2212,11 +2212,8 @@ pcie_x2_rc: pcie@0a0c0000 { /* X2 */

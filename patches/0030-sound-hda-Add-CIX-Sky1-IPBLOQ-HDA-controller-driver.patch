@@ -42,7 +42,7 @@ Also silence a noisy clock gate debug print in clk-sky1-audss.
  create mode 100644 sound/hda/controllers/hda_cix_ipbloq.c
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index b36c100aee06..0962fc251a72 100644
+index b36c100aee064..0962fc251a721 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -1289,16 +1289,30 @@ i2s9: i2s@070b0000 {
@@ -87,7 +87,7 @@ index b36c100aee06..0962fc251a72 100644
  
  		mbox_ap2dsp: mailbox@70f0000 {
 diff --git a/drivers/clk/cix/clk-sky1-audss.c b/drivers/clk/cix/clk-sky1-audss.c
-index 95156d8fab13..975313767b60 100644
+index 95156d8fab13d..975313767b605 100644
 --- a/drivers/clk/cix/clk-sky1-audss.c
 +++ b/drivers/clk/cix/clk-sky1-audss.c
 @@ -412,7 +412,7 @@ static int sky1_audss_gate_enable(struct clk_hw *hw)
@@ -100,7 +100,7 @@ index 95156d8fab13..975313767b60 100644
  	return 0;
  }
 diff --git a/sound/hda/controllers/Kconfig b/sound/hda/controllers/Kconfig
-index 34721f50b055..e196164d7213 100644
+index 34721f50b055a..e196164d72130 100644
 --- a/sound/hda/controllers/Kconfig
 +++ b/sound/hda/controllers/Kconfig
 @@ -40,3 +40,19 @@ config SND_HDA_ACPI
@@ -124,7 +124,7 @@ index 34721f50b055..e196164d7213 100644
 +	  To compile this driver as a module, choose M here: the module
 +	  will be called snd-hda-cix-ipbloq.
 diff --git a/sound/hda/controllers/Makefile b/sound/hda/controllers/Makefile
-index a4bcd055e9ae..b8f17d485374 100644
+index a4bcd055e9aef..b8f17d4853745 100644
 --- a/sound/hda/controllers/Makefile
 +++ b/sound/hda/controllers/Makefile
 @@ -2,6 +2,7 @@
@@ -142,7 +142,7 @@ index a4bcd055e9ae..b8f17d485374 100644
 +obj-$(CONFIG_SND_HDA_CIX_IPBLOQ) += snd-hda-cix-ipbloq.o
 diff --git a/sound/hda/controllers/hda_cix_ipbloq.c b/sound/hda/controllers/hda_cix_ipbloq.c
 new file mode 100644
-index 000000000000..df1facafc75a
+index 0000000000000..df1facafc75a3
 --- /dev/null
 +++ b/sound/hda/controllers/hda_cix_ipbloq.c
 @@ -0,0 +1,889 @@

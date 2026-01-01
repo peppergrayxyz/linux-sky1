@@ -30,7 +30,7 @@ Tested on CIX Sky1 (Radxa Orion O6):
  3 files changed, 33 insertions(+)
 
 diff --git a/drivers/base/arch_topology.c b/drivers/base/arch_topology.c
-index e1eff05bea4a..9604b869a0c8 100644
+index e1eff05bea4aa..9604b869a0c8f 100644
 --- a/drivers/base/arch_topology.c
 +++ b/drivers/base/arch_topology.c
 @@ -415,6 +415,26 @@ init_cpu_capacity_callback(struct notifier_block *nb,
@@ -61,7 +61,7 @@ index e1eff05bea4a..9604b869a0c8 100644
  	.notifier_call = init_cpu_capacity_callback,
  };
 diff --git a/drivers/cpufreq/cpufreq.c b/drivers/cpufreq/cpufreq.c
-index 852e024facc3..9d6faeb30052 100644
+index 852e024facc3c..9d6faeb300528 100644
 --- a/drivers/cpufreq/cpufreq.c
 +++ b/drivers/cpufreq/cpufreq.c
 @@ -14,6 +14,7 @@
@@ -83,7 +83,7 @@ index 852e024facc3..9d6faeb30052 100644
  	if (ret < 0)
  		return ret;
 diff --git a/include/linux/arch_topology.h b/include/linux/arch_topology.h
-index d72d6e5aa200..8ae0b155f118 100644
+index d72d6e5aa2002..8ae0b155f118b 100644
 --- a/include/linux/arch_topology.h
 +++ b/include/linux/arch_topology.h
 @@ -89,6 +89,15 @@ void remove_cpu_topology(unsigned int cpuid);

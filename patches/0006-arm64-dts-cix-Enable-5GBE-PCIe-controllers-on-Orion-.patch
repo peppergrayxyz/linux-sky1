@@ -21,7 +21,7 @@ the PCI core leaves resource state corrupted causing kernel panics.
  2 files changed, 34 insertions(+), 11 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 4e7578a4f0ec..688b95519ee7 100644
+index 4e7578a4f0ec6..688b95519ee7f 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -16,6 +16,12 @@ / {
@@ -74,7 +74,7 @@ index 4e7578a4f0ec..688b95519ee7 100644
  
  &pcie1_phy {
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 94f16aa9461a..bb002d66d61d 100644
+index 94f16aa9461a2..bb002d66d61d9 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -2212,8 +2212,11 @@ pcie_x2_rc: pcie@0a0c0000 { /* X2 */

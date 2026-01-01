@@ -28,7 +28,7 @@ Baseline commit before DMA-350 cyclic implementation work.
  1 file changed, 7 insertions(+)
 
 diff --git a/sound/soc/cix/card-utils.c b/sound/soc/cix/card-utils.c
-index 6296584b6ff2..f349edad35d8 100644
+index 6296584b6ff2e..f349edad35d83 100644
 --- a/sound/soc/cix/card-utils.c
 +++ b/sound/soc/cix/card-utils.c
 @@ -88,6 +88,13 @@ static int cix_dailink_parsing_fmt(struct device_node *np,

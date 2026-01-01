@@ -38,7 +38,7 @@ Status:
  2 files changed, 78 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index b5cea1464f38..7b6c8096f4a9 100644
+index b5cea1464f38c..7b6c8096f4a92 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -44,6 +44,7 @@
@@ -139,7 +139,7 @@ index b5cea1464f38..7b6c8096f4a9 100644
  	ret = cix_dsp_rproc_addr_init(rproc_priv);
  	if (ret) {
 diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-index 484890b4a6a7..2467a14a7392 100644
+index 484890b4a6a74..2467a14a73923 100644
 --- a/drivers/rpmsg/virtio_rpmsg_bus.c
 +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
 @@ -159,16 +159,22 @@ static const struct rpmsg_endpoint_ops virtio_endpoint_ops = {

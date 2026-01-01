@@ -20,7 +20,7 @@ doesn't affect other platforms.
  1 file changed, 88 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index efc5f1f08b71..24a301d17e8d 100644
+index efc5f1f08b711..24a301d17e8d6 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -2257,6 +2257,86 @@ static void sky1_pcie_x211_enum_lock(struct sky1_pcie *pcie, bool lock)

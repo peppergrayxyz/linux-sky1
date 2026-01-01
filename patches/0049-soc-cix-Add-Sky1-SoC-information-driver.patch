@@ -37,7 +37,7 @@ Ported from vendor kernel with mainline improvements:
  create mode 100644 drivers/soc/cix/sky1-socinfo.c
 
 diff --git a/drivers/soc/Kconfig b/drivers/soc/Kconfig
-index a2d65adffb80..a17223668ffe 100644
+index a2d65adffb805..a17223668ffe1 100644
 --- a/drivers/soc/Kconfig
 +++ b/drivers/soc/Kconfig
 @@ -7,6 +7,7 @@ source "drivers/soc/aspeed/Kconfig"
@@ -49,7 +49,7 @@ index a2d65adffb80..a17223668ffe 100644
  source "drivers/soc/fsl/Kconfig"
  source "drivers/soc/fujitsu/Kconfig"
 diff --git a/drivers/soc/Makefile b/drivers/soc/Makefile
-index c9e689080ceb..22aac89ba0b1 100644
+index c9e689080ceb7..22aac89ba0b12 100644
 --- a/drivers/soc/Makefile
 +++ b/drivers/soc/Makefile
 @@ -8,6 +8,7 @@ obj-y				+= aspeed/
@@ -62,7 +62,7 @@ index c9e689080ceb..22aac89ba0b1 100644
  obj-$(CONFIG_MACH_DOVE)		+= dove/
 diff --git a/drivers/soc/cix/Kconfig b/drivers/soc/cix/Kconfig
 new file mode 100644
-index 000000000000..1d475bd15464
+index 0000000000000..1d475bd15464e
 --- /dev/null
 +++ b/drivers/soc/cix/Kconfig
 @@ -0,0 +1,14 @@
@@ -82,7 +82,7 @@ index 000000000000..1d475bd15464
 +	  will be called sky1-socinfo.
 diff --git a/drivers/soc/cix/Makefile b/drivers/soc/cix/Makefile
 new file mode 100644
-index 000000000000..a7c720e53ab8
+index 0000000000000..a7c720e53ab82
 --- /dev/null
 +++ b/drivers/soc/cix/Makefile
 @@ -0,0 +1,2 @@
@@ -90,7 +90,7 @@ index 000000000000..a7c720e53ab8
 +obj-$(CONFIG_CIX_SKY1_SOCINFO)	+= sky1-socinfo.o
 diff --git a/drivers/soc/cix/sky1-socinfo.c b/drivers/soc/cix/sky1-socinfo.c
 new file mode 100644
-index 000000000000..6e7dd9a7f036
+index 0000000000000..6e7dd9a7f036d
 --- /dev/null
 +++ b/drivers/soc/cix/sky1-socinfo.c
 @@ -0,0 +1,478 @@

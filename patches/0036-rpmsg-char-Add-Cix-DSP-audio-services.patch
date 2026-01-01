@@ -13,7 +13,7 @@ devices required by the vendor's libdsp_wrap.so userspace library.
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/rpmsg/rpmsg_char.c b/drivers/rpmsg/rpmsg_char.c
-index 96fcdd2d7093..19b731514d6d 100644
+index 96fcdd2d7093c..19b731514d6d6 100644
 --- a/drivers/rpmsg/rpmsg_char.c
 +++ b/drivers/rpmsg/rpmsg_char.c
 @@ -523,6 +523,8 @@ static void rpmsg_chrdev_remove(struct rpmsg_device *rpdev)

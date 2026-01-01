@@ -27,7 +27,7 @@ Contains debug instrumentation to be cleaned up.
  9 files changed, 560 insertions(+), 27 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index c8e9505dff39..fe40ac3d5731 100644
+index c8e9505dff392..fe40ac3d57319 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -1630,7 +1630,7 @@ rts5453_pd1_port0:rts5453@30 {
@@ -49,7 +49,7 @@ index c8e9505dff39..fe40ac3d5731 100644
  		usbc_con2 {
  			data-role = "host";
 diff --git a/drivers/gpu/drm/panthor/panthor_device.c b/drivers/gpu/drm/panthor/panthor_device.c
-index 832506afe55b..bb6f5fc4df14 100644
+index 832506afe55bb..bb6f5fc4df143 100644
 --- a/drivers/gpu/drm/panthor/panthor_device.c
 +++ b/drivers/gpu/drm/panthor/panthor_device.c
 @@ -6,6 +6,7 @@
@@ -149,7 +149,7 @@ index 832506afe55b..bb6f5fc4df14 100644
  	clk_disable_unprepare(ptdev->clks.stacks);
  	clk_disable_unprepare(ptdev->clks.core);
 diff --git a/drivers/gpu/drm/panthor/panthor_fw.c b/drivers/gpu/drm/panthor/panthor_fw.c
-index df767e82148a..49f22e6e638f 100644
+index df767e82148af..49f22e6e638fb 100644
 --- a/drivers/gpu/drm/panthor/panthor_fw.c
 +++ b/drivers/gpu/drm/panthor/panthor_fw.c
 @@ -5,6 +5,7 @@
@@ -332,7 +332,7 @@ index df767e82148a..49f22e6e638f 100644
  				   0, SZ_4G,
  				   CSF_MCU_SHARED_REGION_START,
 diff --git a/drivers/gpu/drm/panthor/panthor_fw.h b/drivers/gpu/drm/panthor/panthor_fw.h
-index 6598d96c6d2a..96d7972a8cba 100644
+index 6598d96c6d2aa..96d7972a8cbaf 100644
 --- a/drivers/gpu/drm/panthor/panthor_fw.h
 +++ b/drivers/gpu/drm/panthor/panthor_fw.h
 @@ -170,7 +170,15 @@ struct panthor_fw_csg_input_iface {
@@ -366,7 +366,7 @@ index 6598d96c6d2a..96d7972a8cba 100644
  	u32 ack_irq_mask;
  	u32 doorbell_req;
 diff --git a/drivers/gpu/drm/panthor/panthor_gpu.c b/drivers/gpu/drm/panthor/panthor_gpu.c
-index cfb53a1a8811..749b56ab0f04 100644
+index cfb53a1a88110..749b56ab0f04e 100644
 --- a/drivers/gpu/drm/panthor/panthor_gpu.c
 +++ b/drivers/gpu/drm/panthor/panthor_gpu.c
 @@ -47,12 +47,65 @@ struct panthor_gpu {
@@ -650,7 +650,7 @@ index cfb53a1a8811..749b56ab0f04 100644
   * panthor_gpu_flush_caches() - Flush caches
   * @ptdev: Device.
 diff --git a/drivers/gpu/drm/panthor/panthor_gpu.h b/drivers/gpu/drm/panthor/panthor_gpu.h
-index 7c17a8c06858..5db710e78e37 100644
+index 7c17a8c068581..5db710e78e37d 100644
 --- a/drivers/gpu/drm/panthor/panthor_gpu.h
 +++ b/drivers/gpu/drm/panthor/panthor_gpu.h
 @@ -47,6 +47,7 @@ int panthor_gpu_block_power_off(struct panthor_device *ptdev,
@@ -662,7 +662,7 @@ index 7c17a8c06858..5db710e78e37 100644
  			     u32 l2, u32 lsc, u32 other);
  int panthor_gpu_soft_reset(struct panthor_device *ptdev);
 diff --git a/drivers/gpu/drm/panthor/panthor_mmu.c b/drivers/gpu/drm/panthor/panthor_mmu.c
-index 15961629872e..f8e55e2e613c 100644
+index 15961629872e1..f8e55e2e613c9 100644
 --- a/drivers/gpu/drm/panthor/panthor_mmu.c
 +++ b/drivers/gpu/drm/panthor/panthor_mmu.c
 @@ -20,6 +20,7 @@
@@ -715,7 +715,7 @@ index 15961629872e..f8e55e2e613c 100644
  	if (ret)
  		return ret;
 diff --git a/drivers/gpu/drm/panthor/panthor_regs.h b/drivers/gpu/drm/panthor/panthor_regs.h
-index 089ac1ff1bed..ffe95d5aead6 100644
+index 089ac1ff1bedf..ffe95d5aead64 100644
 --- a/drivers/gpu/drm/panthor/panthor_regs.h
 +++ b/drivers/gpu/drm/panthor/panthor_regs.h
 @@ -96,6 +96,8 @@
@@ -767,7 +767,7 @@ index 089ac1ff1bed..ffe95d5aead6 100644
  #define GPU_COHERENCY_PROT_BIT(name)			BIT(GPU_COHERENCY_  ## name)
  
 diff --git a/drivers/gpu/drm/panthor/panthor_sched.c b/drivers/gpu/drm/panthor/panthor_sched.c
-index 881a07ffbabc..6beb35a28bd9 100644
+index 881a07ffbabc8..6beb35a28bd90 100644
 --- a/drivers/gpu/drm/panthor/panthor_sched.c
 +++ b/drivers/gpu/drm/panthor/panthor_sched.c
 @@ -1140,11 +1140,17 @@ csg_slot_sync_priority_locked(struct panthor_device *ptdev, u32 csg_id)

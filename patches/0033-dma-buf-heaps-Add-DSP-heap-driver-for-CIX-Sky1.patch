@@ -28,7 +28,7 @@ Ported from CIX vendor kernel 6.6 with adaptations for mainline:
  create mode 100644 drivers/dma-buf/heaps/dsp_heap.c
 
 diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-index bb369b38b001..c7c1cf41cafb 100644
+index bb369b38b001a..c7c1cf41cafb8 100644
 --- a/drivers/dma-buf/heaps/Kconfig
 +++ b/drivers/dma-buf/heaps/Kconfig
 @@ -13,6 +13,15 @@ config DMABUF_HEAPS_CMA
@@ -48,7 +48,7 @@ index bb369b38b001..c7c1cf41cafb 100644
  	bool "Legacy DMA-BUF CMA Heap"
  	default y
 diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makefile
-index 974467791032..169c5de45454 100644
+index 974467791032f..169c5de454540 100644
 --- a/drivers/dma-buf/heaps/Makefile
 +++ b/drivers/dma-buf/heaps/Makefile
 @@ -1,3 +1,4 @@
@@ -58,7 +58,7 @@ index 974467791032..169c5de45454 100644
 +obj-$(CONFIG_DMABUF_HEAPS_DSP)		+= dsp_heap.o
 diff --git a/drivers/dma-buf/heaps/dsp_heap.c b/drivers/dma-buf/heaps/dsp_heap.c
 new file mode 100644
-index 000000000000..e3bb0bc4c750
+index 0000000000000..e3bb0bc4c750f
 --- /dev/null
 +++ b/drivers/dma-buf/heaps/dsp_heap.c
 @@ -0,0 +1,174 @@

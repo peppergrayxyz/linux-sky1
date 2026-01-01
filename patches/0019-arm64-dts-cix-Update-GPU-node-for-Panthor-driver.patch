@@ -12,7 +12,7 @@ Add RCSU region for shader harvesting (offset 0x304).
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 2bbcc25b6970..f9cbf6550d69 100644
+index 2bbcc25b6970f..f9cbf6550d69c 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -2878,14 +2878,14 @@ gpu_protected_memory_allocator: protected-memory-allocator {

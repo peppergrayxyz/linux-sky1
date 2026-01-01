@@ -37,7 +37,7 @@ may require TX queue (svq) checking for in-place responses.
  4 files changed, 200 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
-index 7b6c8096f4a9..c0fbd5b30861 100644
+index 7b6c8096f4a92..c0fbd5b308615 100644
 --- a/drivers/remoteproc/cix_dsp_rproc.c
 +++ b/drivers/remoteproc/cix_dsp_rproc.c
 @@ -759,9 +759,15 @@ static void cix_dsp_rproc_vring_poll_work(struct work_struct *work)
@@ -60,7 +60,7 @@ index 7b6c8096f4a9..c0fbd5b30861 100644
  	/* Schedule next poll if still running */
  	if (READ_ONCE(rproc->state) == RPROC_RUNNING)
 diff --git a/drivers/remoteproc/remoteproc_internal.h b/drivers/remoteproc/remoteproc_internal.h
-index 0cd09e67ac14..e90bcfd93579 100644
+index 0cd09e67ac145..e90bcfd935790 100644
 --- a/drivers/remoteproc/remoteproc_internal.h
 +++ b/drivers/remoteproc/remoteproc_internal.h
 @@ -61,6 +61,7 @@ int rproc_of_parse_firmware(struct device *dev, int index,
@@ -72,7 +72,7 @@ index 0cd09e67ac14..e90bcfd93579 100644
  /* from remoteproc_debugfs.c */
  void rproc_remove_trace_file(struct dentry *tfile);
 diff --git a/drivers/remoteproc/remoteproc_virtio.c b/drivers/remoteproc/remoteproc_virtio.c
-index c5d46a878149..2dfbd40d572b 100644
+index c5d46a8781490..2dfbd40d572b7 100644
 --- a/drivers/remoteproc/remoteproc_virtio.c
 +++ b/drivers/remoteproc/remoteproc_virtio.c
 @@ -100,6 +100,33 @@ irqreturn_t rproc_vq_interrupt(struct rproc *rproc, int notifyid)
@@ -128,7 +128,7 @@ index c5d46a878149..2dfbd40d572b 100644
  	dev_dbg(dev, "vring%d: va %p qsz %d notifyid %d\n",
  		id, addr, num, rvring->notifyid);
 diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
-index 2467a14a7392..ad67bba2721c 100644
+index 2467a14a73923..ad67bba2721cd 100644
 --- a/drivers/rpmsg/virtio_rpmsg_bus.c
 +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
 @@ -15,17 +15,22 @@

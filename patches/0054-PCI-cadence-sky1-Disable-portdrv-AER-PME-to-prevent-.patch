@@ -19,7 +19,7 @@ that firmware (in this case, the platform driver) owns these services.
  1 file changed, 13 insertions(+)
 
 diff --git a/drivers/pci/controller/cadence/pci-sky1.c b/drivers/pci/controller/cadence/pci-sky1.c
-index 0a9c9714bd5f..99e847b283bf 100644
+index 0a9c9714bd5f0..99e847b283bfe 100644
 --- a/drivers/pci/controller/cadence/pci-sky1.c
 +++ b/drivers/pci/controller/cadence/pci-sky1.c
 @@ -2347,6 +2347,19 @@ static int sky1_cdns_pcie_host_setup(struct cdns_pcie_rc *rc)

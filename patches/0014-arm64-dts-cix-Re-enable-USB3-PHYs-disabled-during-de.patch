@@ -17,7 +17,7 @@ These should match the vendor DTS which has all PHYs enabled.
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index a1eca8415360..c8e9505dff39 100644
+index a1eca84153608..c8e9505dff392 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -1379,7 +1379,7 @@ usbdpphy0_lane_switch: endpoint@0 {

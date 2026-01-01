@@ -27,7 +27,7 @@ Further driver work needed to match vendor behavior.
  2 files changed, 8 insertions(+), 9 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index 6a5cde860275..8e6d84810a7d 100644
+index 6a5cde860275e..8e6d84810a7dc 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -2191,11 +2191,11 @@ &ap_tfa_scmi_mem {
@@ -45,7 +45,7 @@ index 6a5cde860275..8e6d84810a7d 100644
  
  &scmi_dvfs {
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 363c3fc65eef..94f16aa9461a 100644
+index 363c3fc65eefd..94f16aa9461a2 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -3390,20 +3390,19 @@ cix_dphy_hw_1: phy@14300000 {

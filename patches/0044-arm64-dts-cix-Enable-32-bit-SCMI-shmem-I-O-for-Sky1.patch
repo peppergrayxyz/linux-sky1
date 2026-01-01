@@ -22,7 +22,7 @@ Affected nodes:
  1 file changed, 3 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index b53e2355a241..2ceaba390e3d 100644
+index b53e2355a2414..2ceaba390e3d9 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -3468,6 +3468,7 @@ ap2pm_scmi_mem: ap2pm-shmem@0 {

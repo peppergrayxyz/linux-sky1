@@ -24,7 +24,7 @@ Enable the hwspinlock node in sky1.dtsi device tree.
  create mode 100644 drivers/hwspinlock/sky1_hwspinlock.c
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 2ceaba390e3d..efeaf51d62fc 100644
+index 2ceaba390e3d9..efeaf51d62fca 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -2935,7 +2935,7 @@ hwclock: hwspinlock@06510000 {
@@ -37,7 +37,7 @@ index 2ceaba390e3d..efeaf51d62fc 100644
  
  		gpt_timer0: gpt_timer@04110000 {
 diff --git a/drivers/hwspinlock/Kconfig b/drivers/hwspinlock/Kconfig
-index 3874d15b0e9b..0a044c00fe8a 100644
+index 3874d15b0e9b7..0a044c00fe8a4 100644
 --- a/drivers/hwspinlock/Kconfig
 +++ b/drivers/hwspinlock/Kconfig
 @@ -53,6 +53,16 @@ config HWSPINLOCK_SUN6I
@@ -58,7 +58,7 @@ index 3874d15b0e9b..0a044c00fe8a 100644
  	tristate "STE Hardware Semaphore functionality"
  	depends on ARCH_U8500 || COMPILE_TEST
 diff --git a/drivers/hwspinlock/Makefile b/drivers/hwspinlock/Makefile
-index a0f16c9aaa82..1cef7cf04377 100644
+index a0f16c9aaa821..1cef7cf04377a 100644
 --- a/drivers/hwspinlock/Makefile
 +++ b/drivers/hwspinlock/Makefile
 @@ -8,5 +8,6 @@ obj-$(CONFIG_HWSPINLOCK_OMAP)		+= omap_hwspinlock.o
@@ -70,7 +70,7 @@ index a0f16c9aaa82..1cef7cf04377 100644
  obj-$(CONFIG_HSEM_U8500)		+= u8500_hsem.o
 diff --git a/drivers/hwspinlock/sky1_hwspinlock.c b/drivers/hwspinlock/sky1_hwspinlock.c
 new file mode 100644
-index 000000000000..a59021dd6cfb
+index 0000000000000..a59021dd6cfb7
 --- /dev/null
 +++ b/drivers/hwspinlock/sky1_hwspinlock.c
 @@ -0,0 +1,111 @@

@@ -37,7 +37,7 @@ kernel's SCMI cpufreq driver - no vendor-specific thermal drivers needed.
  create mode 100644 drivers/irqchip/irq-sky1-pdc.c
 
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 6663ffd23f25..0a3ede870df8 100644
+index 6663ffd23f252..0a3ede870df81 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
 @@ -1593,10 +1593,11 @@ config ARCH_SUPPORTS_KEXEC_SIG
@@ -55,7 +55,7 @@ index 6663ffd23f25..0a3ede870df8 100644
  
  config ARCH_SUPPORTS_CRASH_DUMP
 diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index fe40ac3d5731..38c7b61976e2 100644
+index fe40ac3d57319..38c7b61976e2f 100644
 --- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 +++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
 @@ -2392,3 +2392,15 @@ map1 {
@@ -75,7 +75,7 @@ index fe40ac3d5731..38c7b61976e2 100644
 +	status = "okay";
 +};
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 0962fc251a72..13081115b0ea 100644
+index 0962fc251a721..13081115b0ea4 100644
 --- a/arch/arm64/boot/dts/cix/sky1.dtsi
 +++ b/arch/arm64/boot/dts/cix/sky1.dtsi
 @@ -21,7 +21,7 @@
@@ -88,7 +88,7 @@ index 0962fc251a72..13081115b0ea 100644
  	#size-cells = <2>;
  
 diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
-index a61c6dc63c29..dd1432f7cb55 100644
+index a61c6dc63c29c..dd1432f7cb553 100644
 --- a/drivers/irqchip/Kconfig
 +++ b/drivers/irqchip/Kconfig
 @@ -413,6 +413,14 @@ config IMX_GPCV2
@@ -107,7 +107,7 @@ index a61c6dc63c29..dd1432f7cb55 100644
  	def_bool y if MACH_ASM9260 || ARCH_MXS
  	select IRQ_DOMAIN
 diff --git a/drivers/irqchip/Makefile b/drivers/irqchip/Makefile
-index 3de083f5484c..b2b07a891c35 100644
+index 3de083f5484cc..b2b07a891c350 100644
 --- a/drivers/irqchip/Makefile
 +++ b/drivers/irqchip/Makefile
 @@ -86,7 +86,8 @@ obj-$(CONFIG_MVEBU_GICP)		+= irq-mvebu-gicp.o
@@ -122,7 +122,7 @@ index 3de083f5484c..b2b07a891c35 100644
  obj-$(CONFIG_ARCH_ASPEED)		+= irq-aspeed-vic.o irq-aspeed-i2c-ic.o irq-aspeed-scu-ic.o
 diff --git a/drivers/irqchip/irq-sky1-pdc.c b/drivers/irqchip/irq-sky1-pdc.c
 new file mode 100644
-index 000000000000..5e53387cf781
+index 0000000000000..5e53387cf7817
 --- /dev/null
 +++ b/drivers/irqchip/irq-sky1-pdc.c
 @@ -0,0 +1,267 @@
@@ -394,7 +394,7 @@ index 000000000000..5e53387cf781
 +MODULE_DESCRIPTION("Cix Sky1 irq pdc driver");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/net/ethernet/cadence/macb_main.c b/drivers/net/ethernet/cadence/macb_main.c
-index ca2386b83473..c891fae62d6b 100644
+index ca2386b834737..c891fae62d6bf 100644
 --- a/drivers/net/ethernet/cadence/macb_main.c
 +++ b/drivers/net/ethernet/cadence/macb_main.c
 @@ -5387,6 +5387,7 @@ static const struct of_device_id macb_dt_ids[] = {

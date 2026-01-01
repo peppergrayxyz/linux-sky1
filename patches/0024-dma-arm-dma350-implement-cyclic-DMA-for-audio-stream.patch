@@ -33,7 +33,7 @@ virt-dma infrastructure and is designed to be upstreamable.
  1 file changed, 405 insertions(+), 24 deletions(-)
 
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index 88761fd79390..b17797e256a7 100644
+index 88761fd79390c..b17797e256a75 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -112,6 +112,25 @@

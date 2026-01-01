@@ -26,7 +26,7 @@ Tested with HDMI audio playback on Radxa Orion O6 - pops are now gone.
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/dma/arm-dma350.c b/drivers/dma/arm-dma350.c
-index 54d703ab16ce..1e7948c58c43 100644
+index 54d703ab16cef..1e7948c58c437 100644
 --- a/drivers/dma/arm-dma350.c
 +++ b/drivers/dma/arm-dma350.c
 @@ -709,12 +709,12 @@ static void d350_start_cyclic(struct d350_chan *dch)
