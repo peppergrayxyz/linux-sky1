@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From d0c698a90770922646321f7e94e850ef989c7dd2 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 5 Dec 2025 09:43:48 +0800
-Subject: [PATCH] dma: arm-dma350: Fix IRQ clearing and use minimal cyclic
- command format
+Subject: [PATCH 28/72] dma: arm-dma350: Fix IRQ clearing and use minimal
+ cyclic command format
 
 Fix two issues in the DMA-350 driver:
 
@@ -605,3 +605,6 @@ index 7ae54f52b47de..54d703ab16cef 100644
  	}
  
  	return vchan_tx_prep(&dch->vc, &desc->vd, flags);
+-- 
+2.51.0
+
