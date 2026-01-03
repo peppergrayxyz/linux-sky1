@@ -56,3 +56,15 @@
 0056-cpufreq-Update-capacity_freq_ref-when-boost-state-ch.patch
 0057-iommu-arm-smmu-v3-Add-DT-support-for-boot-active-str.patch
 0058-arm64-cix-change-core-Sky1-Kconfig-entries-from-tris.patch
+0059-perf-arm_spe-Check-per-CPU-SPE-support-for-heterogen.patch
+0060-arm64-dts-cix-sky1-Add-cache-topology-fix-DTS-warnin.patch
+0061-pci-cadence-sky1-Enable-I-O-and-prefetchable-memory-.patch
+0062-soc-cix-Add-DDR-low-power-control-driver.patch
+0063-thermal-cix-Add-CPU-IPA-power-monitoring-driver.patch
+0064-arm64-dts-cix-orion-o6-Enable-DDR-LP-and-CPU-IPA-dri.patch
+0065-drm-cix-dptx-Fix-null-pointer-dereference-in-unbind.patch
+0066-soc-cix-Add-bus-performance-state-control-driver.patch
+0067-wifi-rtw89-fix-power-save-race-causing-firmware-cras.patch
+0068-soc-cix-Fix-DDR-LP-and-bus-DVFS-initialization.patch
+0069-arm64-dts-cix-Add-Radxa-Orion-O6N-device-tree.patch
+0070-arm64-dts-cix-orion-o6n-Remove-regulator-boot-on-fro.patch

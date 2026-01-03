@@ -2,6 +2,20 @@
 
 All notable changes to the Sky1 kernel patch set.
 
+## [6.18.2-3] - 2026-01-03
+
+### Added
+- DTS: Radxa Orion O6N device tree (micro-ITX variant with fewer peripherals)
+- soc: DDR low power control driver
+- soc: Bus performance state (DVFS) driver
+- thermal: CPU IPA power monitoring driver
+
+### Fixed
+- DTS: O6N modem regulator-boot-on removed (prevents boot hang)
+- drm/cix: dptx null pointer dereference in unbind
+- wifi: rtw89 power save race causing firmware crash
+- soc: DDR LP and bus DVFS initialization order
+
 ## [6.18.2-2] - 2025-12-24
 
 ### Fixed

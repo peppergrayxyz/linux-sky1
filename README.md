@@ -5,7 +5,7 @@ Linux kernel patches and configuration for CIX Sky1 SoC (Radxa Orion O6 and comp
 ## Overview
 
 This repository contains the Sky1 kernel patch set:
-- **68 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
+- **70 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
 - **Kernel configuration** for arm64
 
 ## Repository Structure
@@ -24,7 +24,7 @@ linux-sky1/
 ## Supported Hardware
 
 - **SoC**: CIX CD8180 (Sky1)
-- **Board**: Radxa Orion O6
+- **Boards**: Radxa Orion O6, Radxa Orion O6N (micro-ITX)
 - **GPU**: Mali-G720-Immortalis (via Panthor driver)
 - **Display**: DisplayPort via linlon-dp/trilin-dpsub
 
