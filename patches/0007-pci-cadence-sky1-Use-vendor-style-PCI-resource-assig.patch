@@ -1,4 +1,4 @@
-From 7f6c74b7936576df7a3033e9f1282781ac876720 Mon Sep 17 00:00:00 2001
+From 3a359c15b1a33f4de0a449f81de1c75979264de3 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 19:50:09 +0800
 Subject: [PATCH 07/72] pci: cadence: sky1: Use vendor-style PCI resource

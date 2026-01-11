@@ -1,4 +1,4 @@
-From be7be7b86a921489f4dd4bc3e046f93c0a2fd78c Mon Sep 17 00:00:00 2001
+From 7c04c64a6f928d3a3955118b75c70806fa2471ab Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 6 Dec 2025 20:45:39 +0800
 Subject: [PATCH 36/72] rpmsg: char: Add Cix DSP audio services

@@ -1,4 +1,4 @@
-From 169c90f459a8a8f88e444c6db939bb540f525152 Mon Sep 17 00:00:00 2001
+From ab2c4f7689fd8cf6695789b6ec110d91f437c49b Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 22:07:35 +0800
 Subject: [PATCH 17/72] usb: typec: Add Realtek RTS5453 USB PD controller

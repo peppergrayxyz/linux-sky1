@@ -1,4 +1,4 @@
-From 7038e5458fdec66cb40ca944a8632f5ceb8bc3b9 Mon Sep 17 00:00:00 2001
+From 23eb9197c3d7a78a80164524fa6f7ed675660cdb Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 19:53:43 +0800
 Subject: [PATCH 08/72] pci: cadence: Add MSG region support for ATU layout

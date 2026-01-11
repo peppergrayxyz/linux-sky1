@@ -1,4 +1,4 @@
-From f215f766671fd265ccec9ebcd37056e459209a23 Mon Sep 17 00:00:00 2001
+From 4e203046a7d6bb8ff946c39dd7a63f20730a9a53 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 30 Dec 2025 19:37:34 +1100
 Subject: [PATCH 68/72] soc: cix: Fix DDR LP and bus DVFS initialization

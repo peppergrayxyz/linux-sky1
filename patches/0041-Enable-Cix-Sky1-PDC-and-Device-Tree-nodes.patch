@@ -1,4 +1,4 @@
-From 213763393ce5ce73018426d27d901a2ecf55ea76 Mon Sep 17 00:00:00 2001
+From 996a1c87942285da8f04c7e3b45c75ca4ab35191 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 5 Dec 2025 10:52:58 +0800
 Subject: [PATCH 41/72] Enable Cix Sky1 PDC and Device Tree nodes
@@ -394,10 +394,10 @@ index 0000000000000..5e53387cf7817
 +MODULE_DESCRIPTION("Cix Sky1 irq pdc driver");
 +MODULE_LICENSE("GPL v2");
 diff --git a/drivers/net/ethernet/cadence/macb_main.c b/drivers/net/ethernet/cadence/macb_main.c
-index ca2386b834737..c891fae62d6bf 100644
+index 064fccdcf6994..90050f4a5a3eb 100644
 --- a/drivers/net/ethernet/cadence/macb_main.c
 +++ b/drivers/net/ethernet/cadence/macb_main.c
-@@ -5387,6 +5387,7 @@ static const struct of_device_id macb_dt_ids[] = {
+@@ -5388,6 +5388,7 @@ static const struct of_device_id macb_dt_ids[] = {
  	{ .compatible = "cdns,np4-macb", .data = &np4_config },
  	{ .compatible = "cdns,pc302-gem", .data = &pc302gem_config },
  	{ .compatible = "cdns,gem", .data = &pc302gem_config },

@@ -2,6 +2,18 @@
 
 All notable changes to the Sky1 kernel patch set.
 
+## [6.18.4-1] - 2026-01-10
+
+### Changed
+- Rebased to Linux 6.18.4 stable
+
+### Added
+- Input: gpio_keys driver support for level-triggered interrupts
+- DTS: O6N power button uses IRQ_TYPE_LEVEL_LOW (Cadence GPIO compatibility)
+
+### Fixed
+- O6N boot failure from gpio-keys edge interrupt (Cadence GPIO only supports level triggers)
+
 ## [6.18.3-1] - 2026-01-03
 
 ### Changed

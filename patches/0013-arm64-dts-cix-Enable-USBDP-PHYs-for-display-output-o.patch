@@ -1,4 +1,4 @@
-From 0d2c8d75f937aabea19ef50367a059551d9eff01 Mon Sep 17 00:00:00 2001
+From 4ccf83f7d25ea5f5274bcf9a12ffd10bea921fb2 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 19:54:16 +0800
 Subject: [PATCH 13/72] arm64: dts: cix: Enable USBDP PHYs for display output

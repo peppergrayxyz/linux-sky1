@@ -1,4 +1,4 @@
-From 5aa727133ee96f0a5254028a9d06c1a563781cab Mon Sep 17 00:00:00 2001
+From 2ce85811c6f1a993ca74fda6c7310d76cef63f25 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 27 Dec 2025 23:29:15 +1100
 Subject: [PATCH 65/72] drm/cix: dptx: Fix null pointer dereference in unbind

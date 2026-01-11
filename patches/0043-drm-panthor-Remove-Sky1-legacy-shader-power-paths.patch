@@ -1,4 +1,4 @@
-From 7c846608fd49d54d451f4011cbe5facba73bb6d4 Mon Sep 17 00:00:00 2001
+From 7981f7f6806b24246a9943e06605b097fceb3afd Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 8 Dec 2025 20:26:13 +0800
 Subject: [PATCH 43/72] drm/panthor: Remove Sky1 legacy shader power paths

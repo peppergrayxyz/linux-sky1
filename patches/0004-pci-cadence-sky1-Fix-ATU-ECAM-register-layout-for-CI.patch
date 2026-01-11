@@ -1,4 +1,4 @@
-From 76d57d13c07ce61a6d19215ec70fcb03fbc315fa Mon Sep 17 00:00:00 2001
+From 031d36fde0455bc11d528a28f7c292f3502fd9b1 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 14:49:26 +0800
 Subject: [PATCH 04/72] pci: cadence: sky1: Fix ATU/ECAM register layout for

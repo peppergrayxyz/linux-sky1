@@ -1,4 +1,4 @@
-From 94110de10b75f959717ba2fb8ed7ea7e5cca49b3 Mon Sep 17 00:00:00 2001
+From d63f45c97e56fa8b2ded238866ec9a5c5b39e7df Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 20:04:09 +0800
 Subject: [PATCH 14/72] arm64: dts: cix: Re-enable USB3 PHYs disabled during

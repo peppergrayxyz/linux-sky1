@@ -1,4 +1,4 @@
-From 71d7bce7f7ef57cc3d2e67313fc7873b9d02de30 Mon Sep 17 00:00:00 2001
+From 0dfcd509c6c3f3dc81481a363ad60ec48fbc513c Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 10 Dec 2025 10:08:08 +0800
 Subject: [PATCH 44/72] arm64: dts: cix: Enable 32-bit SCMI shmem I/O for Sky1

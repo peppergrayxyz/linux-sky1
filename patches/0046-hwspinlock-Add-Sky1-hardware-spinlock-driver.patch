@@ -1,4 +1,4 @@
-From a5946561a092f00a5693c4e4324c7fe1d9bea02d Mon Sep 17 00:00:00 2001
+From a55e9c6dc365d84c4f483750e8e06201bc56939a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 10 Dec 2025 11:00:09 +0800
 Subject: [PATCH 46/72] hwspinlock: Add Sky1 hardware spinlock driver

@@ -5,7 +5,7 @@ Linux kernel patches and configuration for CIX Sky1 SoC (Radxa Orion O6 and comp
 ## Overview
 
 This repository contains the Sky1 kernel patch set:
-- **70 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
+- **72 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
 - **Kernel configuration** for arm64
 
 ## Repository Structure
@@ -34,9 +34,9 @@ linux-sky1/
 
 ```bash
 # Download kernel
-wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.3.tar.xz
-tar xf linux-6.18.3.tar.xz
-cd linux-6.18.3
+wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.4.tar.xz
+tar xf linux-6.18.4.tar.xz
+cd linux-6.18.4
 
 # Apply patches
 for p in /path/to/linux-sky1/patches/*.patch; do
@@ -81,7 +81,7 @@ echo "deb [signed-by=/usr/share/keyrings/sky1-linux.asc] https://sky1-linux.gith
 
 # Install kernel
 sudo apt update
-sudo apt install linux-image-6.18.3-sky1 linux-headers-6.18.3-sky1 sky1-firmware
+sudo apt install linux-image-6.18.4-sky1 linux-headers-6.18.4-sky1 sky1-firmware
 ```
 
 ## Documentation

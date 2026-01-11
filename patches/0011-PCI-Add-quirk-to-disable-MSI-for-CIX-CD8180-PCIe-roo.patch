@@ -1,4 +1,4 @@
-From f8e5e138b0e02d718d7bf4854f3f7512e1ed7454 Mon Sep 17 00:00:00 2001
+From e160f4014809e03c9634baa8c9b0166415540e4a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 30 Nov 2025 02:29:01 +0800
 Subject: [PATCH 11/72] PCI: Add quirk to disable MSI for CIX CD8180 PCIe root

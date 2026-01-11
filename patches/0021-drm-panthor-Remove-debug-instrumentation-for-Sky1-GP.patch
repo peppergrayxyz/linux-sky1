@@ -1,4 +1,4 @@
-From 7db877518bd8437509796c9fd6d909e1372d8665 Mon Sep 17 00:00:00 2001
+From 568d9a806292bf324c7b14f16b03d997504e00a8 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 1 Dec 2025 18:20:17 +0800
 Subject: [PATCH 21/72] drm/panthor: Remove debug instrumentation for Sky1 GPU

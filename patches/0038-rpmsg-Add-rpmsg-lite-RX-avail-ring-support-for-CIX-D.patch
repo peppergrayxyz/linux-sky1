@@ -1,4 +1,4 @@
-From cf4eeb736cfd65a4abd67f6cbe5737aee9ccff7b Mon Sep 17 00:00:00 2001
+From 50b8236b148963c9e3e13bbce35f96a715f57d08 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 7 Dec 2025 21:15:55 +0800
 Subject: [PATCH 38/72] rpmsg: Add rpmsg-lite RX avail ring support for CIX DSP

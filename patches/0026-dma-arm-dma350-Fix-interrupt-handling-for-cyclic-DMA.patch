@@ -1,4 +1,4 @@
-From a51cec0d4fff79e2af84f76ddc33cc101f59aba8 Mon Sep 17 00:00:00 2001
+From f5561550929a4556000dec6e53867f02090ee3b4 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 4 Dec 2025 19:08:25 +0800
 Subject: [PATCH 26/72] dma: arm-dma350: Fix interrupt handling for cyclic DMA

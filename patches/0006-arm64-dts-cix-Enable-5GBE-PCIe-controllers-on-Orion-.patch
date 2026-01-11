@@ -1,4 +1,4 @@
-From 04eb0682a231b6e31719c048d7e7d6375d39fde3 Mon Sep 17 00:00:00 2001
+From a73e305228476e8c520c33d11a29b3c5cf49eb41 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 18:29:04 +0800
 Subject: [PATCH 06/72] arm64: dts: cix: Enable 5GBE PCIe controllers on Orion

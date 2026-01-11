@@ -1,4 +1,4 @@
-From 53ffdd552841095c1f7c4f146cde18c1db08cdde Mon Sep 17 00:00:00 2001
+From 00ae15f5a798973067fe5a952cc67aa9bdd8c3fd Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 11 Dec 2025 23:00:09 +0800
 Subject: [PATCH 52/72] arm64: dts: cix: Update GPU node to match vendor
