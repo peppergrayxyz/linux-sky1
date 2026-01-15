@@ -246,20 +246,14 @@ main() {
     echo "Sky1 default:  $sky1_count options"
     echo ""
 
-    # Find differences
-    local only_local="$WORK_DIR/only_local"
-    local only_sky1="$WORK_DIR/only_sky1"
-    local changed="$WORK_DIR/changed"
-
-    comm -23 "$local_sorted" "$sky1_sorted" > "$only_local"
-    comm -13 "$local_sorted" "$sky1_sorted" > "$only_sky1"
-
-    # Find options with different values
+    # Find options with different values first
+    local changed_opts="$WORK_DIR/changed_opts"
     echo "=== Options with DIFFERENT VALUES ==="
     echo "(Your value -> Sky1 default)"
     echo ""
 
     local count=0
+    > "$changed_opts"  # Clear file
     while IFS='=' read -r opt local_val; do
         local sky1_line
         sky1_line=$(grep "^${opt}=" "$sky1_sorted" 2>/dev/null || true)
@@ -267,6 +261,7 @@ main() {
             local sky1_val="${sky1_line#*=}"
             if [ "$local_val" != "$sky1_val" ]; then
                 echo "  $opt: $local_val -> $sky1_val"
+                echo "$opt" >> "$changed_opts"
                 ((count++)) || true
             fi
         fi
@@ -278,6 +273,24 @@ main() {
     echo ""
     echo "Total options with different values: $count"
     echo ""
+
+    # Find options only in one config (excluding those with different values)
+    local only_local="$WORK_DIR/only_local"
+    local only_sky1="$WORK_DIR/only_sky1"
+
+    # Get options only in local, excluding changed ones
+    comm -23 "$local_sorted" "$sky1_sorted" | while IFS='=' read -r opt val; do
+        if ! grep -qxF "$opt" "$changed_opts" 2>/dev/null; then
+            echo "${opt}=${val}"
+        fi
+    done > "$only_local"
+
+    # Get options only in Sky1, excluding changed ones
+    comm -13 "$local_sorted" "$sky1_sorted" | while IFS='=' read -r opt val; do
+        if ! grep -qxF "$opt" "$changed_opts" 2>/dev/null; then
+            echo "${opt}=${val}"
+        fi
+    done > "$only_sky1"
 
     # Options only in local
     local only_local_count
