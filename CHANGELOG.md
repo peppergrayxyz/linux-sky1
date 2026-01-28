@@ -2,6 +2,11 @@
 
 All notable changes to the Sky1 kernel patch set.
 
+## [6.18.7-1] - 2026-01-28
+
+### Changed
+- Rebased to Linux 6.18.7 stable (73 patches)
+
 ## [6.18.4-2] - 2026-01-14
 
 ### Fixed

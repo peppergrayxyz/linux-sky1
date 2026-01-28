@@ -1,7 +1,7 @@
-From b08f46470e32e8161dbe463c54dfdbb326cd3c8d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 12 Dec 2025 15:35:03 +0800
-Subject: [PATCH 53/73] drm/panthor: Add Sky1 GPU power-on reset sequence
+Subject: [PATCH] drm/panthor: Add Sky1 GPU power-on reset sequence
 
 The CIX Sky1 SoC requires a specific power-on sequence for the GPU,
 derived from the vendor kbase driver:
@@ -284,6 +284,3 @@ index b5e2ffd5ea64c..fcce7b7a1bccb 100644
  
  MODULE_AUTHOR("Sudeep Holla <sudeep.holla@arm.com>");
  MODULE_DESCRIPTION("ARM SCMI power domain driver");
--- 
-2.51.0
-

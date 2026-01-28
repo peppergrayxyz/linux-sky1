@@ -35,9 +35,9 @@ linux-sky1/
 
 ```bash
 # Download kernel
-wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.4.tar.xz
-tar xf linux-6.18.4.tar.xz
-cd linux-6.18.4
+wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.7.tar.xz
+tar xf linux-6.18.7.tar.xz
+cd linux-6.18.7
 
 # Apply patches
 for p in /path/to/linux-sky1/patches/*.patch; do
@@ -82,7 +82,7 @@ echo "deb [signed-by=/usr/share/keyrings/sky1-linux.asc] https://sky1-linux.gith
 
 # Install kernel
 sudo apt update
-sudo apt install linux-image-6.18.4-sky1 linux-headers-6.18.4-sky1 sky1-firmware
+sudo apt install linux-image-6.18.7-sky1 linux-headers-6.18.7-sky1 sky1-firmware
 ```
 
 ## Verifying Your Config
