@@ -2,6 +2,19 @@
 
 All notable changes to the Sky1 kernel patch set.
 
+## [6.18.7-2] - 2026-01-30
+
+### Added
+- media: In-tree VPU driver (amvx) — replaces DKMS sky1-vpu-dkms
+- misc: In-tree NPU driver (armchina-npu) — replaces DKMS cix-npu-driver
+- net: In-tree Realtek RTL8126 5GbE and RTL8125 2.5GbE drivers — replaces DKMS
+
+### Fixed
+- armchina-npu: Fix iommu_dma_cookie struct layout for kernel 6.18 (boot panic)
+
+### Changed
+- config: Enable in-tree VPU/NPU/r8126/r8125, disable R8169 to avoid conflicts
+
 ## [6.18.7-1] - 2026-01-28
 
 ### Changed

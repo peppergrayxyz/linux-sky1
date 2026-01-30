@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0305076f8b0db1c1b41393b78dd64a9c7ca07917 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 5 Dec 2025 10:52:58 +0800
-Subject: [PATCH] Enable Cix Sky1 PDC and Device Tree nodes
+Subject: [PATCH 41/77] Enable Cix Sky1 PDC and Device Tree nodes
 
 Port the Power Domain Controller (PDC) driver required for proper interrupt
 routing on the Radxa Orion O6 (Cix Sky1 SoC).
@@ -405,3 +405,6 @@ index 064fccdcf6994..90050f4a5a3eb 100644
  	{ .compatible = "cdns,sam9x60-macb", .data = &at91sam9260_config },
  	{ .compatible = "atmel,sama5d2-gem", .data = &sama5d2_config },
  	{ .compatible = "atmel,sama5d29-gem", .data = &sama5d29_config },
+-- 
+2.51.0
+

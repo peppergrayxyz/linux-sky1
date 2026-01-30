@@ -1,7 +1,7 @@
-From 63b0a20d7a3285433289db15a9b515f3811a665a Mon Sep 17 00:00:00 2001
+From 1fc98f6715575ad1ceac3d435f7c6445e961e632 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 14 Jan 2026 20:48:21 +1100
-Subject: [PATCH 73/73] arm64: dts: cix: sky1: Disable IOMMU for display
+Subject: [PATCH 73/77] arm64: dts: cix: sky1: Disable IOMMU for display
  controllers
 
 Remove iommus property from all five display controllers (dpu0-dpu4)

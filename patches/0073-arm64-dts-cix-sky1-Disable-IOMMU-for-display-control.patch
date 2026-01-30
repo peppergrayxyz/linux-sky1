@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 1fc98f6715575ad1ceac3d435f7c6445e961e632 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 14 Jan 2026 20:48:21 +1100
-Subject: [PATCH] arm64: dts: cix: sky1: Disable IOMMU for display controllers
+Subject: [PATCH 73/77] arm64: dts: cix: sky1: Disable IOMMU for display
+ controllers
 
 Remove iommus property from all five display controllers (dpu0-dpu4)
 to fix ACE (Address Cache Engine) errors during compositor transitions.
@@ -83,3 +84,6 @@ index 1f2161240df9d..728cc7bc750a6 100644
  			power-domains = <&smc_devpd SKY1_PD_DPU4>;
  			power-domain-names = "dpu_pd";
  			clocks = <&scmi_clk CLK_TREE_DPU4_ACLK>;
+-- 
+2.51.0
+

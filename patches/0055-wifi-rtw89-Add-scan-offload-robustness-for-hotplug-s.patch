@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 3317ae7a0c1375db0df7394804487f33e68ec603 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 15 Dec 2025 09:17:37 +0800
-Subject: [PATCH] wifi: rtw89: Add scan offload robustness for hotplug
+Subject: [PATCH 55/77] wifi: rtw89: Add scan offload robustness for hotplug
  scenarios
 
 During rapid driver rebind (PCIe hotplug), userspace may trigger
@@ -73,3 +73,6 @@ index 080c4f8a655a8..cc98698755997 100644
  
  out:
  	return ret;
+-- 
+2.51.0
+

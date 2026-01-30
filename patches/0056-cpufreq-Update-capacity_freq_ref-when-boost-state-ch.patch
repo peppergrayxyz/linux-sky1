@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 12ca31f63770b602440850dcf94fe8eb776a62f6 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 15 Dec 2025 22:46:29 +0800
-Subject: [PATCH] cpufreq: Update capacity_freq_ref when boost state changes
+Subject: [PATCH 56/77] cpufreq: Update capacity_freq_ref when boost state
+ changes
 
 When CPU boost frequencies are enabled or disabled via cpufreq_boost_set_sw(),
 the capacity_freq_ref per-cpu variable is not updated. This causes schedutil
@@ -102,3 +103,6 @@ index d72d6e5aa2002..8ae0b155f118b 100644
 +#endif /* CONFIG_GENERIC_ARCH_TOPOLOGY */
  
  #endif /* _LINUX_ARCH_TOPOLOGY_H_ */
+-- 
+2.51.0
+

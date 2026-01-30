@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 05568b697d960c4185bfb53e3f7744beeb43a1d6 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 8 Dec 2025 20:25:45 +0800
-Subject: [PATCH] irqchip/pdc: Make PDC opt-in via explicit interrupt-parent
+Subject: [PATCH 42/77] irqchip/pdc: Make PDC opt-in via explicit
+ interrupt-parent
 
 - Change global interrupt-parent from &pdc to &gic
 - Add explicit interrupt-parent = <&pdc> to GPU node
@@ -104,3 +105,6 @@ index 5e53387cf7817..f7d8e633eab56 100644
  	cix_domain = domain;
  
  	register_syscore_ops(&sky1_pdc_syscore_ops);
+-- 
+2.51.0
+

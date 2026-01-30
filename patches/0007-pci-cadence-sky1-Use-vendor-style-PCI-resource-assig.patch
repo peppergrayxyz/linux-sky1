@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 6ab967d2888338b16da0e729e9c5dbcee147958f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 29 Nov 2025 19:50:09 +0800
-Subject: [PATCH] pci: cadence: sky1: Use vendor-style PCI resource assignment
+Subject: [PATCH 07/77] pci: cadence: sky1: Use vendor-style PCI resource
+ assignment
 
 Add custom sky1_pci_host_probe() and sky1_cdns_pcie_host_setup()
 functions that use the simpler vendor kernel (6.6) resource assignment
@@ -134,3 +135,6 @@ index efc5f1f08b711..24a301d17e8d6 100644
  
  	pcie->cdns_pcie = cdns_pcie;
  	pcie->cdns_pcie_rc = rc;
+-- 
+2.51.0
+

@@ -96,6 +96,29 @@ No vendor-specific thermal drivers are needed.
 | `NVMEM_SKY1` | bool | eFuse/OTP access |
 | `CIX_SKY1_SOCINFO` | bool | SoC info (sysfs) |
 
+## Video Processing (optional)
+
+| Config | Type | Purpose |
+|--------|------|---------|
+| `VIDEO_LINLON` | module | Linlon VPU video codec (H.264/H.265/AV1/VP9 HW encode/decode) |
+| `VIDEO_LINLON_FTRACE` | bool | VPU ftrace debug logging (development only) |
+| `VIDEO_LINLON_PRINT_FILE` | bool | VPU log file/line annotations |
+
+## NPU (optional)
+
+| Config | Type | Purpose |
+|--------|------|---------|
+| `ARMCHINA_NPU` | module | ArmChina Zhouyi NPU accelerator |
+| `ARMCHINA_NPU_ARCH_V3` | bool | Zhouyi V3 architecture (Sky1) |
+| `ARMCHINA_NPU_SOC_SKY1` | bool | Sky1 SoC support |
+
+## Ethernet
+
+| Config | Type | Purpose |
+|--------|------|---------|
+| `R8126` | module | Realtek RTL8126 5GbE (Orion O6) |
+| `R8125` | module | Realtek RTL8125 2.5GbE (Orion O6N) |
+
 ## DSP/Firmware (optional)
 
 | Config | Type | Purpose |
@@ -104,7 +127,7 @@ No vendor-specific thermal drivers are needed.
 | `CIX_DSP_RPROC` | module | Remote processor for DSP |
 | `DMABUF_HEAPS_DSP` | module | DSP DMA buffers |
 
-## Device-Specific (Orion O6)
+## Device-Specific (Orion O6 / O6N)
 
 | Config | Type | Purpose |
 |--------|------|---------|
@@ -144,6 +167,10 @@ USB_CDNSP_SKY1, PHY_CIX_USB2, PHY_CIX_USB3
 
 # Storage
 BLK_DEV_NVME
+
+# Ethernet (pick one based on board)
+R8126      # Orion O6 (5GbE)
+R8125      # Orion O6N (2.5GbE)
 ```
 
-Add display, audio, WiFi, etc. as needed for your use case.
+Add display, audio, WiFi, VPU, NPU, etc. as needed for your use case.

@@ -5,7 +5,7 @@ Linux kernel patches and configuration for CIX Sky1 SoC (Radxa Orion O6 and comp
 ## Overview
 
 This repository contains the Sky1 kernel patch set:
-- **72 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
+- **78 patches** on top of Linux 6.18.x for CIX Sky1 SoC support
 - **Kernel configuration** for arm64
 
 ## Repository Structure
@@ -66,6 +66,7 @@ make ARCH=arm64 -j$(nproc) Image modules dtbs
 | GPU | 0018-0021, 0043, 0051-0053 | Panthor Sky1 support |
 | Audio | 0022-0040 | HDA, DMA-350, DSP |
 | Power | 0062-0064, 0066, 0068 | DDR LP, bus DVFS, CPU IPA |
+| Drivers | 0074-0078 | In-tree VPU (amvx), NPU (armchina-npu), r8126/r8125 Ethernet |
 | Misc | 0041-0042, 0044-0050, 0055-0061, 0065, 0067 | PDC, hwspinlock, eFuse, SoC info, cpufreq, SMMU, SPE, DTS, PCIe I/O, dptx fix, rtw89 fix |
 
 ## Installing Pre-built Packages
