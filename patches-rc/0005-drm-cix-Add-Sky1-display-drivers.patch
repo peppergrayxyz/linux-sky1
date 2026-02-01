@@ -1,25 +1,12 @@
-From a3614b2de09e8ebe51dcf2941fb2aa8db2ac8297 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
-Date: Sun, 30 Nov 2025 19:51:46 +0800
-Subject: [PATCH 12/77] drm: cix: Add CIX Sky1 display drivers (linlon-dp,
- trilin-dpsub)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Sun, 1 Feb 2026 00:41:04 +1100
+Subject: [PATCH] drm: cix: Add Sky1 display drivers
 
-Port CIX display drivers from vendor kernel 6.6 to mainline 6.18-rc7:
-
-- linlon-dp: Display Processing Unit (DPU) driver
-- trilin-dpsub: DisplayPort TX subsystem driver
-- cix_virtual: Virtual display connector
-
-Key API changes for 6.6 → 6.18 porting:
-- DRM_FBDEV_DMA_DRIVER_OPS macro for fbdev emulation
-- fb_create() gained 4th parameter (format_info)
-- drm_panel_prepare/enable() now return void
-- Timer API: from_timer() → timer_container_of()
-
-HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
+Add Linlon Display Processor (DPU), Trilinear DisplayPort TX, HDCP,
+eDP panel support, and virtual display connector for CIX Sky1 SoC.
+Supports 5 independent display controllers with DisplayPort audio,
+MST daisy-chaining, and writeback connector.
 ---
  drivers/gpu/drm/Kconfig                       |    2 +
  drivers/gpu/drm/Makefile                      |    1 +
@@ -29,7 +16,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  drivers/gpu/drm/cix/cix_virtual.c             |  312 ++
  drivers/gpu/drm/cix/dptx/Kconfig              |   27 +
  drivers/gpu/drm/cix/dptx/Makefile             |   11 +
- drivers/gpu/drm/cix/dptx/cix_edp_panel.c      |  879 +++++
+ drivers/gpu/drm/cix/dptx/cix_edp_panel.c      |  880 +++++
  drivers/gpu/drm/cix/dptx/cix_edp_panel.h      |   26 +
  drivers/gpu/drm/cix/dptx/dptx_infoframe.c     |  359 ++
  drivers/gpu/drm/cix/dptx/dptx_infoframe.h     |   46 +
@@ -52,7 +39,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  drivers/gpu/drm/cix/dptx/trilin_dptx.h        |  580 +++
  drivers/gpu/drm/cix/dptx/trilin_dptx_audio.c  |  178 +
  drivers/gpu/drm/cix/dptx/trilin_dptx_audio.h  |   51 +
- drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c    |  413 +++
+ drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c    |  414 +++
  drivers/gpu/drm/cix/dptx/trilin_dptx_reg.h    |  452 +++
  drivers/gpu/drm/cix/dptx/trilin_drm.c         | 1184 ++++++
  drivers/gpu/drm/cix/dptx/trilin_drm.h         |   27 +
@@ -77,26 +64,26 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  .../drm/cix/linlon-dp/linlondp_color_mgmt.h   |   48 +
  drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c | 1015 +++++
  drivers/gpu/drm/cix/linlon-dp/linlondp_dev.c  |  832 +++++
- drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h  |  303 ++
+ drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h  |  307 ++
  drivers/gpu/drm/cix/linlon-dp/linlondp_drm.h  |   26 +
  drivers/gpu/drm/cix/linlon-dp/linlondp_drv.c  |  360 ++
  .../gpu/drm/cix/linlon-dp/linlondp_event.c    |  159 +
  .../drm/cix/linlon-dp/linlondp_format_caps.c  |  149 +
  .../drm/cix/linlon-dp/linlondp_format_caps.h  |  101 +
- .../drm/cix/linlon-dp/linlondp_framebuffer.c  |  289 ++
+ .../drm/cix/linlon-dp/linlondp_framebuffer.c  |  290 ++
  .../drm/cix/linlon-dp/linlondp_framebuffer.h  |   49 +
  drivers/gpu/drm/cix/linlon-dp/linlondp_io.h   |   46 +
- drivers/gpu/drm/cix/linlon-dp/linlondp_kms.c  |  413 +++
+ drivers/gpu/drm/cix/linlon-dp/linlondp_kms.c  |  414 +++
  drivers/gpu/drm/cix/linlon-dp/linlondp_kms.h  |  339 ++
  .../gpu/drm/cix/linlon-dp/linlondp_pipeline.c |  464 +++
  .../gpu/drm/cix/linlon-dp/linlondp_pipeline.h |  597 +++
  .../cix/linlon-dp/linlondp_pipeline_state.c   | 1733 +++++++++
- .../gpu/drm/cix/linlon-dp/linlondp_plane.c    |  653 ++++
+ .../gpu/drm/cix/linlon-dp/linlondp_plane.c    |  652 ++++
  .../drm/cix/linlon-dp/linlondp_private_obj.c  |  433 +++
  .../gpu/drm/cix/linlon-dp/linlondp_product.h  |   37 +
  .../gpu/drm/cix/linlon-dp/linlondp_utils.h    |   43 +
  .../drm/cix/linlon-dp/linlondp_wb_connector.c |  391 ++
- 75 files changed, 27454 insertions(+)
+ 75 files changed, 27461 insertions(+)
  create mode 100644 drivers/gpu/drm/cix/Kconfig
  create mode 100644 drivers/gpu/drm/cix/Makefile
  create mode 100644 drivers/gpu/drm/cix/cix_display.c
@@ -172,7 +159,7 @@ HDMI output verified working at 1920x1280@60Hz via DP-to-HDMI.
  create mode 100644 drivers/gpu/drm/cix/linlon-dp/linlondp_wb_connector.c
 
 diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-index 7e6bc0b3a589c..ebdfd3ffeb6a9 100644
+index ed85d0ceee3ba..dcb476f9a9582 100644
 --- a/drivers/gpu/drm/Kconfig
 +++ b/drivers/gpu/drm/Kconfig
 @@ -269,6 +269,8 @@ source "drivers/gpu/drm/sysfb/Kconfig"
@@ -185,10 +172,10 @@ index 7e6bc0b3a589c..ebdfd3ffeb6a9 100644
  
  source "drivers/gpu/drm/amd/amdgpu/Kconfig"
 diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-index da2565e6de71d..51a231cd31a00 100644
+index d261917174280..43d1fc3800103 100644
 --- a/drivers/gpu/drm/Makefile
 +++ b/drivers/gpu/drm/Makefile
-@@ -164,6 +164,7 @@ obj-y			+= tests/
+@@ -169,6 +169,7 @@ obj-y			+= tests/
  obj-$(CONFIG_DRM_MIPI_DBI) += drm_mipi_dbi.o
  obj-$(CONFIG_DRM_MIPI_DSI) += drm_mipi_dsi.o
  obj-y			+= arm/
@@ -849,10 +836,10 @@ index 0000000000000..1d3c95b318891
 \ No newline at end of file
 diff --git a/drivers/gpu/drm/cix/dptx/cix_edp_panel.c b/drivers/gpu/drm/cix/dptx/cix_edp_panel.c
 new file mode 100644
-index 0000000000000..00df3aa01360d
+index 0000000000000..6081aa19cdf3c
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/dptx/cix_edp_panel.c
-@@ -0,0 +1,879 @@
+@@ -0,0 +1,880 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2013, NVIDIA Corporation.  All rights reserved.
@@ -882,6 +869,7 @@ index 0000000000000..00df3aa01360d
 +#include <linux/gpio/consumer.h>
 +#include <linux/iopoll.h>
 +#include <linux/module.h>
++#include <linux/of.h>
 +#include <linux/of_platform.h>
 +#include <linux/platform_device.h>
 +#include <linux/regulator/consumer.h>
@@ -9505,10 +9493,10 @@ index 0000000000000..8df1f961f97fb
 +#endif
 diff --git a/drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c b/drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c
 new file mode 100644
-index 0000000000000..18b3c6a5ad939
+index 0000000000000..8cfe75180379e
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c
-@@ -0,0 +1,413 @@
+@@ -0,0 +1,414 @@
 +// SPDX-License-Identifier: GPL-2.0
 +//------------------------------------------------------------------------------
 +//	Trilinear Technologies DisplayPort DRM Driver
@@ -9699,7 +9687,8 @@ index 0000000000000..18b3c6a5ad939
 +
 +	trilin_dp_remove(dpsub);
 +
-+	device_link_del(dpsub->link);
++	if (dpsub->link)
++		device_link_del(dpsub->link);
 +}
 +
 +static const struct component_ops trilin_dptx_cix_ops = {
@@ -15955,7 +15944,7 @@ index 0000000000000..4bc5c850e91c7
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c b/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c
 new file mode 100644
-index 0000000000000..434248ab07960
+index 0000000000000..a12c45449950c
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_component.c
 @@ -0,0 +1,1696 @@
@@ -16378,7 +16367,7 @@ index 0000000000000..434248ab07960
 +			max_line_sz = layer->line_sz / 2;
 +
 +		if (line_sz > max_line_sz) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(c->pipeline->mdev->drm,
 +				"afbc request line_sz: %d exceed the max afbc line_sz: %d.\n",
 +				line_sz, max_line_sz);
 +			return -EINVAL;
@@ -16387,14 +16376,14 @@ index 0000000000000..434248ab07960
 +
 +	if (fourcc == DRM_FORMAT_YUV420_10BIT && line_sz > 2046 &&
 +	    (st->afbc_crop_l % 4)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(c->pipeline->mdev->drm,
 +			"YUV420_10BIT input_hsize: %d exceed the max size 2046.\n",
 +			line_sz);
 +		return -EINVAL;
 +	}
 +
 +	if (fourcc == DRM_FORMAT_X0L2 && line_sz > 2046 && (st->addr[0] % 16)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(c->pipeline->mdev->drm,
 +			"X0L2 input_hsize: %d exceed the max size 2046.\n",
 +			line_sz);
 +		return -EINVAL;
@@ -17657,7 +17646,7 @@ index 0000000000000..434248ab07960
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c
 new file mode 100644
-index 0000000000000..5156fcdf50bc5
+index 0000000000000..8855898d4c84b
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/hw/dp_dev.c
 @@ -0,0 +1,694 @@
@@ -18224,7 +18213,7 @@ index 0000000000000..5156fcdf50bc5
 +
 +	if ((layout == AFBC_FORMAT_MOD_BLOCK_SIZE_32x8) &&
 +	    drm_rotation_90_or_270(rot)) {
-+		DRM_DEBUG_ATOMIC("DP doesn't support ROT90 for WB-AFBC.\n");
++		drm_dbg_atomic(NULL, "DP doesn't support ROT90 for WB-AFBC.\n");
 +		return false;
 +	}
 +
@@ -19201,7 +19190,7 @@ index 0000000000000..1077c56f1ae91
 +#endif /*_LINLONDP_COEFFS_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c
 new file mode 100644
-index 0000000000000..6e811e11c9865
+index 0000000000000..15c85567a4041
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_color_mgmt.c
 @@ -0,0 +1,270 @@
@@ -19459,7 +19448,7 @@ index 0000000000000..6e811e11c9865
 +		drm_lut_to_coeffs(igamma_blob, coeffs, true);
 +		st->igamma = linlondp_coeffs_request(mgr->igamma_mgr, coeffs);
 +		if (!st->igamma) {
-+			DRM_DEBUG_ATOMIC("request igamma table failed.\n");
++			drm_dbg_atomic(NULL, "request igamma table failed.\n");
 +			return -EBUSY;
 +		}
 +	}
@@ -19468,7 +19457,7 @@ index 0000000000000..6e811e11c9865
 +		drm_lut_to_coeffs(fgamma_blob, coeffs, false);
 +		st->fgamma = linlondp_coeffs_request(mgr->fgamma_mgr, coeffs);
 +		if (!st->fgamma) {
-+			DRM_DEBUG_ATOMIC("request fgamma table failed.\n");
++			drm_dbg_atomic(NULL, "request fgamma table failed.\n");
 +			return -EBUSY;
 +		}
 +	}
@@ -19531,7 +19520,7 @@ index 0000000000000..61e871554bde7
 +#endif /*_LINLONDP_COLOR_MGMT_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c
 new file mode 100644
-index 0000000000000..589be279c4e3a
+index 0000000000000..c4d69e0c1da88
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_crtc.c
 @@ -0,0 +1,1015 @@
@@ -19835,7 +19824,7 @@ index 0000000000000..589be279c4e3a
 +				struct drm_writeback_job,
 +				list_entry);
 +	if (job) {
-+		DRM_DEBUG_ATOMIC("Timer fired! has JOB not signal\n");
++		drm_dbg_atomic(kcrtc->base.dev, "Timer fired! has JOB not signal\n");
 +		spin_unlock_irqrestore(&wb_conn->base.job_lock, flags);
 +		drm_writeback_signal_completion(&wb_conn->base, 0);
 +	} else {
@@ -19874,7 +19863,7 @@ index 0000000000000..589be279c4e3a
 +	struct linlondp_wb_connector *wb_conn = kcrtc->wb_conn;
 +	struct drm_connector_state *conn_st;
 +
-+	DRM_DEBUG_ATOMIC("CRTC%d_FLUSH: active_pipes: 0x%x, affected: 0x%x.\n",
++	drm_dbg_atomic(crtc->dev, "CRTC%d_FLUSH: active_pipes: 0x%x, affected: 0x%x.\n",
 +			 drm_crtc_index(crtc), kcrtc_st->active_pipes,
 +			 kcrtc_st->affected_pipes);
 +
@@ -19907,7 +19896,7 @@ index 0000000000000..589be279c4e3a
 +	struct drm_display_mode *mode = &crtc_state->adjusted_mode;
 +
 +	if (old && old->self_refresh_active) {
-+		DRM_DEBUG_ATOMIC("%s self_refresh_active, do nothing.\n", __func__);
++		drm_dbg_atomic(mdev->drm, "%s self_refresh_active, do nothing.\n", __func__);
 +		drm_crtc_vblank_on(crtc);
 +		linlondp_crtc_do_flush(crtc, old);
 +		return;
@@ -19989,7 +19978,7 @@ index 0000000000000..589be279c4e3a
 +	} else {
 +		spin_lock_irqsave(&drm->event_lock, flags);
 +		if (kcrtc->disable_done != NULL) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(mdev->drm, 
 +				"CRTC%d has last flip done %p do nothing",
 +				kcrtc->master->id, kcrtc->disable_done);
 +			spin_unlock_irqrestore(&drm->event_lock, flags);
@@ -20037,7 +20026,7 @@ index 0000000000000..589be279c4e3a
 +	if (!new_state || !new_state->self_refresh_active)
 +		dev_info(crtc->dev->dev, "%s enter\n", __func__);
 +
-+	DRM_DEBUG_ATOMIC("CRTC%d_DISABLE: active_pipes: 0x%x, affected: 0x%x\n",
++	drm_dbg_atomic(mdev->drm, "CRTC%d_DISABLE: active_pipes: 0x%x, affected: 0x%x\n",
 +			 drm_crtc_index(crtc), old_st->active_pipes,
 +			 old_st->affected_pipes);
 +
@@ -20086,7 +20075,7 @@ index 0000000000000..589be279c4e3a
 +	}
 +
 +	if (new_state && new_state->self_refresh_active) {
-+		DRM_DEBUG_ATOMIC("%s, self_refresh_active, do nothing\n", __func__);
++		drm_dbg_atomic(mdev->drm, "%s, self_refresh_active, do nothing\n", __func__);
 +		return;
 +	}
 +
@@ -20186,7 +20175,7 @@ index 0000000000000..589be279c4e3a
 +	if ((m->clock > 600000) && (m->clock < 600000 * 2))
 +		pixel_per_cycle = 2;
 +	else if (m->clock > 600000 * 2) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kcrtc->base.dev, 
 +			"engine clk can't satisfy the requirement of %s-clk: %d.\n",
 +			m->name, m->clock);
 +		return MODE_CLOCK_HIGH;
@@ -20199,14 +20188,14 @@ index 0000000000000..589be279c4e3a
 +
 +	//FIXME
 +	if (min_pxlclk > clk_round_rate(master->pxlclk, min_pxlclk)) {
-+		DRM_DEBUG_ATOMIC("pxlclk doesn't support %lu Hz\n", min_pxlclk);
++		drm_dbg_atomic(kcrtc->base.dev, "pxlclk doesn't support %lu Hz\n", min_pxlclk);
 +
 +		return MODE_NOCLOCK;
 +	}
 +
 +	min_aclk = linlondp_calc_min_aclk_rate(to_kcrtc(crtc), min_pxlclk);
 +	if (clk_round_rate(mdev->aclk, min_aclk) < min_aclk) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kcrtc->base.dev, 
 +			"engine clk can't satisfy the requirement of %s-clk: %lu.\n",
 +			m->name, min_pxlclk);
 +
@@ -20246,7 +20235,7 @@ index 0000000000000..589be279c4e3a
 +	if (rebuilt_crtcs) {
 +		kms = container_of(crtc->dev, struct linlondp_kms_dev, base);
 +		linlondp_kms_setup_crtcs(kms, mdev);
-+		DRM_DEBUG_ATOMIC("%s sidy_by_side. rebuild crtcs",
++		drm_dbg_atomic(mdev->drm, "%s sidy_by_side. rebuild crtcs",
 +			mdev->side_by_side ? "enable" : "disable");
 +	}
 +
@@ -21390,10 +21379,10 @@ index 0000000000000..16412dcd678a7
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h b/drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h
 new file mode 100644
-index 0000000000000..5cae6bc336640
+index 0000000000000..feb3f75634726
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_dev.h
-@@ -0,0 +1,303 @@
+@@ -0,0 +1,307 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +/*
 + * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
@@ -21411,6 +21400,8 @@ index 0000000000000..5cae6bc336640
 +#include "linlondp_product.h"
 +#include "linlondp_format_caps.h"
 +#include <linux/version.h>
++
++struct drm_device;
 +
 +#define LINLONDP_EVENT_VSYNC BIT_ULL(0)
 +#define LINLONDP_EVENT_FLIP BIT_ULL(1)
@@ -21587,6 +21578,8 @@ index 0000000000000..5cae6bc336640
 +
 +	/** @dev: the base device structure */
 +	struct device *dev;
++	/** @drm: the DRM device, set by linlondp_kms_attach */
++	struct drm_device *drm;
 +	/** @reg_base: the base address of linlondp io space */
 +	u32 __iomem *reg_base;
 +	/** @dma_parms: the dma parameters of linlondp */
@@ -22524,10 +22517,10 @@ index 0000000000000..9851264f0f9ee
 +#endif
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_framebuffer.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_framebuffer.c
 new file mode 100644
-index 0000000000000..f2fcb3eaf503b
+index 0000000000000..48316301ebe9b
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_framebuffer.c
-@@ -0,0 +1,289 @@
+@@ -0,0 +1,290 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
@@ -22539,6 +22532,7 @@ index 0000000000000..f2fcb3eaf503b
 +#include <drm/drm_gem.h>
 +#include <drm/drm_gem_dma_helper.h>
 +#include <drm/drm_gem_framebuffer_helper.h>
++#include <drm/drm_print.h>
 +
 +#include "linlondp_framebuffer.h"
 +#include "linlondp_dev.h"
@@ -22578,7 +22572,7 @@ index 0000000000000..f2fcb3eaf503b
 +
 +	obj = drm_gem_object_lookup(file, mode_cmd->handles[0]);
 +	if (!obj) {
-+		DRM_DEBUG_KMS("Failed to lookup GEM object\n");
++		drm_dbg_kms(kfb->base.dev, "Failed to lookup GEM object\n");
 +		return -ENOENT;
 +	}
 +
@@ -22610,7 +22604,7 @@ index 0000000000000..f2fcb3eaf503b
 +	kfb->aligned_h = ALIGN(fb->height, alignment_h);
 +
 +	if (fb->offsets[0] % alignment_header) {
-+		DRM_DEBUG_KMS("afbc offset alignment check failed.\n");
++		drm_dbg_kms(kfb->base.dev, "afbc offset alignment check failed.\n");
 +		goto check_failed;
 +	}
 +
@@ -22624,7 +22618,7 @@ index 0000000000000..f2fcb3eaf503b
 +					  AFBC_SUPERBLK_ALIGNMENT);
 +	min_size = kfb->afbc_size + fb->offsets[0];
 +	if (min_size > obj->size) {
-+		DRM_DEBUG_KMS(
++		drm_dbg_kms(kfb->base.dev, 
 +			"afbc size check failed, obj_size: 0x%zx. min_size 0x%llx.\n",
 +			obj->size, min_size);
 +		goto check_failed;
@@ -22655,14 +22649,14 @@ index 0000000000000..f2fcb3eaf503b
 +	for (i = 0; i < info->num_planes; i++) {
 +		obj = drm_gem_object_lookup(file, mode_cmd->handles[i]);
 +		if (!obj) {
-+			DRM_DEBUG_KMS("Failed to lookup GEM object\n");
++			drm_dbg_kms(kfb->base.dev, "Failed to lookup GEM object\n");
 +			return -ENOENT;
 +		}
 +		fb->obj[i] = obj;
 +
 +		block_h = drm_format_info_block_height(info, i);
 +		if ((fb->pitches[i] * block_h) % mdev->chip.bus_width) {
-+			DRM_DEBUG_KMS("Pitch[%d]: 0x%x doesn't align to 0x%x\n",
++			drm_dbg_kms(kfb->base.dev, "Pitch[%d]: 0x%x doesn't align to 0x%x\n",
 +				      i, fb->pitches[i], mdev->chip.bus_width);
 +			return -EINVAL;
 +		}
@@ -22670,7 +22664,7 @@ index 0000000000000..f2fcb3eaf503b
 +		min_size = linlondp_fb_get_pixel_addr(kfb, 0, fb->height, i) -
 +			   to_drm_gem_dma_obj(obj)->dma_addr;
 +		if (obj->size < min_size) {
-+			DRM_DEBUG_KMS(
++			drm_dbg_kms(kfb->base.dev, 
 +				"The fb->obj[%d] size: 0x%zx lower than the minimum requirement: 0x%llx.\n",
 +				i, obj->size, min_size);
 +			return -EINVAL;
@@ -22679,7 +22673,7 @@ index 0000000000000..f2fcb3eaf503b
 +
 +	if (fb->format->num_planes == 3) {
 +		if (fb->pitches[1] != fb->pitches[2]) {
-+			DRM_DEBUG_KMS("The pitch[1] and [2] are not same\n");
++			drm_dbg_kms(kfb->base.dev, "The pitch[1] and [2] are not same\n");
 +			return -EINVAL;
 +		}
 +	}
@@ -22703,7 +22697,7 @@ index 0000000000000..f2fcb3eaf503b
 +	kfb->format_caps = linlondp_get_format_caps(
 +		&mdev->fmt_tbl, mode_cmd->pixel_format, mode_cmd->modifier[0]);
 +	if (!kfb->format_caps) {
-+		DRM_DEBUG_KMS("FMT %x is not supported.\n",
++		drm_dbg_kms(kfb->base.dev, "FMT %x is not supported.\n",
 +			      mode_cmd->pixel_format);
 +		kfree(kfb);
 +		return ERR_PTR(-EINVAL);
@@ -22721,7 +22715,7 @@ index 0000000000000..f2fcb3eaf503b
 +
 +	ret = drm_framebuffer_init(dev, &kfb->base, &linlondp_fb_funcs);
 +	if (ret < 0) {
-+		DRM_DEBUG_KMS("failed to initialize fb\n");
++		drm_dbg_kms(kfb->base.dev, "failed to initialize fb\n");
 +
 +		goto err_cleanup;
 +	}
@@ -22747,13 +22741,13 @@ index 0000000000000..f2fcb3eaf503b
 +	u32 block_h = drm_format_info_block_height(fb->format, 0);
 +
 +	if ((src_x + src_w > fb->width) || (src_y + src_h > fb->height)) {
-+		DRM_DEBUG_ATOMIC("Invalid source coordinate.\n");
++		drm_dbg_atomic(kfb->base.dev, "Invalid source coordinate.\n");
 +		return -EINVAL;
 +	}
 +
 +	if ((src_x % info->hsub) || (src_w % info->hsub) ||
 +	    (src_y % info->vsub) || (src_h % info->vsub)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kfb->base.dev, 
 +			"Wrong subsampling dimension x:%d, y:%d, w:%d, h:%d for format: %x.\n",
 +			src_x, src_y, src_w, src_h, info->format);
 +		return -EINVAL;
@@ -22761,7 +22755,7 @@ index 0000000000000..f2fcb3eaf503b
 +
 +	if ((src_x % block_w) || (src_w % block_w) || (src_y % block_h) ||
 +	    (src_h % block_h)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kfb->base.dev, 
 +			"x:%d, y:%d, w:%d, h:%d should be multiple of block_w/h for format: %x.\n",
 +			src_x, src_y, src_w, src_h, info->format);
 +		return -EINVAL;
@@ -22778,7 +22772,7 @@ index 0000000000000..f2fcb3eaf503b
 +	u32 offset, plane_x, plane_y, block_w, block_sz;
 +
 +	if (plane >= fb->format->num_planes) {
-+		DRM_DEBUG_KMS("Out of max plane num.\n");
++		drm_dbg_kms(kfb->base.dev, "Out of max plane num.\n");
 +		return -EINVAL;
 +	}
 +
@@ -22811,7 +22805,7 @@ index 0000000000000..f2fcb3eaf503b
 +	supported = linlondp_format_mod_supported(&mdev->fmt_tbl, layer_type,
 +						  fourcc, modifier, rot);
 +	if (!supported)
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(mdev->drm, 
 +			"Layer TYPE: %d doesn't support fb FMT: %p4cc with modifier: 0x%llx.\n",
 +			layer_type, &fourcc, modifier);
 +
@@ -22926,10 +22920,10 @@ index 0000000000000..602c5731269b8
 +#endif /*_LINLONDP_IO_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_kms.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_kms.c
 new file mode 100644
-index 0000000000000..70d7cd1ba90c8
+index 0000000000000..83904c1628ba5
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_kms.c
-@@ -0,0 +1,413 @@
+@@ -0,0 +1,414 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
@@ -22957,9 +22951,9 @@ index 0000000000000..70d7cd1ba90c8
 +
 +DEFINE_DRM_GEM_DMA_FOPS(linlondp_cma_fops);
 +
-+static bool enable_render = true;
++static bool enable_render = false;
 +module_param(enable_render, bool, 0644);
-+MODULE_PARM_DESC(enable_render, "Enable render node support (true/false)");
++MODULE_PARM_DESC(enable_render, "Enable render node support (default: false, conflicts with Panthor)");
 +
 +static int linlondp_gem_dma_dumb_create(struct drm_file *file,
 +					struct drm_device *dev,
@@ -23089,7 +23083,7 @@ index 0000000000000..70d7cd1ba90c8
 +			/* Linlondp doesn't support setting a same zpos for
 +			 * different planes.
 +			 */
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(plane_st->plane->dev,
 +				"PLANE: %s and PLANE: %s are configured same zpos: %d.\n",
 +				a->name, b->name, node->base.zpos);
 +			return -EINVAL;
@@ -23112,7 +23106,7 @@ index 0000000000000..70d7cd1ba90c8
 +	int order = 0, err;
 +	bool split = 0;
 +
-+	DRM_DEBUG_ATOMIC("[CRTC:%d:%s] calculating normalized zpos values\n",
++	drm_dbg_atomic(crtc->dev, "[CRTC:%d:%s] calculating normalized zpos values\n",
 +			 crtc->base.id, crtc->name);
 +
 +	INIT_LIST_HEAD(&zorder_list);
@@ -23146,7 +23140,7 @@ index 0000000000000..70d7cd1ba90c8
 +		if (split)
 +			order++;
 +
-+		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] zpos:%d, normalized zpos: %d\n",
++		drm_dbg_atomic(plane->dev, "[PLANE:%d:%s] zpos:%d, normalized zpos: %d\n",
 +				 plane->base.id, plane->name, plane_st->zpos,
 +				 plane_st->normalized_zpos);
 +
@@ -23273,6 +23267,7 @@ index 0000000000000..70d7cd1ba90c8
 +		return kms;
 +
 +	drm = &kms->base;
++	mdev->drm = drm;
 +
 +	drm->dev_private = mdev;
 +
@@ -23690,7 +23685,7 @@ index 0000000000000..6405ab68e08a0
 +#endif /*_LINLONDP_KMS_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline.c
 new file mode 100644
-index 0000000000000..2c5a850812aac
+index 0000000000000..fc4eca5f6b7db
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline.c
 @@ -0,0 +1,464 @@
@@ -24112,7 +24107,7 @@ index 0000000000000..2c5a850812aac
 +	//SBS can work with image merge mode
 +	/*
 +	 * if (!master->dual_link) {
-+	 * DRM_DEBUG_ATOMIC("SBS can not work without dual link.\n");
++	 * drm_dbg_atomic(mdev->drm, "SBS can not work without dual link.\n");
 +	 * return -EINVAL;
 +	 * }
 +	 */
@@ -24763,7 +24758,7 @@ index 0000000000000..ba58188c0214c
 +#endif /* _LINLONDP_PIPELINE_H_*/
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline_state.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline_state.c
 new file mode 100644
-index 0000000000000..5fef06d02ae62
+index 0000000000000..e0e3547116d69
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_pipeline_state.c
 @@ -0,0 +1,1733 @@
@@ -24839,14 +24834,14 @@ index 0000000000000..5fef06d02ae62
 +		return st;
 +
 +	if (is_switching_user(crtc, st->crtc)) {
-+		DRM_DEBUG_ATOMIC("CRTC%d required pipeline%d is busy.\n",
++		drm_dbg_atomic(crtc->dev, "CRTC%d required pipeline%d is busy.\n",
 +				 drm_crtc_index(crtc), pipe->id);
 +		return ERR_PTR(-EBUSY);
 +	}
 +
 +	/* pipeline only can be disabled when the it is free or unused */
 +	if (!crtc && st->active_comps) {
-+		DRM_DEBUG_ATOMIC("Disabling a busy pipeline:%d.\n", pipe->id);
++		drm_dbg_atomic(crtc->dev, "Disabling a busy pipeline:%d.\n", pipe->id);
 +		return ERR_PTR(-EBUSY);
 +	}
 +
@@ -24936,7 +24931,7 @@ index 0000000000000..5fef06d02ae62
 +
 +	/* check if the component has been occupied */
 +	if (is_switching_user(user, st->binding_user)) {
-+		DRM_DEBUG_ATOMIC("required %s is busy.\n", c->name);
++		drm_dbg_atomic(crtc->dev, "required %s is busy.\n", c->name);
 +		return ERR_PTR(-EBUSY);
 +	}
 +
@@ -24977,13 +24972,13 @@ index 0000000000000..5fef06d02ae62
 +	struct linlondp_component *c = state->component;
 +
 +	if ((idx < 0) || (idx >= c->max_active_inputs)) {
-+		DRM_DEBUG_ATOMIC("%s required an invalid %s-input[%d].\n",
++		drm_dbg_atomic(c->pipeline->mdev->drm, "%s required an invalid %s-input[%d].\n",
 +				 input->component->name, c->name, idx);
 +		return -EINVAL;
 +	}
 +
 +	if (has_bit(idx, state->active_inputs)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(c->pipeline->mdev->drm, 
 +			"%s required %s-input[%d] has been occupied already.\n",
 +			input->component->name, c->name, idx);
 +		return -EINVAL;
@@ -25011,7 +25006,7 @@ index 0000000000000..5fef06d02ae62
 +
 +	err = c->funcs->validate(c, st);
 +	if (err)
-+		DRM_DEBUG_ATOMIC("%s validate private failed.\n", c->name);
++		drm_dbg_atomic(c->pipeline->mdev->drm, "%s validate private failed.\n", c->name);
 +
 +	return err;
 +}
@@ -25065,7 +25060,7 @@ index 0000000000000..5fef06d02ae62
 +				      kplane_st->degamma_lut,
 +				      kplane_st->gamma_lut);
 +	if (err)
-+		DRM_DEBUG_ATOMIC("%s validate color failed.\n", c->name);
++		drm_dbg_atomic(c->pipeline->mdev->drm, "%s validate color failed.\n", c->name);
 +
 +	return err;
 +}
@@ -25096,12 +25091,12 @@ index 0000000000000..5fef06d02ae62
 +		return -EINVAL;
 +
 +	if (!linlon_in_range(&layer->hsize_in, src_w)) {
-+		DRM_DEBUG_ATOMIC("invalidate src_w %d.\n", src_w);
++		drm_dbg_atomic(kfb->base.dev, "invalidate src_w %d.\n", src_w);
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&layer->vsize_in, src_h)) {
-+		DRM_DEBUG_ATOMIC("invalidate src_h %d.\n", src_h);
++		drm_dbg_atomic(kfb->base.dev, "invalidate src_h %d.\n", src_h);
 +		return -EINVAL;
 +	}
 +
@@ -25116,7 +25111,7 @@ index 0000000000000..5fef06d02ae62
 +		max_line_sz = layer->line_sz;
 +
 +	if (line_sz > max_line_sz) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kfb->base.dev, 
 +			"Required line_sz: %d exceeds the max size %d\n",
 +			line_sz, max_line_sz);
 +		return -EINVAL;
@@ -25249,13 +25244,13 @@ index 0000000000000..5fef06d02ae62
 +
 +	if (!linlon_in_range(&scaler->hsize, hsize_in) ||
 +	    !linlon_in_range(&scaler->hsize, hsize_out)) {
-+		DRM_DEBUG_ATOMIC("Invalid horizontal sizes");
++		drm_dbg_atomic(scaler->base.pipeline->mdev->drm, "Invalid horizontal sizes");
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&scaler->vsize, vsize_in) ||
 +	    !linlon_in_range(&scaler->vsize, vsize_out)) {
-+		DRM_DEBUG_ATOMIC("Invalid vertical sizes");
++		drm_dbg_atomic(scaler->base.pipeline->mdev->drm, "Invalid vertical sizes");
 +		return -EINVAL;
 +	}
 +
@@ -25269,13 +25264,13 @@ index 0000000000000..5fef06d02ae62
 +
 +	if (!scaling_ratio_valid(hsize_in, hsize_out, max_upscaling,
 +				 scaler->max_downscaling)) {
-+		DRM_DEBUG_ATOMIC("Invalid horizontal scaling ratio");
++		drm_dbg_atomic(scaler->base.pipeline->mdev->drm, "Invalid horizontal scaling ratio");
 +		return -EINVAL;
 +	}
 +
 +	if (!scaling_ratio_valid(vsize_in, vsize_out, max_upscaling,
 +				 scaler->max_downscaling)) {
-+		DRM_DEBUG_ATOMIC("Invalid vertical scaling ratio");
++		drm_dbg_atomic(scaler->base.pipeline->mdev->drm, "Invalid vertical scaling ratio");
 +		return -EINVAL;
 +	}
 +
@@ -25288,7 +25283,7 @@ index 0000000000000..5fef06d02ae62
 +			pipe, &kcrtc_st->base.adjusted_mode,
 +			linlondp_crtc_get_aclk(kcrtc_st), dflow);
 +		if (err) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(pipe->mdev->drm, 
 +				"aclk can't satisfy the clock requirement of the downscaling\n");
 +			return err;
 +		}
@@ -25312,7 +25307,7 @@ index 0000000000000..5fef06d02ae62
 +	scaler = linlondp_component_get_avail_scaler(dflow->input.component,
 +						     drm_st);
 +	if (!scaler) {
-+		DRM_DEBUG_ATOMIC("No scaler available");
++		drm_dbg_atomic(dflow->input.component->pipeline->mdev->drm, "No scaler available");
 +		return -EINVAL;
 +	}
 +
@@ -25364,19 +25359,19 @@ index 0000000000000..5fef06d02ae62
 +	struct linlondp_splitter_state *st;
 +
 +	if (!splitter) {
-+		DRM_DEBUG_ATOMIC("Current HW doesn't support splitter.\n");
++		drm_dbg_atomic(conn_st->connector->dev, "Current HW doesn't support splitter.\n");
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&splitter->hsize, dflow->in_w)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(conn_st->connector->dev, 
 +			"split in_w:%d is out of the acceptable range.\n",
 +			dflow->in_w);
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&splitter->vsize, dflow->in_h)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(conn_st->connector->dev, 
 +			"split in_h: %d exceeds the acceptable range.\n",
 +			dflow->in_h);
 +		return -EINVAL;
@@ -25416,18 +25411,18 @@ index 0000000000000..5fef06d02ae62
 +	int err = 0;
 +
 +	if (!merger) {
-+		DRM_DEBUG_ATOMIC("No merger is available");
++		drm_dbg_atomic(kcrtc_st->base.crtc->dev, "No merger is available");
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&merger->hsize_merged, output->out_w)) {
-+		DRM_DEBUG_ATOMIC("merged_w: %d is out of the accepted range.\n",
++		drm_dbg_atomic(merger->base.pipeline->mdev->drm, "merged_w: %d is out of the accepted range.\n",
 +				 output->out_w);
 +		return -EINVAL;
 +	}
 +
 +	if (!linlon_in_range(&merger->vsize_merged, output->out_h)) {
-+		DRM_DEBUG_ATOMIC("merged_h: %d is out of the accepted range.\n",
++		drm_dbg_atomic(merger->base.pipeline->mdev->drm, "merged_h: %d is out of the accepted range.\n",
 +				 output->out_h);
 +		return -EINVAL;
 +	}
@@ -25487,7 +25482,7 @@ index 0000000000000..5fef06d02ae62
 +	     compiz_w) ||
 +	    (dflow->out_y + dflow->out_h > compiz_h) || dflow->out_w == 0 ||
 +	    dflow->out_h == 0) {
-+		DRM_DEBUG_ATOMIC("invalid disp rect [x=%d, y=%d, w=%d, h=%d]\n",
++		drm_dbg_atomic(crtc->dev, "invalid disp rect [x=%d, y=%d, w=%d, h=%d]\n",
 +				 dflow->out_x, dflow->out_y, dflow->out_w,
 +				 dflow->out_h);
 +		return -EINVAL;
@@ -25599,7 +25594,7 @@ index 0000000000000..5fef06d02ae62
 +
 +		avail_depths = output_depths & improc->supported_color_depths;
 +		if (avail_depths == 0) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(crtc->dev, 
 +				"No available color depths, conn depths: 0x%x & display: 0x%x\n",
 +				output_depths, improc->supported_color_depths);
 +			return -EINVAL;
@@ -25608,7 +25603,7 @@ index 0000000000000..5fef06d02ae62
 +		avail_formats = output_formats &
 +				improc->supported_color_formats;
 +		if (!avail_formats) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(crtc->dev, 
 +				"No available color_formats, conn formats 0x%x & display: 0x%x\n",
 +				output_formats,
 +				improc->supported_color_formats);
@@ -25624,7 +25619,7 @@ index 0000000000000..5fef06d02ae62
 +
 +		if ((st->color_format == DRM_COLOR_FORMAT_YCBCR420) &&
 +		    (improc->base.pipeline->pixel_per_cycle != 1)) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(crtc->dev, 
 +				"420 with non-1ppc out is not supported\n");
 +			return -EINVAL;
 +		}
@@ -25718,7 +25713,7 @@ index 0000000000000..5fef06d02ae62
 +	struct linlondp_pipeline *pipe = layer->base.pipeline;
 +	int err;
 +
-+	DRM_DEBUG_ATOMIC(
++	drm_dbg_atomic(pipe->mdev->drm, 
 +		"%s handling [PLANE:%d:%s]: src[x/y:%d/%d, w/h:%d/%d] disp[x/y:%d/%d, w/h:%d/%d]",
 +		layer->base.name, plane->base.id, plane->name, dflow->in_x,
 +		dflow->in_y, dflow->in_w, dflow->in_h, dflow->out_x,
@@ -25933,17 +25928,17 @@ index 0000000000000..5fef06d02ae62
 +	int err;
 +
 +	if (!right) {
-+		DRM_DEBUG_ATOMIC("%s has no right layer\n", left->base.name);
++		drm_dbg_atomic(pipe->mdev->drm, "%s has no right layer\n", left->base.name);
 +		return -EINVAL;
 +	}
 +
 +	linlondp_split_data_flow(pipe->scalers[0], dflow, &l_dflow, &r_dflow);
 +
-+	DRM_DEBUG_ATOMIC("Assign %s + %s to [PLANE:%d:%s]: ",
++	drm_dbg_atomic(pipe->mdev->drm, "Assign %s + %s to [PLANE:%d:%s]: ",
 +			 left->base.name, right->base.name,
 +			 plane->base.id, plane->name);
 +
-+	DRM_DEBUG_ATOMIC("src[x/y:%d/%d, w/h:%d/%d] disp[x/y:%d/%d, w/h:%d/%d]",
++	drm_dbg_atomic(pipe->mdev->drm, "src[x/y:%d/%d, w/h:%d/%d] disp[x/y:%d/%d, w/h:%d/%d]",
 +			 dflow->in_x, dflow->in_y, dflow->in_w, dflow->in_h,
 +			 dflow->out_x, dflow->out_y, dflow->out_w, dflow->out_h);
 +
@@ -26017,7 +26012,7 @@ index 0000000000000..5fef06d02ae62
 +
 +#ifdef SBS_NO_OVERLAP_SCALING
 +		if (master->en_scaling || master->en_img_enhancement) {
-+			DRM_DEBUG_ATOMIC(
++			drm_dbg_atomic(kcrtc->base.dev, 
 +				"sbs doesn't support to split a scaling image.\n");
 +			return -EINVAL;
 +		}
@@ -26108,7 +26103,7 @@ index 0000000000000..5fef06d02ae62
 +	pipeline_composition_size(kcrtc_st, true, &boundary, NULL, false);
 +
 +	if (slave->out_x < boundary) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kcrtc_st->base.crtc->dev,
 +			"SBS Slave plane is only allowed to configure the right part frame.\n");
 +		return -EINVAL;
 +	}
@@ -26160,7 +26155,7 @@ index 0000000000000..5fef06d02ae62
 +	bool master_plane = layer->base.pipeline == kcrtc->master;
 +	int err;
 +
-+	DRM_DEBUG_ATOMIC("SBS prepare %s-[PLANE:%d:%s]: %s.\n",
++	drm_dbg_atomic(plane->dev, "SBS prepare %s-[PLANE:%d:%s]: %s.\n",
 +			 master_plane ? "Master" : "Slave", plane->base.id,
 +			 plane->name, linlondp_data_flow_msg(dflow));
 +
@@ -26183,7 +26178,7 @@ index 0000000000000..5fef06d02ae62
 +		return err;
 +
 +	if (master_dflow) {
-+		DRM_DEBUG_ATOMIC("SBS Master-%s assigned: %s\n",
++		drm_dbg_atomic(plane->dev, "SBS Master-%s assigned: %s\n",
 +				 master->base.name,
 +				 linlondp_data_flow_msg(master_dflow));
 +
@@ -26199,7 +26194,7 @@ index 0000000000000..5fef06d02ae62
 +	}
 +
 +	if (slave_dflow) {
-+		DRM_DEBUG_ATOMIC("SBS Slave-%s assigned: %s\n",
++		drm_dbg_atomic(plane->dev, "SBS Slave-%s assigned: %s\n",
 +				 slave->base.name,
 +				 linlondp_data_flow_msg(slave_dflow));
 +
@@ -26283,7 +26278,7 @@ index 0000000000000..5fef06d02ae62
 +	int err;
 +
 +	if (wb_dflow->en_scaling || wb_dflow->en_img_enhancement) {
-+		DRM_DEBUG_ATOMIC("sbs doesn't support WB_scaling\n");
++		drm_dbg_atomic(conn_st->connector->dev, "sbs doesn't support WB_scaling\n");
 +		return -EINVAL;
 +	}
 +
@@ -26446,7 +26441,7 @@ index 0000000000000..5fef06d02ae62
 +		disabling_comps = old->active_comps &
 +				  pipe->standalone_disabled_comps;
 +
-+	DRM_DEBUG_ATOMIC(
++	drm_dbg_atomic(pipe->mdev->drm,
 +		"PIPE%d: active_comps: 0x%x, disabling_comps: 0x%lx.\n",
 +		pipe->id, old->active_comps, disabling_comps);
 +
@@ -26488,7 +26483,7 @@ index 0000000000000..5fef06d02ae62
 +
 +	changed_comps = new->active_comps | old->active_comps;
 +
-+	DRM_DEBUG_ATOMIC("PIPE%d: active_comps: 0x%x, changed: 0x%lx.\n",
++	drm_dbg_atomic(pipe->mdev->drm, "PIPE%d: active_comps: 0x%x, changed: 0x%lx.\n",
 +			 pipe->id, new->active_comps, changed_comps);
 +
 +	for_each_set_bit(id, &changed_comps, 32) {
@@ -26502,10 +26497,10 @@ index 0000000000000..5fef06d02ae62
 +}
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_plane.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_plane.c
 new file mode 100644
-index 0000000000000..aa0d28b2b1cd1
+index 0000000000000..df5e6ea7b6ffd
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_plane.c
-@@ -0,0 +1,653 @@
+@@ -0,0 +1,652 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * (C) COPYRIGHT 2022-2023 Arm Technology (China) Co., Ltd.
@@ -26532,7 +26527,6 @@ index 0000000000000..aa0d28b2b1cd1
 +	struct drm_framebuffer *fb = st->fb;
 +	const struct linlondp_format_caps *caps = to_kfb(fb)->format_caps;
 +	struct linlondp_pipeline *pipe = kplane->layer->base.pipeline;
-+	struct linlondp_dev *mdev = st->plane->dev->dev_private;
 +	struct drm_crtc_state *crtc_st;
 +	struct drm_display_mode *mode;
 +	struct drm_display_mode *adjusted_mode;
@@ -26544,7 +26538,7 @@ index 0000000000000..aa0d28b2b1cd1
 +	if (pipe == to_kcrtc(st->crtc)->master)
 +		dflow->blending_zorder -= kcrtc_st->max_slave_zorder;
 +	if (dflow->blending_zorder < 0) {
-+		DRM_DEBUG_ATOMIC("%s zorder:%d < max_slave_zorder: %d.\n",
++		drm_dbg_atomic(pipe->mdev->drm, "%s zorder:%d < max_slave_zorder: %d.\n",
 +				 st->plane->name, st->normalized_zpos,
 +				 kcrtc_st->max_slave_zorder);
 +		return -EINVAL;
@@ -26585,7 +26579,7 @@ index 0000000000000..aa0d28b2b1cd1
 +
 +	dflow->rot = drm_rotation_simplify(st->rotation, caps->supported_rots);
 +	if (!has_bits(dflow->rot, caps->supported_rots)) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(pipe->mdev->drm, 
 +			"rotation(0x%x) isn't supported by %p4cc with modifier: 0x%llx.\n",
 +			dflow->rot, &caps->fourcc, fb->modifier);
 +		return -EINVAL;
@@ -26627,7 +26621,7 @@ index 0000000000000..aa0d28b2b1cd1
 +
 +	crtc_st = drm_atomic_get_crtc_state(state, new_plane_state->crtc);
 +	if (IS_ERR(crtc_st) || !crtc_st->enable) {
-+		DRM_DEBUG_ATOMIC("Cannot update plane on a disabled CRTC.\n");
++		drm_dbg_atomic(kcrtc->base.dev, "Cannot update plane on a disabled CRTC.\n");
 +		return -EINVAL;
 +	}
 +
@@ -26846,7 +26840,7 @@ index 0000000000000..aa0d28b2b1cd1
 +
 +	dir = debugfs_create_dir(name, plane->dev->primary->debugfs_root);
 +	if (!dir) {
-+		DRM_DEBUG_ATOMIC("Cannot create debugfs dir for %s\n", name);
++		drm_dbg_atomic(plane->dev, "Cannot create debugfs dir for %s\n", name);
 +		return 0;
 +	}
 +
@@ -27692,7 +27686,7 @@ index 0000000000000..a3b04f66058a8
 +#endif /* _LINLONDP_UTILS_ */
 diff --git a/drivers/gpu/drm/cix/linlon-dp/linlondp_wb_connector.c b/drivers/gpu/drm/cix/linlon-dp/linlondp_wb_connector.c
 new file mode 100644
-index 0000000000000..27d369aba482c
+index 0000000000000..82b9efdcd42cb
 --- /dev/null
 +++ b/drivers/gpu/drm/cix/linlon-dp/linlondp_wb_connector.c
 @@ -0,0 +1,391 @@
@@ -27752,7 +27746,7 @@ index 0000000000000..27d369aba482c
 +		return 0;
 +
 +	if (!crtc_st->active) {
-+		DRM_DEBUG_ATOMIC(
++		drm_dbg_atomic(kcrtc->base.dev, 
 +			"Cannot write the composition result out on a inactive CRTC.\n");
 +		return -EINVAL;
 +	}
@@ -27846,7 +27840,7 @@ index 0000000000000..27d369aba482c
 +	} else if (property == wb_conn->color_range_property) {
 +		*val = conn_st->color_range;
 +	} else {
-+		DRM_DEBUG_ATOMIC("Unknown property %s\n", property->name);
++		drm_dbg_atomic(connector->dev, "Unknown property %s\n", property->name);
 +		return -EINVAL;
 +	}
 +	return 0;
@@ -27865,7 +27859,7 @@ index 0000000000000..27d369aba482c
 +	} else if (property == wb_conn->color_range_property) {
 +		conn_st->color_range = val;
 +	} else {
-+		DRM_DEBUG_ATOMIC("Unknown property %s\n", property->name);
++		drm_dbg_atomic(connector->dev, "Unknown property %s\n", property->name);
 +		return -EINVAL;
 +	}
 +	return 0;
@@ -28087,6 +28081,3 @@ index 0000000000000..27d369aba482c
 +
 +	return 0;
 +}
--- 
-2.51.0
-

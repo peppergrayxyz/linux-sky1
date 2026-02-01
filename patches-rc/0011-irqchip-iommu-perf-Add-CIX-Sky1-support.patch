@@ -1,97 +1,87 @@
-From 0305076f8b0db1c1b41393b78dd64a9c7ca07917 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
-Date: Fri, 5 Dec 2025 10:52:58 +0800
-Subject: [PATCH 41/77] Enable Cix Sky1 PDC and Device Tree nodes
+Date: Sun, 1 Feb 2026 01:20:21 +1100
+Subject: [PATCH] irqchip: iommu: perf: Add CIX Sky1 support
 
-Port the Power Domain Controller (PDC) driver required for proper interrupt
-routing on the Radxa Orion O6 (Cix Sky1 SoC).
-
-Key Changes:
-1.  **Power Domain Controller (PDC):**
-    *   Ported drivers/irqchip/irq-sky1-pdc.c from vendor kernel.
-    *   This driver is ESSENTIAL for the GPU (Panthor) and other peripherals to
-        receive interrupts. Without it, the GPU hangs on job submission.
-    *   Added CONFIG_SKY1_PDC to Kconfig/Makefile.
-
-2.  **Device Tree (DTS):**
-    *   Updated sky1.dtsi: Changed root interrupt parent to &pdc.
-    *   Updated sky1-orion-o6.dts: Enabled &npu, &sensorhub, and &sfh_scp.
-
-3.  **Architecture:**
-    *   Added CONFIG_ARCH_CIX to arch/arm64/Kconfig to guard these new drivers.
-
-4.  **Ethernet:**
-    *   Patched macb_main.c to support cdns,sky1-gem, fixing probe failure.
-
-Note: Thermal management (energy model, power allocation) is handled by mainline
-kernel's SCMI cpufreq driver - no vendor-specific thermal drivers needed.
+Add Sky1 Power Domain Controller (PDC) wakeup interrupt driver.
+Add GIC-v3 single-redistributor topology support for Sky1. Add
+arm-smmu-v3 bypass STE installation for boot-active devices
+specified in device tree (e.g., display left on by bootloader).
+Skip arm_spe setup on CPUs without SPE support in heterogeneous
+big.LITTLE configurations.
 ---
- arch/arm64/Kconfig                        |   5 +-
- arch/arm64/boot/dts/cix/sky1-orion-o6.dts |  12 +
- arch/arm64/boot/dts/cix/sky1.dtsi         |   2 +-
- drivers/irqchip/Kconfig                   |   8 +
- drivers/irqchip/Makefile                  |   3 +-
- drivers/irqchip/irq-sky1-pdc.c            | 267 ++++++++++++++++++++++
- drivers/net/ethernet/cadence/macb_main.c  |   1 +
- 7 files changed, 294 insertions(+), 4 deletions(-)
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |  40 +++
+ drivers/irqchip/Kconfig                     |   8 +
+ drivers/irqchip/Makefile                    |   3 +-
+ drivers/irqchip/irq-gic-v3.c                |   5 +
+ drivers/irqchip/irq-sky1-pdc.c              | 274 ++++++++++++++++++++
+ drivers/perf/arm_spe_pmu.c                  |  17 ++
+ 6 files changed, 346 insertions(+), 1 deletion(-)
  create mode 100644 drivers/irqchip/irq-sky1-pdc.c
 
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 6663ffd23f252..0a3ede870df81 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -1593,10 +1593,11 @@ config ARCH_SUPPORTS_KEXEC_SIG
- config ARCH_SUPPORTS_KEXEC_IMAGE_VERIFY_SIG
- 	def_bool y
+diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+index d16d35c78c068..693d237892e98 100644
+--- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
++++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+@@ -4653,6 +4653,43 @@ static void __iomem *arm_smmu_ioremap(struct device *dev, resource_size_t start,
+ 	return devm_ioremap_resource(dev, &res);
+ }
  
--config ARCH_DEFAULT_KEXEC_IMAGE_VERIFY_SIG
-+config ARCH_SUPPORTS_KEXEC_HANDOVER
- 	def_bool y
- 
--config ARCH_SUPPORTS_KEXEC_HANDOVER
-+config ARCH_CIX
-+	bool "Cix Technology Group SoC Support"
- 	def_bool y
- 
- config ARCH_SUPPORTS_CRASH_DUMP
-diff --git a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-index fe40ac3d57319..38c7b61976e2f 100644
---- a/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-+++ b/arch/arm64/boot/dts/cix/sky1-orion-o6.dts
-@@ -2392,3 +2392,15 @@ map1 {
- &cix_ipa {
- 	status = "okay";
- };
++/*
++ * Install bypass STEs for stream IDs specified in device tree.
++ * This handles devices that are already active at boot (e.g., display
++ * controllers left running by bootloader) before the kernel driver
++ * has attached them to the IOMMU.
++ */
++static void arm_smmu_dt_install_bypass_ste(struct arm_smmu_device *smmu)
++{
++	struct device_node *np = smmu->dev->of_node;
++	int count, i;
++	u32 sid;
 +
-+&npu {
-+	status = "okay";
-+};
++	if (!np)
++		return;
 +
-+&sensorhub {
-+	status = "okay";
-+};
++	count = of_property_count_u32_elems(np, "arm,boot-active-sids");
++	if (count <= 0)
++		return;
 +
-+&sfh_scp {
-+	status = "okay";
-+};
-diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
-index 0962fc251a721..13081115b0ea4 100644
---- a/arch/arm64/boot/dts/cix/sky1.dtsi
-+++ b/arch/arm64/boot/dts/cix/sky1.dtsi
-@@ -21,7 +21,7 @@
- /memreserve/ 0x80000000 0x6000000;
++	for (i = 0; i < count; i++) {
++		if (of_property_read_u32_index(np, "arm,boot-active-sids",
++					       i, &sid))
++			continue;
++
++		if (arm_smmu_init_sid_strtab(smmu, sid)) {
++			dev_err(smmu->dev,
++				"boot-active SID(0x%x) bypass failed\n", sid);
++			continue;
++		}
++
++		arm_smmu_make_bypass_ste(smmu,
++			arm_smmu_get_step_for_sid(smmu, sid));
++		dev_dbg(smmu->dev,
++			"installed bypass STE for boot-active SID 0x%x\n", sid);
++	}
++}
++
+ static void arm_smmu_rmr_install_bypass_ste(struct arm_smmu_device *smmu)
+ {
+ 	struct list_head rmr_list;
+@@ -4819,6 +4856,9 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+ 	/* Check for RMRs and install bypass STEs if any */
+ 	arm_smmu_rmr_install_bypass_ste(smmu);
  
- / {
--	interrupt-parent = <&gic>;
-+	interrupt-parent = <&pdc>;
- 	#address-cells = <2>;
- 	#size-cells = <2>;
- 
++	/* Install bypass STEs for boot-active devices from DT */
++	arm_smmu_dt_install_bypass_ste(smmu);
++
+ 	/* Reset the device */
+ 	ret = arm_smmu_device_reset(smmu);
+ 	if (ret)
 diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
-index a61c6dc63c29c..dd1432f7cb553 100644
+index f334f49c9791f..751e8b27fee9e 100644
 --- a/drivers/irqchip/Kconfig
 +++ b/drivers/irqchip/Kconfig
-@@ -413,6 +413,14 @@ config IMX_GPCV2
+@@ -412,6 +412,14 @@ config IMX_GPCV2
  	help
  	  Enables the wakeup IRQs for IMX platforms with GPCv2 block
  
@@ -107,10 +97,10 @@ index a61c6dc63c29c..dd1432f7cb553 100644
  	def_bool y if MACH_ASM9260 || ARCH_MXS
  	select IRQ_DOMAIN
 diff --git a/drivers/irqchip/Makefile b/drivers/irqchip/Makefile
-index 3de083f5484cc..b2b07a891c350 100644
+index 6a229443efe08..58c0ccfbf5183 100644
 --- a/drivers/irqchip/Makefile
 +++ b/drivers/irqchip/Makefile
-@@ -86,7 +86,8 @@ obj-$(CONFIG_MVEBU_GICP)		+= irq-mvebu-gicp.o
+@@ -85,7 +85,8 @@ obj-$(CONFIG_MVEBU_GICP)		+= irq-mvebu-gicp.o
  obj-$(CONFIG_MVEBU_ICU)			+= irq-mvebu-icu.o
  obj-$(CONFIG_MVEBU_ODMI)		+= irq-mvebu-odmi.o
  obj-$(CONFIG_MVEBU_PIC)			+= irq-mvebu-pic.o
@@ -120,12 +110,42 @@ index 3de083f5484cc..b2b07a891c350 100644
  obj-$(CONFIG_LS_EXTIRQ)			+= irq-ls-extirq.o
  obj-$(CONFIG_LS_SCFG_MSI)		+= irq-ls-scfg-msi.o
  obj-$(CONFIG_ARCH_ASPEED)		+= irq-aspeed-vic.o irq-aspeed-i2c-ic.o irq-aspeed-scu-ic.o
+diff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c
+index 6607ab58f72e6..e96fbf86ca9f9 100644
+--- a/drivers/irqchip/irq-gic-v3.c
++++ b/drivers/irqchip/irq-gic-v3.c
+@@ -2200,6 +2200,7 @@ static int __init gic_of_init(struct device_node *node, struct device_node *pare
+ 	u64 redist_stride;
+ 	u32 nr_redist_regions;
+ 	int err, i;
++	bool single_redist = false;
+ 
+ 	dist_base = gic_of_iomap(node, 0, "GICD", &res);
+ 	if (IS_ERR(dist_base)) {
+@@ -2225,6 +2226,9 @@ static int __init gic_of_init(struct device_node *node, struct device_node *pare
+ 		goto out_unmap_dist;
+ 	}
+ 
++	if (of_property_read_bool(node, "single-redist"))
++		single_redist = true;
++
+ 	for (i = 0; i < nr_redist_regions; i++) {
+ 		rdist_regs[i].redist_base = gic_of_iomap(node, 1 + i, "GICR", &res);
+ 		if (IS_ERR(rdist_regs[i].redist_base)) {
+@@ -2233,6 +2237,7 @@ static int __init gic_of_init(struct device_node *node, struct device_node *pare
+ 			goto out_unmap_rdist;
+ 		}
+ 		rdist_regs[i].phys_base = res.start;
++		rdist_regs[i].single_redist = single_redist;
+ 	}
+ 
+ 	if (of_property_read_u64(node, "redistributor-stride", &redist_stride))
 diff --git a/drivers/irqchip/irq-sky1-pdc.c b/drivers/irqchip/irq-sky1-pdc.c
 new file mode 100644
-index 0000000000000..5e53387cf7817
+index 0000000000000..ed14b3309989c
 --- /dev/null
 +++ b/drivers/irqchip/irq-sky1-pdc.c
-@@ -0,0 +1,267 @@
+@@ -0,0 +1,274 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +
 +#include <linux/of_address.h>
@@ -147,19 +167,22 @@ index 0000000000000..5e53387cf7817
 +	void __iomem            *pdc_base;
 +};
 +
-+static int pdcv1_wakeup_source_save(void)
++static int pdcv1_wakeup_source_save(void *data)
 +{
 +	return 0;
 +}
 +
-+static void pdcv1_wakeup_source_restore(void)
++static void pdcv1_wakeup_source_restore(void *data)
 +{
-+	return;
 +}
 +
-+static struct syscore_ops sky1_pdc_syscore_ops = {
++static const struct syscore_ops sky1_pdc_syscore_ops = {
 +	.suspend        = pdcv1_wakeup_source_save,
 +	.resume         = pdcv1_wakeup_source_restore,
++};
++
++static struct syscore sky1_pdc_syscore = {
++	.ops = &sky1_pdc_syscore_ops,
 +};
 +
 +static int sky1_pdc_irq_set_wake(struct irq_data *d, unsigned int on)
@@ -195,10 +218,11 @@ index 0000000000000..5e53387cf7817
 +				      unsigned int *type)
 +{
 +	if (is_of_node(fwspec->fwnode)) {
-+		if (fwspec->param_count != 3)
++		/* Accept both 3-cell and 4-cell GIC format */
++		if (fwspec->param_count < 3 || fwspec->param_count > 4)
 +			return -EINVAL;
 +
-+		/* No PPI should point to this domain */
++		/* No PPI should point to this domain (param[0] must be GIC_SPI=0) */
 +		if (fwspec->param[0] != 0)
 +			return -EINVAL;
 +
@@ -272,6 +296,8 @@ index 0000000000000..5e53387cf7817
 +	struct pdcv1_irqchip_data *cd;
 +	const struct of_device_id *id;
 +
++	pr_info("sky1_pdc: init called for %pOF, parent=%pOF\n", node, parent);
++
 +	if (!parent) {
 +		pr_err("%pOF: no parent, giving up\n", node);
 +		return -ENODEV;
@@ -304,18 +330,19 @@ index 0000000000000..5e53387cf7817
 +		return -ENOMEM;
 +	}
 +
-+	domain = irq_domain_add_hierarchy(parent_domain, 0, PDC_MAX_IRQS,
-+					node, &pdcv1_irqchip_data_domain_ops, cd);
++	domain = irq_domain_create_hierarchy(parent_domain, 0, PDC_MAX_IRQS,
++					of_fwnode_handle(node), &pdcv1_irqchip_data_domain_ops, cd);
 +	if (!domain) {
 +		iounmap(cd->pdc_base);
 +		kfree(cd);
 +		return -ENOMEM;
 +	}
-+	irq_set_default_host(domain);
++	irq_set_default_domain(domain);
 +
 +	cix_domain = domain;
++	pr_info("sky1_pdc: domain created successfully for %pOF\n", node);
 +
-+	register_syscore_ops(&sky1_pdc_syscore_ops);
++	register_syscore(&sky1_pdc_syscore);
 +
 +	/*
 +	 * Clear the OF_POPULATED flag set in of_irq_init so that
@@ -356,10 +383,10 @@ index 0000000000000..5e53387cf7817
 +		return -ENOMEM;
 +	}
 +
-+	irq_set_default_host(domain);
++	irq_set_default_domain(domain);
 +	cix_domain = domain;
 +
-+	register_syscore_ops(&sky1_pdc_syscore_ops);
++	register_syscore(&sky1_pdc_syscore);
 +
 +	return 0;
 +}
@@ -393,18 +420,45 @@ index 0000000000000..5e53387cf7817
 +MODULE_AUTHOR("Copyright 2024 Cix Technology Group Co., Ltd.");
 +MODULE_DESCRIPTION("Cix Sky1 irq pdc driver");
 +MODULE_LICENSE("GPL v2");
-diff --git a/drivers/net/ethernet/cadence/macb_main.c b/drivers/net/ethernet/cadence/macb_main.c
-index 064fccdcf6994..90050f4a5a3eb 100644
---- a/drivers/net/ethernet/cadence/macb_main.c
-+++ b/drivers/net/ethernet/cadence/macb_main.c
-@@ -5388,6 +5388,7 @@ static const struct of_device_id macb_dt_ids[] = {
- 	{ .compatible = "cdns,np4-macb", .data = &np4_config },
- 	{ .compatible = "cdns,pc302-gem", .data = &pc302gem_config },
- 	{ .compatible = "cdns,gem", .data = &pc302gem_config },
-+	{ .compatible = "cdns,sky1-gem", .data = &pc302gem_config },
- 	{ .compatible = "cdns,sam9x60-macb", .data = &at91sam9260_config },
- 	{ .compatible = "atmel,sama5d2-gem", .data = &sama5d2_config },
- 	{ .compatible = "atmel,sama5d29-gem", .data = &sama5d29_config },
--- 
-2.51.0
-
+diff --git a/drivers/perf/arm_spe_pmu.c b/drivers/perf/arm_spe_pmu.c
+index 4801115f2b540..4b8d5fffe946b 100644
+--- a/drivers/perf/arm_spe_pmu.c
++++ b/drivers/perf/arm_spe_pmu.c
+@@ -1228,6 +1228,15 @@ static void __arm_spe_pmu_dev_probe(void *info)
+ 	spe_pmu->features |= SPE_PMU_FEAT_DEV_PROBED;
+ }
+ 
++/* Check if current CPU supports SPE (for heterogeneous big.LITTLE systems) */
++static bool arm_spe_pmu_cpu_supported(void)
++{
++	u64 dfr0 = read_sysreg(id_aa64dfr0_el1);
++	int pmsver = cpuid_feature_extract_unsigned_field(dfr0,
++					ID_AA64DFR0_EL1_PMSVer_SHIFT);
++	return pmsver != 0;
++}
++
+ static void __arm_spe_pmu_reset_local(void)
+ {
+ 	/*
+@@ -1249,6 +1258,10 @@ static void __arm_spe_pmu_setup_one(void *info)
+ {
+ 	struct arm_spe_pmu *spe_pmu = info;
+ 
++	/* Skip CPUs that don't support SPE (e.g., A520 in big.LITTLE) */
++	if (!arm_spe_pmu_cpu_supported())
++		return;
++
+ 	__arm_spe_pmu_reset_local();
+ 	enable_percpu_irq(spe_pmu->irq, IRQ_TYPE_NONE);
+ }
+@@ -1257,6 +1270,10 @@ static void __arm_spe_pmu_stop_one(void *info)
+ {
+ 	struct arm_spe_pmu *spe_pmu = info;
+ 
++	/* Skip CPUs that don't support SPE */
++	if (!arm_spe_pmu_cpu_supported())
++		return;
++
+ 	disable_percpu_irq(spe_pmu->irq);
+ 	__arm_spe_pmu_reset_local();
+ }

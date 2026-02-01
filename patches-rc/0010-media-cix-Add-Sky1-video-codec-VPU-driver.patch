@@ -1,17 +1,10 @@
-From ad0b6c62f401a0bc381f77b0c4d4aa7493c29133 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
-Date: Fri, 30 Jan 2026 12:44:08 +1100
-Subject: [PATCH 74/77] media: platform: cix: Add Linlon VPU (amvx) video codec
- driver
+Date: Sun, 1 Feb 2026 01:19:36 +1100
+Subject: [PATCH] media: cix: Add Sky1 video codec (VPU) driver
 
-Add the ARM Mali Video eXtension (Linlon MVE v8) V4L2 stateful codec
-driver for the CIX Sky1 SoC. Supports hardware encode/decode for
-H.264, HEVC, VP8, VP9, AV1, JPEG, MPEG-2, MPEG-4, VC-1, and AVS/AVS2.
-
-Previously shipped as a DKMS package (sky1-vpu-dkms). The driver
-already had proper Kconfig and Kbuild files for in-tree builds.
-
-CONFIG_VIDEO_LINLON=m produces amvx.ko.
+Add CIX Sky1 video processing unit driver supporting hardware-
+accelerated video encode and decode via V4L2 mem2mem interface.
 ---
  drivers/media/platform/Kconfig                |    1 +
  drivers/media/platform/Makefile               |    1 +
@@ -140,10 +133,10 @@ CONFIG_VIDEO_LINLON=m produces amvx.ko.
  create mode 100755 drivers/media/platform/cix/mvx_seq.h
 
 diff --git a/drivers/media/platform/Kconfig b/drivers/media/platform/Kconfig
-index 9287faafdce58..049870855c28d 100644
+index 3f0b7bb68cc94..2dfc2465669cd 100644
 --- a/drivers/media/platform/Kconfig
 +++ b/drivers/media/platform/Kconfig
-@@ -69,6 +69,7 @@ source "drivers/media/platform/aspeed/Kconfig"
+@@ -70,6 +70,7 @@ source "drivers/media/platform/aspeed/Kconfig"
  source "drivers/media/platform/atmel/Kconfig"
  source "drivers/media/platform/broadcom/Kconfig"
  source "drivers/media/platform/cadence/Kconfig"
@@ -152,10 +145,10 @@ index 9287faafdce58..049870855c28d 100644
  source "drivers/media/platform/imagination/Kconfig"
  source "drivers/media/platform/intel/Kconfig"
 diff --git a/drivers/media/platform/Makefile b/drivers/media/platform/Makefile
-index 6fd7db0541c7e..875aae0fc5e6f 100644
+index 6d5f79ddfcc37..8222c1880ca04 100644
 --- a/drivers/media/platform/Makefile
 +++ b/drivers/media/platform/Makefile
-@@ -12,6 +12,7 @@ obj-y += aspeed/
+@@ -13,6 +13,7 @@ obj-y += aspeed/
  obj-y += atmel/
  obj-y += broadcom/
  obj-y += cadence/
@@ -39934,6 +39927,3 @@ index 0000000000000..3713621b65274
 +void mvx_seq_hash_stop(void *v);
 +
 +#endif /* _MVX_SEQ_H_ */
--- 
-2.51.0
-
