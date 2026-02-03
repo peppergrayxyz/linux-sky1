@@ -1,8 +1,8 @@
-From ca0c2ec1353d1f19a2b8286758b862cfcacab278 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 19:12:40 +1100
-Subject: [PATCH 26/27] arm64: dts: cix: Enable USB-C DisplayPort alt mode on
- Orion O6
+Subject: [PATCH] arm64: dts: cix: Enable USB-C DisplayPort alt mode on Orion
+ O6
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -193,6 +193,3 @@ index 4f3a0c65e0204..b26152c751e4e 100644
  			power-domains = <&smc_devpd SKY1_PD_DPU4>;
  			power-domain-names = "dpu_pd";
  			clocks = <&scmi_clk CLK_TREE_DPU4_ACLK>;
--- 
-2.51.0
-

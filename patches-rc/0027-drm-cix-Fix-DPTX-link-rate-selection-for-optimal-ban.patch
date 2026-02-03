@@ -1,8 +1,8 @@
-From 88bed0823722f7dd2c6179020358f095f7e788a8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 19:11:59 +1100
-Subject: [PATCH 27/27] drm/cix: Fix DPTX link rate selection for optimal
- bandwidth margin
+Subject: [PATCH] drm/cix: Fix DPTX link rate selection for optimal bandwidth
+ margin
 
 Replace the minimum-rate link selection algorithm with one that ensures
 adequate bandwidth margin. The old code picked the lowest link rate
@@ -113,6 +113,3 @@ index 53954a5bed0ce..2b9e4a939eaa1 100644
  
  	ret = trilin_dp_mode_configure(dp, adjusted_mode->clock, link_rate_bw_code, bpp, false);
  	if (ret < 0)
--- 
-2.51.0
-
