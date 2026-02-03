@@ -1,7 +1,7 @@
 From d22d32bda608ed95615f929840b2e61e0b22ba84 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 23:21:49 +1100
-Subject: [PATCH 16/24] arm64: dts: cix: Add GPU OPP table for Sky1
+Subject: [PATCH 16/27] arm64: dts: cix: Add GPU OPP table for Sky1
 
 Add operating-points-v2 table documenting the GPU frequency levels from
 the CIX P1 GPU Development Guide: 350, 600, 800, and 1000 MHz.

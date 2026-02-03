@@ -1,7 +1,7 @@
 From b1921b6ff68adcdc816742ac4b8f3bb5236be7f0 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 15:24:17 +1100
-Subject: [PATCH 24/24] arm64: dts: cix: Add board-specific compatible string
+Subject: [PATCH 24/27] arm64: dts: cix: Add board-specific compatible string
  to Orange Pi 6 Plus
 
 The OPi6+ DTS only had the generic "cix,sky1" compatible, making it

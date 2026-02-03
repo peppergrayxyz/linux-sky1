@@ -1,7 +1,7 @@
 From 3b5c585a0380962d84b76b66382c57ccb82f2767 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 01:18:45 +1100
-Subject: [PATCH 08/24] net: Add CIX Sky1 networking drivers
+Subject: [PATCH 08/27] net: Add CIX Sky1 networking drivers
 
 Add Realtek r8125 (2.5GbE) and r8126 (5GbE) vendor drivers for the
 onboard Ethernet controllers on the Radxa Orion O6. Add Cadence GMAC

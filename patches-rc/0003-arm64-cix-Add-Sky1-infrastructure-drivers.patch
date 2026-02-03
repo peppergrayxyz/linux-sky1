@@ -1,7 +1,7 @@
 From 900e854bee61076fdc11ff0c875aa0982e3baef8 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 00:39:45 +1100
-Subject: [PATCH 03/24] arm64: cix: Add Sky1 infrastructure drivers
+Subject: [PATCH 03/27] arm64: cix: Add Sky1 infrastructure drivers
 
 Add pinctrl, GPIO, reset controllers, clock (AUDSS), PWM, watchdog,
 hwspinlock, NVMEM, SoC info, DDR low-power, and bus performance drivers

@@ -1,7 +1,7 @@
 From 14298bf649c0d801bae1be5b1dd8104256155100 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:39 +1100
-Subject: [PATCH 13/24] scripts: Add Sky1 kernel development tools
+Subject: [PATCH 13/27] scripts: Add Sky1 kernel development tools
 
 ---
  README.md                      |  76 ++++++++

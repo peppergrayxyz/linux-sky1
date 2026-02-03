@@ -22,3 +22,6 @@
 0022-drm-cix-Add-DRM-bridge-chain-for-PS185-DP-to-HDMI-on.patch
 0023-drm-panthor-Rate-limit-SCMI-perf-domain-DVFS-request.patch
 0024-arm64-dts-cix-Add-board-specific-compatible-string-t.patch
+0025-Update-README-24-patches-add-individual-patch-list-O.patch
+0026-arm64-dts-cix-Enable-USB-C-DisplayPort-alt-mode-on-O.patch
+0027-drm-cix-Fix-DPTX-link-rate-selection-for-optimal-ban.patch
