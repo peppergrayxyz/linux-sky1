@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
-Date: Tue, 3 Feb 2026 11:03:21 +1100
+Date: Tue, 3 Feb 2026 13:04:17 +1100
 Subject: [PATCH] drm/cix: Fix compiler warnings in DPTX display driver
 
 Fix all compiler warnings in the Trilinear DPTX module:
@@ -9,8 +9,10 @@ Fix all compiler warnings in the Trilinear DPTX module:
   trilin_dp_panel_hw_cfg, trilin_dp_encoder_atomic_check,
   tmr_hdcp_init, tmr_hdcp_set_us, tmr_hdcp_enable,
   tmr_hdcp_interrupt, tmr_hdcp_autoreload)
-- Remove unused variables (ret in trilin_link_rate_update,
-  pdata in trilin_dptx_cix_bind, phy in trilin_dp_host_init)
+- Remove unused variables (pdata in trilin_dptx_cix_bind,
+  phy in trilin_dp_host_init)
+- Drop unchecked return value assignment in
+  trilin_link_rate_update
 - Remove unreachable err_out label and dead cleanup code
   in trilin_dp_host_init
 - Add missing header includes for function prototypes
@@ -20,11 +22,11 @@ Fix all compiler warnings in the Trilinear DPTX module:
 ---
  drivers/gpu/drm/cix/dptx/hdcp/cix_hdcp_ioctl.c |  1 +
  drivers/gpu/drm/cix/dptx/hdcp/hdcp2_tx_tmr.c   | 11 ++++++-----
- drivers/gpu/drm/cix/dptx/trilin_dptx.c         | 10 ++--------
+ drivers/gpu/drm/cix/dptx/trilin_dptx.c         | 12 +++---------
  drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c     | 11 ++---------
  drivers/gpu/drm/cix/dptx/trilin_drm.c          |  2 +-
  drivers/gpu/drm/cix/dptx/trilin_edp_phy.c      |  2 +-
- 6 files changed, 13 insertions(+), 24 deletions(-)
+ 6 files changed, 14 insertions(+), 25 deletions(-)
 
 diff --git a/drivers/gpu/drm/cix/dptx/hdcp/cix_hdcp_ioctl.c b/drivers/gpu/drm/cix/dptx/hdcp/cix_hdcp_ioctl.c
 index afc975e083b55..fa7d763744b6d 100644
@@ -96,7 +98,7 @@ index 77e01f153f8b8..2a5d6c3f92bfc 100644
  	uint32_t tmr_val = readl(addr);
  
 diff --git a/drivers/gpu/drm/cix/dptx/trilin_dptx.c b/drivers/gpu/drm/cix/dptx/trilin_dptx.c
-index f007dea70d814..e87b97c5a757b 100644
+index f007dea70d814..dfd5b3dd49cc4 100644
 --- a/drivers/gpu/drm/cix/dptx/trilin_dptx.c
 +++ b/drivers/gpu/drm/cix/dptx/trilin_dptx.c
 @@ -114,7 +114,6 @@ static void trilin_link_rate_update(struct trilin_dp *dp, u32 reg)
@@ -107,6 +109,15 @@ index f007dea70d814..e87b97c5a757b 100644
  
  	if (IS_ERR_OR_NULL(phy->base)) {
  		lanes = max_lanes;
+@@ -130,7 +129,7 @@ static void trilin_link_rate_update(struct trilin_dp *dp, u32 reg)
+ 	opts.dp.set_rate = 1;
+ 
+ 	if (phy->phy_ops)
+-		ret = phy->phy_ops->configure(dp, &opts);
++		phy->phy_ops->configure(dp, &opts);
+ }
+ 
+ /**
 @@ -688,7 +687,7 @@ static int trilin_dp_train(struct trilin_dp *dp)
   *
   * Train the link by downshifting the link rate if training is not successful.
