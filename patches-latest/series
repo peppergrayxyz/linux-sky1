@@ -10,10 +10,10 @@
 0010-media-cix-Add-Sky1-video-codec-VPU-driver.patch
 0011-irqchip-iommu-perf-Add-CIX-Sky1-support.patch
 0012-arm64-cix-Add-Sky1-thermal-PWM-watchdog-and-misc-dri.patch
-0013-scripts-Add-Sky1-kernel-development-tools.patch
-0014-net-realtek-fix-shutdown-panic-in-r8125-r8126-get_st.patch
-0015-drm-panthor-Add-SCMI-perf-domain-support-for-GPU-DVF.patch
-0016-arm64-dts-cix-Add-GPU-OPP-table-for-Sky1.patch
+0013-net-realtek-fix-shutdown-panic-in-r8125-r8126-get_st.patch
+0014-drm-panthor-Add-SCMI-perf-domain-support-for-GPU-DVF.patch
+0015-arm64-dts-cix-Add-GPU-OPP-table-for-Sky1.patch
+0016-scripts-Add-Sky1-kernel-development-tools.patch
 0017-drm-panthor-Fix-SCMI-perf-domain-DVFS-to-use-existin.patch
 0018-arm64-dts-cix-Fix-WiFi-RFKill-GPIO-on-Orion-O6-and-O.patch
 0019-arm64-dts-cix-Add-GPIO-LEDs-and-fix-pinctrl-on-Orion.patch
@@ -34,10 +34,10 @@
 0034-arm64-dts-cix-Add-dma-coherent-to-SMMU-nodes.patch
 0035-arm64-dts-cix-Add-boot-active-sids-to-PCIe-SMMU-for-.patch
 0036-arm64-dts-cix-Add-msi-cells-to-ITS-node.patch
-0037-update-dev-boot-fix-DTB-sort-key-to-use-full-path.patch
-0038-arm64-dts-cix-Add-missing-DPU-SIDs-and-enable-GOP-RM.patch
-0039-arm64-dts-cix-Enable-PCIe-SMMU-on-Orion-O6.patch
-0040-iommu-arm-smmu-v3-Add-per-SID-event-auto-suppression.patch
+0037-arm64-dts-cix-Add-missing-DPU-SIDs-and-enable-GOP-RM.patch
+0038-arm64-dts-cix-Enable-PCIe-SMMU-on-Orion-O6.patch
+0039-iommu-arm-smmu-v3-Add-per-SID-event-auto-suppression.patch
+0040-update-dev-boot-fix-DTB-sort-key-to-use-full-path.patch
 0041-update-dev-boot-handle-.rN-revision-suffix-in-kernel.patch
 0042-net-realtek-r8125-r8126-Add-IRQ-affinity-hint-for-pe.patch
 0043-PCI-cadence-sky1-Add-ASPM-control-and-wakeup-improve.patch
@@ -105,4 +105,5 @@
 0105-PCI-cadence-sky1-skip-regulator-lookup-under-ACPI.patch
 0106-clk-cix-sky1-acpi-use-CLKT-consumer-reference-for-cl.patch
 0107-audio-cix-sky1-enable-HDMI-DisplayPort-audio-output-.patch
-0108-scripts-kernel-track-status-handle-major-version-bum.patch
+0108-reset-restore-lookup-table-API-for-ACPI-reset-consum.patch
+0109-scripts-kernel-track-status-handle-major-version-bum.patch
