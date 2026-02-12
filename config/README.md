@@ -95,6 +95,7 @@ No vendor-specific thermal drivers are needed.
 | `USB_CDNSP_HOST` | bool | Host mode |
 | `USB_CDNSP_GADGET` | bool | Gadget mode (OTG) |
 | `USB_CDNSP_SKY1` | bool | Sky1 platform glue |
+| `USB_UAS` | module | USB Attached SCSI (high-performance USB storage) |
 | `TYPEC` | bool | USB Type-C support |
 | `TYPEC_RTS5453` | bool | Realtek PD controller (Orion O6) |
 
