@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 73c2183159cdba03a028a4d327d635c1bc4b029a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 13:04:41 +1100
-Subject: [PATCH] drm/cix: Add DRM bridge chain for PS185 DP-to-HDMI on Orange
- Pi 6 Plus
+Subject: [PATCH 022/118] drm/cix: Add DRM bridge chain for PS185 DP-to-HDMI on
+ Orange Pi 6 Plus
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

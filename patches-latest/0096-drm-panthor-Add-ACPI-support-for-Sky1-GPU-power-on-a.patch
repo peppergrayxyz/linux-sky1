@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 9adcfa1042fac5f3d8b31d414955ee287939dfa4 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 14:23:16 +1100
-Subject: [PATCH] drm/panthor: Add ACPI support for Sky1 GPU power-on and DVFS
+Subject: [PATCH 096/118] drm/panthor: Add ACPI support for Sky1 GPU power-on
+ and DVFS
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

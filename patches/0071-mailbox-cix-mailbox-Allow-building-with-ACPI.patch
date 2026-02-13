@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 7068907be92fdd390b943ca1e37ebcda6dead2aa Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 17:43:07 +1100
-Subject: [PATCH] mailbox: cix-mailbox: Allow building with ACPI
+Subject: [PATCH 071/117] mailbox: cix-mailbox: Allow building with ACPI
 
 The CIX mailbox driver already has an ACPI match table for CIXHA001 but
 Kconfig has depends on OF which prevents it from being selected in

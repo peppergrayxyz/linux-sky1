@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 163c73b9aa13168bda1e7a2a5445a8f73ac5026e Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 22:50:03 +1100
-Subject: [PATCH] usb: cdns3: Skip destructive hardware reinit under ACPI boot
+Subject: [PATCH 086/118] usb: cdns3: Skip destructive hardware reinit under
+ ACPI boot
 
 Under ACPI, firmware has already initialized USB controller clocks,
 resets, and mode configuration.  The xHCI register space is driven by

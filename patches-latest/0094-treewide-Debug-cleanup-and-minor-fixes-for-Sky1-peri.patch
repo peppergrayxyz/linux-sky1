@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 56fba9c32322c27031e41b9c7fe36592b4116fc0 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 14:22:34 +1100
-Subject: [PATCH] treewide: Debug cleanup and minor fixes for Sky1 peripherals
+Subject: [PATCH 094/118] treewide: Debug cleanup and minor fixes for Sky1
+ peripherals
 
 arm-dma350:
 - Convert probe dev_info messages to dev_dbg

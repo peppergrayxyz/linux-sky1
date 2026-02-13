@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From d4832ed3225468141538d218440e167af6fb55bc Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 00:02:58 +1100
-Subject: [PATCH] pwm: sky1: Remove clock auto-enable and probe reset
+Subject: [PATCH 059/117] pwm: sky1: Remove clock auto-enable and probe reset
 
 Remove clock enable/disable toggling during get_state() and apply()
 operations. Clocks are now kept enabled after probe, simplifying the

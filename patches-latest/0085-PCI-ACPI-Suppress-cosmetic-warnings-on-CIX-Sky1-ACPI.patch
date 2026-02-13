@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 5954d1ab421ab413c643eacc2f849724cd9d0e52 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 22:11:07 +1100
-Subject: [PATCH] PCI: ACPI: Suppress cosmetic warnings on CIX Sky1 ACPI boot
+Subject: [PATCH 085/118] PCI: ACPI: Suppress cosmetic warnings on CIX Sky1
+ ACPI boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

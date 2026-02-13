@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 1ae33e8e4374a275e0e2591fcfb08a5f0019cfa6 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:37 +1100
-Subject: [PATCH] misc: armchina-npu: Add Zhouyi NPU driver for CIX Sky1
+Subject: [PATCH 009/117] misc: armchina-npu: Add Zhouyi NPU driver for CIX
+ Sky1
 
 ---
  drivers/misc/Kconfig                          |    1 +

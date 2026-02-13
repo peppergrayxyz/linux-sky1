@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From d780eba05957532740ff3a1b01af881a6deb9c42 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 10 Feb 2026 21:18:47 +1100
-Subject: [PATCH] xhci: plat: auto-detect USB3 LPM support for ACPI platform
- controllers
+Subject: [PATCH 104/118] xhci: plat: auto-detect USB3 LPM support for ACPI
+ platform controllers
 
 Under DT, USB3 LPM (Link Power Management) is enabled by the
 usb3-lpm-capable property.  ACPI platform controllers lack this

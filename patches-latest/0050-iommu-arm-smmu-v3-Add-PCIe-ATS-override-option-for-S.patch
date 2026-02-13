@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From ca711e2da40a7e5c0f8f633dd60cda6c7db5f200 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:07:36 +1100
-Subject: [PATCH] iommu/arm-smmu-v3: Add PCIe ATS override option for Sky1
+Subject: [PATCH 050/118] iommu/arm-smmu-v3: Add PCIe ATS override option for
+ Sky1
 
 Sky1's PCIe controller has a DTI (Distributed Translation Interface)
 ATS Master that can send translated TLP messages to the SMMU even when

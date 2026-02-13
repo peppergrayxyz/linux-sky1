@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 4e887e65ba9d00b7dfec6bf052d1427916a301ea Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 17:09:42 +1100
-Subject: [PATCH] pmdomain: add fwnode-based genpd provider for ACPI power
- domain consumers
+Subject: [PATCH 101/117] pmdomain: add fwnode-based genpd provider for ACPI
+ power domain consumers
 
 The generic power domain (genpd) subsystem only supports OF-based
 provider registration.  Under ACPI, consumers that reference power

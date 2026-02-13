@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 644718f45c00ff4c223128f2b9d43ae58256a378 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 22:38:06 +1100
-Subject: [PATCH] drm: cix: dptx: Improve PSR implementation
+Subject: [PATCH 047/117] drm: cix: dptx: Improve PSR implementation
 
 Port PSR improvements from CIX 6.6.89:
 

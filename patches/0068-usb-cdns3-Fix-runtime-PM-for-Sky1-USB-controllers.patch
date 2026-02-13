@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 6db798ab4c125a2d76fae8f9aadae5403b0e2822 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 13:45:01 +1100
-Subject: [PATCH] usb: cdns3: Fix runtime PM for Sky1 USB controllers
+Subject: [PATCH 068/117] usb: cdns3: Fix runtime PM for Sky1 USB controllers
 
 The unconditional CDNS3_DEFAULT_PM_RUNTIME_ALLOW quirk caused USB-A
 (host-only) controllers to enter D3 where they cannot detect hot-plug

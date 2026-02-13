@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 37165912dbd6cfeb4a9618863cabaa7f4d44d0f7 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 02:21:54 +1100
-Subject: [PATCH] update-dev-boot: sync kernel and DTB files to EFI partition
+Subject: [PATCH 029/118] update-dev-boot: sync kernel and DTB files to EFI
+ partition
 
 When kernels are installed via APT, the files land in /boot and
 /usr/lib/linux-image-* but the EFI partition copies go stale.

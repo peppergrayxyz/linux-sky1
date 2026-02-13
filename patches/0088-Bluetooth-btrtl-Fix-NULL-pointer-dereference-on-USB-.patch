@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 2006f7a2fa865be3e0b9fcf49cd4dbb490505668 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 22:50:25 +1100
-Subject: [PATCH] Bluetooth: btrtl: Fix NULL pointer dereference on USB
+Subject: [PATCH 088/117] Bluetooth: btrtl: Fix NULL pointer dereference on USB
  disconnect
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

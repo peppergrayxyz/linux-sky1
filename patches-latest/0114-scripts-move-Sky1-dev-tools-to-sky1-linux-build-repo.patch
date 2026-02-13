@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 344ce61f2aecff422b1d01850054f18a301344ac Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 13:08:38 +1100
-Subject: [PATCH] scripts: move Sky1 dev tools to sky1-linux-build repo
+Subject: [PATCH 114/118] scripts: move Sky1 dev tools to sky1-linux-build repo
 
 Move build-install.py, build-test.py, kernel-track-status.py,
 update-dev-boot.py, reconcile-configs.py, and sky1_lib.py to the

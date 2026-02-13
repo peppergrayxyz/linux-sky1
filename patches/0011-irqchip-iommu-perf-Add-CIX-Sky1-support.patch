@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 50c99f81192d8867b8a5e647144ce6df0b00b86b Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:38 +1100
-Subject: [PATCH] irqchip: iommu: perf: Add CIX Sky1 support
+Subject: [PATCH 011/117] irqchip: iommu: perf: Add CIX Sky1 support
 
 ---
  drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |  40 +++

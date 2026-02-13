@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From c6b05d8b28965a0ceb977fe59000a7660c62c18f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:51 +1100
-Subject: [PATCH] clk: cix: Add ACPI support for sky1-audss clock and reset
+Subject: [PATCH 079/118] clk: cix: Add ACPI support for sky1-audss clock and
+ reset
 
 Three changes for audio subsystem ACPI boot:
 

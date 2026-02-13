@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 897f8c6b4b660d62cf94b0a7e9362c1a4fb03761 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:12:38 +1100
-Subject: [PATCH] net: realtek: r8125/r8126: Add missing RSS object files to
- Makefile
+Subject: [PATCH 066/117] net: realtek: r8125/r8126: Add missing RSS object
+ files to Makefile
 
 Both drivers enable ENABLE_RSS_SUPPORT in ccflags but don't include the
 RSS object files in the module. This causes build failures with undefined

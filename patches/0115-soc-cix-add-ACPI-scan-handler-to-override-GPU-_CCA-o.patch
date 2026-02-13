@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 2dde08e6058d31b0c7da2e6937e94f7b8140621a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 13 Feb 2026 16:38:33 +1100
-Subject: [PATCH] soc: cix: add ACPI scan handler to override GPU _CCA on Sky1
+Subject: [PATCH 115/117] soc: cix: add ACPI scan handler to override GPU _CCA
+ on Sky1
 
 The Sky1 DSDT declares the GPU (CIXH5000) with _CCA=1 (coherent), but
 the SoC was designed for non-coherent GPU operation. The GPU shares

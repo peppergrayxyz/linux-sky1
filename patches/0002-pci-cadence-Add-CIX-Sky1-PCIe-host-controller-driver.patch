@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From f368f2c516f8632528dd1d0ed34b8ab3c574c88e Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:35 +1100
-Subject: [PATCH] pci: cadence: Add CIX Sky1 PCIe host controller driver
+Subject: [PATCH 002/117] pci: cadence: Add CIX Sky1 PCIe host controller
+ driver
 
 ---
  drivers/pci/controller/cadence/Kconfig        |   11 +

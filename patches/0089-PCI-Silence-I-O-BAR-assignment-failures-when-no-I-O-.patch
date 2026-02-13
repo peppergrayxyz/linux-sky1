@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From a7bad3fe0f66c5aa9fd232384f7c385317c054c9 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 22:55:52 +1100
-Subject: [PATCH] PCI: Silence I/O BAR assignment failures when no I/O windows
- exist
+Subject: [PATCH 089/117] PCI: Silence I/O BAR assignment failures when no I/O
+ windows exist
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

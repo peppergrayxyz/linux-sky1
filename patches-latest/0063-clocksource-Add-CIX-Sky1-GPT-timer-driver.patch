@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 347bc2a1d27999de11f9680f9d5cc6c3a86bd9c0 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:06:31 +1100
-Subject: [PATCH] clocksource: Add CIX Sky1 GPT timer driver
+Subject: [PATCH 063/118] clocksource: Add CIX Sky1 GPT timer driver
 
 Add driver for the CIX Sky1 General Purpose Timer which provides both
 clocksource and clock event functionality.

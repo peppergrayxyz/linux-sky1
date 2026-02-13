@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 69e12db4dc91930df7a17fbfcdce634dbbab080f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:08 +1100
-Subject: [PATCH] mailbox: Add ACPI fwnode support for channel lookup
+Subject: [PATCH 075/117] mailbox: Add ACPI fwnode support for channel lookup
 
 Under ACPI, provider devices lack #mbox-cells properties, so skip the
 nargs_prop lookup and auto-detect integer arguments following each

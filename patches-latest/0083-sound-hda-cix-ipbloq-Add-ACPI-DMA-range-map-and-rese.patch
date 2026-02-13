@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 8149620077d86e546188c3364b1adf55ffbacc94 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 21:21:29 +1100
-Subject: [PATCH] sound: hda: cix-ipbloq: Add ACPI DMA range map and reserved
- memory support
+Subject: [PATCH 083/118] sound: hda: cix-ipbloq: Add ACPI DMA range map and
+ reserved memory support
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

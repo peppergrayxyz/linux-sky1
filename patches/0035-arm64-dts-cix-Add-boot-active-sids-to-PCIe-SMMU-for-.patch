@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 18b1e26c143841d7903512cc9ee2cec250300c23 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 20:08:02 +1100
-Subject: [PATCH] arm64: dts: cix: Add boot-active-sids to PCIe SMMU for bypass
+Subject: [PATCH 035/117] arm64: dts: cix: Add boot-active-sids to PCIe SMMU
+ for bypass
 
 When smmu_pciehub is enabled, the driver initializes all stream table
 entries to abort mode. PCIe devices that issue DMA before their IOMMU

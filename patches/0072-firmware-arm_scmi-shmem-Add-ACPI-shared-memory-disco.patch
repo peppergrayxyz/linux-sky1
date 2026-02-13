@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 9891819c4e6429cddfebda8d9d65ffe5d61b8733 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 17:46:12 +1100
-Subject: [PATCH] firmware: arm_scmi: shmem: Add ACPI shared memory discovery
+Subject: [PATCH 072/117] firmware: arm_scmi: shmem: Add ACPI shared memory
+ discovery
 
 shmem_setup_iomap() uses of_parse_phandle() to find shared memory nodes,
 which only works with Device Tree. In ACPI mode, the SCMI device's _DSD

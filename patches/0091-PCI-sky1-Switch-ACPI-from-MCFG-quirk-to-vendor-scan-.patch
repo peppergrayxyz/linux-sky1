@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 309f7d05dad81d431600d0180f0538382a56233b Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 8 Feb 2026 21:44:46 +1100
-Subject: [PATCH] PCI: sky1: Switch ACPI from MCFG quirk to vendor scan handler
- approach
+Subject: [PATCH 091/117] PCI: sky1: Switch ACPI from MCFG quirk to vendor scan
+ handler approach
 
 Replace the MCFG quirk + companion driver approach with the vendor
 kernel's pattern: block PNP0A08 root bridges with an ACPI scan handler

@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From fc375a518b91a3241dfb6f3b7b4a8fa0af4c412c Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 12:43:33 +1100
-Subject: [PATCH] soc: cix: add ACPI USB scan handler to block PNP0D10
+Subject: [PATCH 110/118] soc: cix: add ACPI USB scan handler to block PNP0D10
 
 On CIX Sky1, USB controllers need the vendor driver chain
 (cdnsp-sky1 wrapper + cdnsp-plat controller) for proper

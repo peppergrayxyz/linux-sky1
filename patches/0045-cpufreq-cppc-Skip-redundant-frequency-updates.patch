@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From fa17c5cdca8d1f16151df50cf9a00e45f50fb469 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:49:45 +1100
-Subject: [PATCH] cpufreq: cppc: Skip redundant frequency updates
+Subject: [PATCH 045/117] cpufreq: cppc: Skip redundant frequency updates
 
 Add an early return in cppc_cpufreq_set_target() when the requested
 performance level is already set. This avoids unnecessary CPPC mailbox

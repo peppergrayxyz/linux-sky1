@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0d8e27b7c8c57f2dbb00e29cad5130a35d2cd8c6 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 14:08:37 +1100
-Subject: [PATCH] drm/panthor: Rate-limit SCMI perf domain DVFS requests
+Subject: [PATCH 023/118] drm/panthor: Rate-limit SCMI perf domain DVFS
+ requests
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

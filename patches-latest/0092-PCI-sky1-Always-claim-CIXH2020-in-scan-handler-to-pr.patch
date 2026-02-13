@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From f2e6180df253f4b6f5a7eb2488c215e67e30791d Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 8 Feb 2026 22:05:41 +1100
-Subject: [PATCH] PCI: sky1: Always claim CIXH2020 in scan handler to prevent
- fallback
+Subject: [PATCH 092/118] PCI: sky1: Always claim CIXH2020 in scan handler to
+ prevent fallback
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

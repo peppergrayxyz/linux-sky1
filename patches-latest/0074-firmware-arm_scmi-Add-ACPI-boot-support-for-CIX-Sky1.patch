@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 36c3c39fb97da95a3f945c352f8c2409f563293a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:00 +1100
-Subject: [PATCH] firmware: arm_scmi: Add ACPI boot support for CIX Sky1
+Subject: [PATCH 074/118] firmware: arm_scmi: Add ACPI boot support for CIX
+ Sky1
 
 Enable SCMI firmware communication under ACPI boot on CIX Sky1 SoCs.
 

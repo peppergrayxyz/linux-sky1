@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0d094414f14b6b8c3c0ab83f2001d686a15f7947 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:29 +1100
-Subject: [PATCH] soc: cix: Add ACPI resource lookup driver
+Subject: [PATCH 077/118] soc: cix: Add ACPI resource lookup driver
 
 Add driver for CIX ACPI device CIXA1019 that processes custom DSDT
 tables to bridge the firmware with Linux kernel resource frameworks:

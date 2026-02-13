@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 35e174f34af4d52df6c33199983cd1a37d815922 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 18:47:31 +1100
-Subject: [PATCH] arm64: dts: cix: Set O6N DP PHY to pure DisplayPort mode
+Subject: [PATCH 032/118] arm64: dts: cix: Set O6N DP PHY to pure DisplayPort
+ mode
 
 Set usbc_phy3 default_conf to UDPHY_MODE_DP (0x02) on Orion O6N.
 This port is a dedicated DP output, not USB-C combo, so the PHY

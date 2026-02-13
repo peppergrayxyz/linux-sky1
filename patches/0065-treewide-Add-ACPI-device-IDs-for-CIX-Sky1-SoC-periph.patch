@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From e6fab348c4acb9047a559418f00a85737c503b4a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:06:53 +1100
-Subject: [PATCH] treewide: Add ACPI device IDs for CIX Sky1 SoC peripherals
+Subject: [PATCH 065/117] treewide: Add ACPI device IDs for CIX Sky1 SoC
+ peripherals
 
 Add ACPI device IDs to existing drivers to support ACPI enumeration
 on CIX Sky1 SoC systems:

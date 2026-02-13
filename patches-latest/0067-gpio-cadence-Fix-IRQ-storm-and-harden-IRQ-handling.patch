@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From a1b88790c99fc2ac44063d0e2db4942ab5b4c022 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 13:44:50 +1100
-Subject: [PATCH] gpio: cadence: Fix IRQ storm and harden IRQ handling
+Subject: [PATCH 067/118] gpio: cadence: Fix IRQ storm and harden IRQ handling
 
 Fix 6 issues in the Cadence GPIO IRQ support added in a8e7200785d82:
 

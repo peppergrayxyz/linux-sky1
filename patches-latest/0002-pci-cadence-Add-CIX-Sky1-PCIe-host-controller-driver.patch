@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 37bae0ef0b5c7f37a2610be8b81d31c6082685a5 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 00:38:00 +1100
-Subject: [PATCH] pci: cadence: Add CIX Sky1 PCIe host controller driver
+Subject: [PATCH 002/118] pci: cadence: Add CIX Sky1 PCIe host controller
+ driver
 
 Add full-featured PCIe host controller for CIX Sky1 SoC including
 multi-instance support with shared PHY coordination, AER error handling,

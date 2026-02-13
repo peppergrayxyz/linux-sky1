@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 1f37551950bb8fbb8e214005a42ad4cd3111e4a0 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:37 +1100
-Subject: [PATCH] net: Add CIX Sky1 networking drivers
+Subject: [PATCH 008/117] net: Add CIX Sky1 networking drivers
 
 ---
  drivers/net/ethernet/cadence/macb_main.c      |     1 +

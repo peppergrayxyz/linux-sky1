@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 7d412084569513e6cd71669516b7e817e3f40098 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 01:24:42 +1100
-Subject: [PATCH] arm64: cix: Add Sky1 thermal, PWM, watchdog, and misc drivers
+Subject: [PATCH 012/118] arm64: cix: Add Sky1 thermal, PWM, watchdog, and misc
+ drivers
 
 Add Sky1 PWM controller driver, watchdog timer driver, and CPU IPA
 thermal driver. Add topology_update_freq_ref() so schedutil sees

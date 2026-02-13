@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 39b816e30c621a50a89dfa30d67c1aa24134ca82 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:18 +1100
-Subject: [PATCH] clk: Add ACPI clock infrastructure for CIX Sky1
+Subject: [PATCH 076/117] clk: Add ACPI clock infrastructure for CIX Sky1
 
 Add two components for ACPI clock support on CIX Sky1 SoCs:
 

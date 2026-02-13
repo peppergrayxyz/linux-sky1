@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From c109d9a317926dc190a96ce171826504538dae5c Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:07:44 +1100
-Subject: [PATCH] PCI: Add ASPM quirks for Phison and Kingston NVMe drives
+Subject: [PATCH 051/118] PCI: Add ASPM quirks for Phison and Kingston NVMe
+ drives
 
 Some Phison E13T (1987:5013) and Kingston (2646:501d) NVMe drives
 experience link instability when ASPM L0s/L1 is enabled. Disable

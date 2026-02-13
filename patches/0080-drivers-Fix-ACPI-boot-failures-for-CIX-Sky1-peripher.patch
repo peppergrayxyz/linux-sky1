@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 44eeaf8c6213832ff521adfd5fbf0e20b9f9fcc5 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:17:06 +1100
-Subject: [PATCH] drivers: Fix ACPI boot failures for CIX Sky1 peripherals
+Subject: [PATCH 080/117] drivers: Fix ACPI boot failures for CIX Sky1
+ peripherals
 
 Fix six drivers that fail under ACPI boot on CIX Sky1 SoCs:
 

@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 60c006b92ef6cbb8661a937d96faaa0ba577a271 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 21:33:02 +1100
-Subject: [PATCH] pstore: ramoops: Convert to device_property API for ACPI
- support
+Subject: [PATCH 084/118] pstore: ramoops: Convert to device_property API for
+ ACPI support
 
 Replace DT-specific of_property_read_u32/bool with the generic
 device_property_read_u32/bool API, allowing ramoops to probe from

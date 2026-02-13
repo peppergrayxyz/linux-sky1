@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 7299af39f29fe220ee5c98a7699ef8e69c75472f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 01:20:21 +1100
-Subject: [PATCH] irqchip: iommu: perf: Add CIX Sky1 support
+Subject: [PATCH 011/118] irqchip: iommu: perf: Add CIX Sky1 support
 
 Add Sky1 Power Domain Controller (PDC) wakeup interrupt driver.
 Add GIC-v3 single-redistributor topology support for Sky1. Add

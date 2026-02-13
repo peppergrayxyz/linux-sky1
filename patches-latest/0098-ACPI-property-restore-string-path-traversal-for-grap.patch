@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 4a53eae7e40b6fb021e4ad6c8c3f5db994643643 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 16:02:05 +1100
-Subject: [PATCH] ACPI: property: restore string-path traversal for graph
- references
+Subject: [PATCH 098/118] ACPI: property: restore string-path traversal for
+ graph references
 
 ACPI graph references encode the path to a remote endpoint as:
 Package { DEV, "port@N", "endpoint@N" }

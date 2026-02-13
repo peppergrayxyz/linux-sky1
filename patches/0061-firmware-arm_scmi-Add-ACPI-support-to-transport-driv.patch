@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From cfd76b318f5b30e1e2ce3ed9fa77bf70ca7e2056 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:06:16 +1100
-Subject: [PATCH] firmware: arm_scmi: Add ACPI support to transport driver
- macro
+Subject: [PATCH 061/117] firmware: arm_scmi: Add ACPI support to transport
+ driver macro
 
 Extend DEFINE_SCMI_TRANSPORT_DRIVER macro to accept an ACPI match table
 parameter, allowing SCMI transports to be enumerated via ACPI in addition

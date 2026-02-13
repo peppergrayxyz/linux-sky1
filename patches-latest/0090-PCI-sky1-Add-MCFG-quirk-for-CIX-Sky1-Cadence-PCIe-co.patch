@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 336ac1020ccc0242d6998136aeb8909543d72db2 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 8 Feb 2026 13:10:25 +1100
-Subject: [PATCH] PCI: sky1: Add MCFG quirk for CIX Sky1 Cadence PCIe
+Subject: [PATCH 090/118] PCI: sky1: Add MCFG quirk for CIX Sky1 Cadence PCIe
  controllers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

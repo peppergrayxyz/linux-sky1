@@ -14,8 +14,8 @@ All notable changes to the Sky1 kernel patch set.
 - drm: linlon-dp: DPU render node removed (conflicted with Panthor GPU), fbdev always enabled, pm_restore uses device_property API for ACPI, reset controls acquired in ACPI parse path
 
 ### Notes
-- The previous NC memattr workaround (forcing all GPU memory non-cacheable) is superseded by ACE-Lite enablement. With ACE-Lite, GPU write-back data is visible to the non-snooping DPU via the SLC convergence point, so NC is no longer needed.
-- LTS: 118 patches (up from 114), Latest: 119 patches (up from 115)
+- ACE-Lite alone is not sufficient to prevent display corruption — GPU L2 may not evict to SLC in time for the DPU. NC memattr is still forced as a safety fallback when no IOMMU is present.
+- LTS: 117 patches (up from 114), Latest: 118 patches (up from 115)
 
 ## [6.18.10-1] - 2026-02-12
 

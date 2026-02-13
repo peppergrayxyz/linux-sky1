@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 19d613d0f988dd8607adf6eda5f417f4491e3813 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 12:43:44 +1100
-Subject: [PATCH] usb: cdnsp: add ACPI device matching and PHY reference
- resolution
+Subject: [PATCH 110/117] usb: cdnsp: add ACPI device matching and PHY
+ reference resolution
 
 Add CIXH2031 ACPI device ID to cdnsp-plat so the Cadence USBSSP
 controller probes under ACPI boot.

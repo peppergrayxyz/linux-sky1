@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 651d512fe4f50c9cd4d438de4f6adc56d904b18a Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 2 Feb 2026 01:30:11 +1100
-Subject: [PATCH] drm/panthor: Fix SCMI perf domain DVFS to use existing
- virtual device
+Subject: [PATCH 017/117] drm/panthor: Fix SCMI perf domain DVFS to use
+ existing virtual device
 
 panthor_devfreq_scmi_init() was calling dev_pm_domain_attach_by_name()
 to create a virtual device for the SCMI "perf" power domain. This failed

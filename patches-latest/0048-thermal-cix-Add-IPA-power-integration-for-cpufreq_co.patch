@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From fcef28281ddc775fbc1a6920c033dccaab8826dc Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 22:38:17 +1100
-Subject: [PATCH] thermal: cix: Add IPA power integration for cpufreq_cooling
+Subject: [PATCH 048/118] thermal: cix: Add IPA power integration for
+ cpufreq_cooling
 
 Export cix_get_static_power_cpus() and cix_get_dynamic_power_cpus()
 from the CIX IPA driver for use by cpufreq_cooling.

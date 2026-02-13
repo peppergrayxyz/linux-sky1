@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 97d831e51055ff764e1e507ed0cbc00a37d700b9 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 16:02:20 +1100
-Subject: [PATCH] phy: cix: usbdp: guard syscon regmap access for ACPI boot
+Subject: [PATCH 100/118] phy: cix: usbdp: guard syscon regmap access for ACPI
+ boot
 
 Under ACPI boot, syscon_regmap_lookup_by_phandle() returns an error
 because the device has no of_node. The resulting NULL usbphy_syscon

@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From a39d4268ccfc8991a27e31203d774921d95af9fb Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 01:19:36 +1100
-Subject: [PATCH] media: cix: Add Sky1 video codec (VPU) driver
+Subject: [PATCH 010/118] media: cix: Add Sky1 video codec (VPU) driver
 
 Add CIX Sky1 video processing unit driver supporting hardware-
 accelerated video encode and decode via V4L2 mem2mem interface.

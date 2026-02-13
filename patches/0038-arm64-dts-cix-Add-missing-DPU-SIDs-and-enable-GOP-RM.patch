@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From b645c8e523a644dc9b05364fde9416aaf9b65999 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 09:41:18 +1100
-Subject: [PATCH] arm64: dts: cix: Add missing DPU SIDs and enable GOP RMR from
- IORT
+Subject: [PATCH 038/117] arm64: dts: cix: Add missing DPU SIDs and enable GOP
+ RMR from IORT
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

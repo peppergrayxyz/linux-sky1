@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From e79155d6483f5dc9d6706df057927191836bd35e Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 09:41:26 +1100
-Subject: [PATCH] arm64: dts: cix: Enable PCIe SMMU on Orion O6
+Subject: [PATCH 038/118] arm64: dts: cix: Enable PCIe SMMU on Orion O6
 
 Enable smmu_pciehub to provide IOMMU translation for all PCIe devices.
 This enables DMA isolation, VFIO device passthrough support, and

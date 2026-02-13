@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From becab452d7342af8ca4ccbc86f912ecd5b7f4ec4 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:17:14 +1100
-Subject: [PATCH] scripts: sky1_lib: Add DMI board detection for ACPI boot
+Subject: [PATCH 081/117] scripts: sky1_lib: Add DMI board detection for ACPI
+ boot
 
 Under ACPI boot, /sys/firmware/devicetree/base/compatible does not
 exist. Fall back to reading /sys/class/dmi/id/board_name and mapping

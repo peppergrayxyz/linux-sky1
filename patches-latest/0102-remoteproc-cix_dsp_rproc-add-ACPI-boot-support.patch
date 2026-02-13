@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 441999cf288c30adc29ffb483332428df129bd13 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 17:09:53 +1100
-Subject: [PATCH] remoteproc: cix_dsp_rproc: add ACPI boot support
+Subject: [PATCH 102/118] remoteproc: cix_dsp_rproc: add ACPI boot support
 
 The CIX DSP remoteproc driver fails to probe under ACPI because it
 relies on OF-only APIs for syscon lookup, clock/reset acquisition,

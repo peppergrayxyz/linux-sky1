@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From c8c3868b93a2fbb6c7836d6a02d1057001ec5f5d Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 17:42:52 +1100
-Subject: [PATCH] mailbox: cix-mailbox: Remove use_shmem register offset hack
+Subject: [PATCH 070/117] mailbox: cix-mailbox: Remove use_shmem register
+ offset hack
 
 The use_shmem mechanism detected when a DT register address overlapped
 with SCMI shared memory (bit 7 set) and adjusted all register accesses

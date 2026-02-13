@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 9a842b50f4e858f231c810144ad505c947ddb0b0 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 11 Feb 2026 01:58:34 +1100
-Subject: [PATCH] scripts: kernel-track-status: handle major version bumps in
- RC detection
+Subject: [PATCH 108/117] scripts: kernel-track-status: handle major version
+ bumps in RC detection
 
 When checking for the next RC cycle, also look for a major version
 bump (e.g. 7.0-rc1) in addition to a minor version bump (e.g. 6.20-rc1).

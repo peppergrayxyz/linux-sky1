@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0f1b67528953586e5bfa623274dbbaa1764cbfbf Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 23:27:33 +1100
-Subject: [PATCH] scripts: Add Sky1 kernel development tools
+Subject: [PATCH 016/118] scripts: Add Sky1 kernel development tools
 
 Replace build-install.sh with Python 3.14 build scripts that support
 multi-track builds (LTS/Latest/RC/Next) with auto-detection.

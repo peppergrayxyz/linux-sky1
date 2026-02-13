@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 4f789e87953171798dfeedd9f5bb277de89f0034 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 12:45:48 +1100
-Subject: [PATCH] phy: cix: usbdp: enable full PHY reset under ACPI
+Subject: [PATCH 113/118] phy: cix: usbdp: enable full PHY reset under ACPI
 
 The ACPI path previously skipped PHY reset on the assumption that
 firmware-initialized PHY state could be preserved.  Now that

@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 0c2ba97b67dfe300a34be60c5992424617cd0b2e Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:29:15 +1100
-Subject: [PATCH] net: realtek: r8125/r8126: Add IRQ affinity hint for
+Subject: [PATCH 042/118] net: realtek: r8125/r8126: Add IRQ affinity hint for
  performance cores
 
 On ARM big.LITTLE systems, network interrupt processing benefits from

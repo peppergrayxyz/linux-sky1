@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 2bb3d998d3fe1efede7dd40b93bb80df36c0301e Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:35 +1100
-Subject: [PATCH] arm64: dts: cix: Add Sky1 SoC and Radxa Orion O6 device tree
+Subject: [PATCH 001/117] arm64: dts: cix: Add Sky1 SoC and Radxa Orion O6
+ device tree
 
 ---
  arch/arm64/Kconfig                            |    5 +-

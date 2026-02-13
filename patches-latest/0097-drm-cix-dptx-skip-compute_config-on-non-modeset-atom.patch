@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 3967b522e3d8428010c4c8c389cc280c8a06cd6d Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 15:59:01 +1100
-Subject: [PATCH] drm/cix/dptx: skip compute_config on non-modeset atomic
- commits
+Subject: [PATCH 097/118] drm/cix/dptx: skip compute_config on non-modeset
+ atomic commits
 
 DRM core's mode_fixup() calls encoder_atomic_check for every connector
 in the atomic state, including non-modeset commits like pan_display and

@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 18187228a2d168f5ed692b7dbd54bad81abe536b Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 19:40:29 +1100
-Subject: [PATCH] iommu/arm-smmu-v3: Add SMMUv3.2 event definitions
+Subject: [PATCH 033/118] iommu/arm-smmu-v3: Add SMMUv3.2 event definitions
 
 Add missing event IDs from the ARM SMMUv3.2 specification:
 

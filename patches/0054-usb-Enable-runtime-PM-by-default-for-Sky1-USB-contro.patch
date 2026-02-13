@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From dfc21da7044861622f2e3470c58663c6f264a82f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:14:33 +1100
-Subject: [PATCH] usb: Enable runtime PM by default for Sky1 USB controllers
+Subject: [PATCH 054/117] usb: Enable runtime PM by default for Sky1 USB
+ controllers
 
 Enable runtime power management by default for Sky1 USB controllers:
 - Set CDNS3_DEFAULT_PM_RUNTIME_ALLOW quirk for cdnsp-sky1

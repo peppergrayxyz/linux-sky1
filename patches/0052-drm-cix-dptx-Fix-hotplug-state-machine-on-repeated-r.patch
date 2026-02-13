@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 2ac28d138a442df590cd84207752a09310fc431c Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:10:04 +1100
-Subject: [PATCH] drm: cix: dptx: Fix hotplug state machine on repeated resets
+Subject: [PATCH 052/117] drm: cix: dptx: Fix hotplug state machine on repeated
+ resets
 
 When a display is unplugged but the system continues requesting output,
 repeated DP resets can cause loss of HDMI signal and missed HPD events.

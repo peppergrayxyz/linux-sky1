@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 5a3feba078cfc908111478169cea150609a00f33 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 17:10:04 +1100
-Subject: [PATCH] misc: armchina-npu: add ACPI DVFS support via fwnode genpd
- provider
+Subject: [PATCH 103/117] misc: armchina-npu: add ACPI DVFS support via fwnode
+ genpd provider
 
 Under ACPI, the NPU device's pm_domain is already set by the ACPI
 general PM domain (from _PR0/_PR3 power resources), which causes

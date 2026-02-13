@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 421a3615bd20ae111dfbbdb15d3973264b022854 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 19:11:59 +1100
-Subject: [PATCH] drm/cix: Fix DPTX link rate selection for optimal bandwidth
- margin
+Subject: [PATCH 027/118] drm/cix: Fix DPTX link rate selection for optimal
+ bandwidth margin
 
 Replace the minimum-rate link selection algorithm with one that ensures
 adequate bandwidth margin. The old code picked the lowest link rate

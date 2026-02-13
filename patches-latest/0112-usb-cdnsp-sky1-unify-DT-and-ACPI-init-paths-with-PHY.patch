@@ -1,8 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From 08fe42824bff3a9288d1953a12194e6cf2bb0d67 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 12:45:40 +1100
-Subject: [PATCH] usb: cdnsp: sky1: unify DT and ACPI init paths with PHY probe
- ordering
+Subject: [PATCH 112/118] usb: cdnsp: sky1: unify DT and ACPI init paths with
+ PHY probe ordering
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
