@@ -1,7 +1,7 @@
-From 29df08a7efdc6ddb2b9dda7119b82a5260dea3c3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:35 +1100
-Subject: [PATCH 003/117] arm64: cix: Add Sky1 infrastructure drivers
+Subject: [PATCH] arm64: cix: Add Sky1 infrastructure drivers
 
 ---
  drivers/clk/Kconfig                           |   1 +

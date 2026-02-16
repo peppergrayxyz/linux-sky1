@@ -1,8 +1,8 @@
-From f6aa0ef91ed70dd8a712458de5946bfdac2b66ee Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 16:51:55 +1100
-Subject: [PATCH 030/117] arm64: dts: cix: Fix O6N power tree, convert USB-C PD
- to TCPCI
+Subject: [PATCH] arm64: dts: cix: Fix O6N power tree, convert USB-C PD to
+ TCPCI
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,8 +1,8 @@
-From 534ea9d5c815244448f8f418b388daab6a3f879e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 21:21:17 +1100
-Subject: [PATCH 082/117] usb: cdns3: Serialize drd_init to prevent SCMI
- mailbox flooding
+Subject: [PATCH] usb: cdns3: Serialize drd_init to prevent SCMI mailbox
+ flooding
 
 Each USB controller's drd_init disables and re-enables 4 clocks via
 SCMI. With 10 controllers probing in parallel, 80+ SCMI messages

@@ -1,8 +1,7 @@
-From ef1bf21076eb4cd065d25fe2efe272f6b3e871e6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 19:36:00 +1100
-Subject: [PATCH 014/117] net: realtek: fix shutdown panic in r8125/r8126
- get_stats64
+Subject: [PATCH] net: realtek: fix shutdown panic in r8125/r8126 get_stats64
 
 During system poweroff, netif_carrier_off() in the shutdown path
 schedules a linkwatch_event on the events_unbound workqueue.  This

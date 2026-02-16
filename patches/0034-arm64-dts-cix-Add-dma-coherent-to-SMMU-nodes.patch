@@ -1,7 +1,7 @@
-From 7f8d9ec8e5aa1b3c820fea8a266263e68b098f18 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 20:07:22 +1100
-Subject: [PATCH 034/117] arm64: dts: cix: Add dma-coherent to SMMU nodes
+Subject: [PATCH] arm64: dts: cix: Add dma-coherent to SMMU nodes
 
 The MMU-700 (SMMUv3.2) on Sky1 reports IDR0.COHACC=1, indicating
 hardware support for coherent page table walks. The TRM confirms the

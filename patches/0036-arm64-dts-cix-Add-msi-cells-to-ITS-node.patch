@@ -1,7 +1,7 @@
-From 78060c4d620923bd2a714e592e2b1e6fb1db883c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 09:28:05 +1100
-Subject: [PATCH 036/117] arm64: dts: cix: Add #msi-cells to ITS node
+Subject: [PATCH] arm64: dts: cix: Add #msi-cells to ITS node
 
 Add the required #msi-cells = <1> property to the GICv3 ITS node as
 specified by the arm,gic-v3-its binding. This is needed for platform

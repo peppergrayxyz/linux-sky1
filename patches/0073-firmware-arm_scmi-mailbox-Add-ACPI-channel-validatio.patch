@@ -1,8 +1,7 @@
-From 544b27a7062dacd0445eddd8c938819f66b959a0 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 17:48:35 +1100
-Subject: [PATCH 073/117] firmware: arm_scmi: mailbox: Add ACPI channel
- validation
+Subject: [PATCH] firmware: arm_scmi: mailbox: Add ACPI channel validation
 
 mailbox_chan_available() and mailbox_chan_validate() use DT-only APIs
 (of_count_phandle_with_args, of_parse_phandle) that fail when booting

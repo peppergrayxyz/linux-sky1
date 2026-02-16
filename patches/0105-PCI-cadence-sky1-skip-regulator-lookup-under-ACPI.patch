@@ -1,7 +1,7 @@
-From cf2c45ee0a83d4d861d630ec730bb25de220a309 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 10 Feb 2026 21:18:58 +1100
-Subject: [PATCH 105/117] PCI: cadence: sky1: skip regulator lookup under ACPI
+Subject: [PATCH] PCI: cadence: sky1: skip regulator lookup under ACPI
 
 Under ACPI, firmware manages PCIe endpoint power rails via power
 resources (_PR0/_PR3).  The optional regulator lookup produces

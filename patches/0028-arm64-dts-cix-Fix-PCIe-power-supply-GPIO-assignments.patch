@@ -1,8 +1,8 @@
-From 61950e4a3e6cb9b3f843b94c40dafab3293e26de Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 20:16:23 +1100
-Subject: [PATCH 028/117] arm64: dts: cix: Fix PCIe power supply GPIO
- assignments on Orion O6/O6N
+Subject: [PATCH] arm64: dts: cix: Fix PCIe power supply GPIO assignments on
+ Orion O6/O6N
 
 Fix several vendor DTS bugs in PCIe power supply GPIO mappings,
 verified against board schematics:

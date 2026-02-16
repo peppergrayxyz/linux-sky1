@@ -1,8 +1,7 @@
-From 655f719b7f21ccfacd8fc15b304eb9ab50710f93 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 22:51:33 +1100
-Subject: [PATCH 049/117] drm: cix: linlon-dp: Handle vblank event on flip
- timeout
+Subject: [PATCH] drm: cix: linlon-dp: Handle vblank event on flip timeout
 
 Port fix from CIX 6.6.89 to handle flip timeout more gracefully:
 

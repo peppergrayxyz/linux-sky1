@@ -1,7 +1,7 @@
-From 7792bceb79c07296cb2d2029306a4042cefabf04 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 19:06:10 +1100
-Subject: [PATCH 114/117] dmaengine: arm-dma350: fix ACPI probe missing address
+Subject: [PATCH] dmaengine: arm-dma350: fix ACPI probe missing address
  translation and IRQ routing
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

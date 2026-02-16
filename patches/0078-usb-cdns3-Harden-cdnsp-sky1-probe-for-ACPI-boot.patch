@@ -1,7 +1,7 @@
-From 237719689296b4d1d249afa62ee078b1b04d1480 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:38 +1100
-Subject: [PATCH 078/117] usb: cdns3: Harden cdnsp-sky1 probe for ACPI boot
+Subject: [PATCH] usb: cdns3: Harden cdnsp-sky1 probe for ACPI boot
 
 Add a NULL guard for usb_syscon in sky1_set_mode_by_id() since the
 syscon regmap may not be available under ACPI.

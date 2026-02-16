@@ -1,7 +1,7 @@
-From edb7b0171bf72980c06ea28986f0d2ecd31b8e66 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:32:47 +1100
-Subject: [PATCH 056/117] ASoC/ALSA: CIX Sky1 audio fixes
+Subject: [PATCH] ASoC/ALSA: CIX Sky1 audio fixes
 
 HDA:
 - Add CIX Phecda board fixup (SSID 0x10ec:0x129e) to disable

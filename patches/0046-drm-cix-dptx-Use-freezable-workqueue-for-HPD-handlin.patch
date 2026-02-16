@@ -1,8 +1,7 @@
-From 2174223a9a87a38499a5cdf5e73c7773fca53aee Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:52:08 +1100
-Subject: [PATCH 046/117] drm: cix: dptx: Use freezable workqueue for HPD
- handling
+Subject: [PATCH] drm: cix: dptx: Use freezable workqueue for HPD handling
 
 Use system_freezable_wq instead of the default system workqueue for
 HPD (hot-plug detect) event and IRQ work. This ensures HPD work is

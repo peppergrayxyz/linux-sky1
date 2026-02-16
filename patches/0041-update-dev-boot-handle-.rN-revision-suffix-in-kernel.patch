@@ -1,8 +1,7 @@
-From e8838860644c809de1201214b808aa61031219d8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 14:07:58 +1100
-Subject: [PATCH 041/117] update-dev-boot: handle .rN revision suffix in kernel
- names
+Subject: [PATCH] update-dev-boot: handle .rN revision suffix in kernel names
 
 Match both old-style (vmlinuz-*-sky1-rc) and new-style
 (vmlinuz-*-sky1-rc.r6) kernel and DTB paths.

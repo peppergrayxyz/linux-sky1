@@ -1,7 +1,7 @@
-From 907bfd1b93e94049d2139e335aaf2b4466610e8a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 13 Feb 2026 16:38:47 +1100
-Subject: [PATCH 116/117] drm: linlon-dp: harden DPU for ACPI boot and Panthor
+Subject: [PATCH] drm: linlon-dp: harden DPU for ACPI boot and Panthor
  coexistence
 
 Three DPU driver fixes for ACPI boot reliability:

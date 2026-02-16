@@ -1,8 +1,8 @@
-From e8af310593375b54b94072b481dacb5b2dcf9574 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 2 Feb 2026 23:59:01 +1100
-Subject: [PATCH 019/117] arm64: dts: cix: Add GPIO LEDs and fix pinctrl on
- Orion O6 and O6N
+Subject: [PATCH] arm64: dts: cix: Add GPIO LEDs and fix pinctrl on Orion O6
+ and O6N
 
 O6: Add gpio-leds node with power LED (GPIO015, default-on), state LED
 (GPIO008, heartbeat), and SSD activity LED (GPIO016, disk-activity).

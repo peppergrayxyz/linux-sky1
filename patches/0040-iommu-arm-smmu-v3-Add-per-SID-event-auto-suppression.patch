@@ -1,7 +1,7 @@
-From ecc24efcccd295fd1b715a496f71c5053b78b4eb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 10:33:37 +1100
-Subject: [PATCH 040/117] iommu/arm-smmu-v3: Add per-SID event auto-suppression
+Subject: [PATCH] iommu/arm-smmu-v3: Add per-SID event auto-suppression
 
 Some SoCs have hardware blocks (e.g. PCIe DTI ATS masters) that
 continuously generate SMMU faults on stream IDs shared with real

@@ -1,7 +1,7 @@
-From 7c00ec953747f5bcee213029192eaf4dbed90cb9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 23:40:51 +1100
-Subject: [PATCH 057/117] arm64: dts: cix: Thermal zone improvements
+Subject: [PATCH] arm64: dts: cix: Thermal zone improvements
 
 - Rename thermal zones to tz-* pattern for clarity and <20 char limit
 - Add switch_on trip point (60C) to prevent IPA governor from

@@ -1,8 +1,7 @@
-From 3b7b9dff58f7008de011441b8f98942f6719d8fb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 23:18:49 +1100
-Subject: [PATCH 015/117] drm/panthor: Add SCMI perf domain support for GPU
- DVFS
+Subject: [PATCH] drm/panthor: Add SCMI perf domain support for GPU DVFS
 
 On platforms with multiple power domains (e.g. CIX Sky1 with pd_gpu for
 power gating and perf for SCMI DVFS), the platform bus does not

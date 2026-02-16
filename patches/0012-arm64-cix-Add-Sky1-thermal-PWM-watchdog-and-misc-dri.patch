@@ -1,8 +1,7 @@
-From 85c52059a3447775a1c82eb85ba10ba49f0e06c6 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:38 +1100
-Subject: [PATCH 012/117] arm64: cix: Add Sky1 thermal, PWM, watchdog, and misc
- drivers
+Subject: [PATCH] arm64: cix: Add Sky1 thermal, PWM, watchdog, and misc drivers
 
 ---
  drivers/base/arch_topology.c       |  20 ++

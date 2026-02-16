@@ -1,7 +1,7 @@
-From f3502c4f716192b585d9c7cfbf213ebab482596c Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 00:14:10 +1100
-Subject: [PATCH 060/117] rtc: hym8563: Add second-level wake-up support
+Subject: [PATCH] rtc: hym8563: Add second-level wake-up support
 
 The HYM8563 RTC has two wake mechanisms:
 - Alarm Function (AF): minute-level precision, for delays >= 256s

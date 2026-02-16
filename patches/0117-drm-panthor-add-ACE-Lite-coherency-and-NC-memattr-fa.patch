@@ -1,8 +1,8 @@
-From 4474fc6b90dcd4b513ad05f023a685471ffa00ac Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 13 Feb 2026 17:55:33 +1100
-Subject: [PATCH 117/117] drm/panthor: add ACE-Lite coherency and NC memattr
- fallback for Sky1
+Subject: [PATCH] drm/panthor: add ACE-Lite coherency and NC memattr fallback
+ for Sky1
 
 Replace the single boolean coherent field with an enum
 panthor_coherency_mode whose values match the GPU_COHERENCY_PROTOCOL

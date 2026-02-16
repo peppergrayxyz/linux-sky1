@@ -1,7 +1,7 @@
-From 8d27afed807f61587d3427c5b178dd62b8089a41 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 3 Feb 2026 13:04:17 +1100
-Subject: [PATCH 021/117] drm/cix: Fix compiler warnings in DPTX display driver
+Subject: [PATCH] drm/cix: Fix compiler warnings in DPTX display driver
 
 Fix all compiler warnings in the Trilinear DPTX module:
 

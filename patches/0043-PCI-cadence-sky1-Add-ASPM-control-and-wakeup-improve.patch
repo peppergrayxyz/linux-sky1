@@ -1,8 +1,7 @@
-From f562a3be123cfb637e66e2f7a872c335b48f0507 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:40:02 +1100
-Subject: [PATCH 043/117] PCI: cadence: sky1: Add ASPM control and wakeup
- improvements
+Subject: [PATCH] PCI: cadence: sky1: Add ASPM control and wakeup improvements
 
 Port several PCIe improvements from CIX 6.6.89 kernel:
 

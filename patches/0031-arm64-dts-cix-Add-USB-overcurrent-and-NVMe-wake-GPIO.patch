@@ -1,8 +1,8 @@
-From c33277c7cd30e63e59c3493a41e5b3d9213a952e Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 4 Feb 2026 16:52:03 +1100
-Subject: [PATCH 031/117] arm64: dts: cix: Add USB overcurrent and NVMe wake
- GPIOs on Orion O6
+Subject: [PATCH] arm64: dts: cix: Add USB overcurrent and NVMe wake GPIOs on
+ Orion O6
 
 Wire up GPIO signals identified from schematic review:
 

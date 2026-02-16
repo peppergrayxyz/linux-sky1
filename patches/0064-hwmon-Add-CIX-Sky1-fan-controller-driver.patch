@@ -1,7 +1,7 @@
-From cee98a2f91d10afbf539bd1e0b7c829eac14acab Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:06:37 +1100
-Subject: [PATCH 064/117] hwmon: Add CIX Sky1 fan controller driver
+Subject: [PATCH] hwmon: Add CIX Sky1 fan controller driver
 
 Add driver for the CIX Sky1 SoC fan controller which provides:
 - PWM-based fan speed control via hwmon interface

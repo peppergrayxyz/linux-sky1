@@ -1,8 +1,7 @@
-From 431e060b22a718072f1c6740cadaa6807971185d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 17:23:37 +1100
-Subject: [PATCH 007/117] sound: audio: Add CIX Sky1 audio, DSP, and HDA
- drivers
+Subject: [PATCH] sound: audio: Add CIX Sky1 audio, DSP, and HDA drivers
 
 ---
  drivers/dma-buf/heaps/Kconfig            |    9 +

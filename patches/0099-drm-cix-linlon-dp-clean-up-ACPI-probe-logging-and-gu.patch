@@ -1,8 +1,8 @@
-From bea10827e69bd10d37d33789273a7df7ee30337a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 16:02:13 +1100
-Subject: [PATCH 099/117] drm/cix/linlon-dp: clean up ACPI probe logging and
- guard NULL match
+Subject: [PATCH] drm/cix/linlon-dp: clean up ACPI probe logging and guard NULL
+ match
 
 Replace pr_info debug messages with dev_dbg for cleaner boot output.
 

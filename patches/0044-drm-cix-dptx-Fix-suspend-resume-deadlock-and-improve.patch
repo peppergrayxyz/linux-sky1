@@ -1,8 +1,8 @@
-From 933ba77d93f8ea049c150395ec1b79869d0bd34a Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:48:21 +1100
-Subject: [PATCH 044/117] drm: cix: dptx: Fix suspend/resume deadlock and
- improve PM handling
+Subject: [PATCH] drm: cix: dptx: Fix suspend/resume deadlock and improve PM
+ handling
 
 Fix a potential deadlock in trilin_dp_pm_prepare() where the session_lock
 mutex was held while calling cancel_delayed_work_sync(). If the HPD work
