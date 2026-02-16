@@ -1,4 +1,4 @@
-From 87045148e27ed5d8275234a3c97983c610035998 Mon Sep 17 00:00:00 2001
+From 1b048fc3d029c293800464b0ce0409a50ef34da1 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 22:50:25 +1100
 Subject: [PATCH 088/118] Bluetooth: btrtl: Fix NULL pointer dereference on USB
@@ -24,9 +24,6 @@ successful rom_version read.
 
 Fix by using 'ret' consistently instead of 'rc', and remove the now
 unused 'rc' variable.
----
- drivers/bluetooth/btrtl.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/bluetooth/btrtl.c b/drivers/bluetooth/btrtl.c
 index 5603b282f9bc1..7c03c7888b9a2 100644
@@ -51,3 +48,6 @@ index 5603b282f9bc1..7c03c7888b9a2 100644
  		goto err_free;
  
  	key_id = reg_val[0];
+-- 
+2.51.0
+

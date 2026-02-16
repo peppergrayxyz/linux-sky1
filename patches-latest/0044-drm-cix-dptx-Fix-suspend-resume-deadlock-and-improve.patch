@@ -1,4 +1,4 @@
-From 931e92255f31c05cc298a8c5e02e01fdf4e1df0f Mon Sep 17 00:00:00 2001
+From 91c1cf89edf66c99e54d244d15ebd69d639ba7d9 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 21:48:21 +1100
 Subject: [PATCH 044/118] drm: cix: dptx: Fix suspend/resume deadlock and
@@ -24,11 +24,6 @@ Additionally, improve the PM handling by:
 
 These changes align with the CIX 6.6.89 kernel's proven suspend/resume
 handling and prevent races during system sleep transitions.
----
- drivers/gpu/drm/cix/dptx/trilin_dptx.c     | 80 +++++++++++++++++++++-
- drivers/gpu/drm/cix/dptx/trilin_dptx.h     |  1 +
- drivers/gpu/drm/cix/dptx/trilin_dptx_cix.c | 35 +++++++---
- 3 files changed, 107 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/gpu/drm/cix/dptx/trilin_dptx.c b/drivers/gpu/drm/cix/dptx/trilin_dptx.c
 index dfd5b3dd49cc4..25429b641b84f 100644
@@ -222,3 +217,6 @@ index 4eacfdd27060a..57b9c30246dfc 100644
  };
  #endif
  
+-- 
+2.51.0
+

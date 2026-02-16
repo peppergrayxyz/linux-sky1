@@ -1,4 +1,4 @@
-From ed8719d5a68a6058cd09e08851fc329eae5de678 Mon Sep 17 00:00:00 2001
+From 5c0c68afb88a499b48fd5121d2b3b8b34e8d721f Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 5 Feb 2026 09:28:05 +1100
 Subject: [PATCH 036/118] arm64: dts: cix: Add #msi-cells to ITS node
@@ -12,9 +12,6 @@ The SMMU nodes do not get msi-parent: the vendor ACPI IORT table
 confirms all three SMMU instances (pciehub, mmhub, syshub) have
 DeviceID Valid = 0 and use wired GSIVs exclusively for their own
 interrupt delivery.
----
- arch/arm64/boot/dts/cix/sky1.dtsi | 1 +
- 1 file changed, 1 insertion(+)
 
 diff --git a/arch/arm64/boot/dts/cix/sky1.dtsi b/arch/arm64/boot/dts/cix/sky1.dtsi
 index bcffb970f492a..3eaca2bee81e6 100644
@@ -28,3 +25,6 @@ index bcffb970f492a..3eaca2bee81e6 100644
  				reg = <0x0 0x0e050000 0x0 0x30000>;
  			};
  		};
+-- 
+2.51.0
+

@@ -1,4 +1,4 @@
-From 62c0734294185ab88e2a316a9a171fdc387f5b2c Mon Sep 17 00:00:00 2001
+From 5afda8167ccb925af0485758c0010ed83bb054f3 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Wed, 11 Feb 2026 01:58:34 +1100
 Subject: [PATCH 109/118] scripts: kernel-track-status: handle major version
@@ -7,9 +7,6 @@ Subject: [PATCH 109/118] scripts: kernel-track-status: handle major version
 When checking for the next RC cycle, also look for a major version
 bump (e.g. 7.0-rc1) in addition to a minor version bump (e.g. 6.20-rc1).
 Linux 7.0 follows 6.19, so the simple minor+1 logic would miss it.
----
- scripts/kernel-track-status.py | 22 +++++++++++++---------
- 1 file changed, 13 insertions(+), 9 deletions(-)
 
 diff --git a/scripts/kernel-track-status.py b/scripts/kernel-track-status.py
 index 73528e5786bf5..979d0146cfe35 100755
@@ -44,3 +41,6 @@ index 73528e5786bf5..979d0146cfe35 100755
      else:
          print(f"{RED}branch missing{NC}")
  
+-- 
+2.51.0
+

@@ -1,4 +1,4 @@
-From da2a5edf7829d20e3ce2cf8248876b8d75a9269c Mon Sep 17 00:00:00 2001
+From e90ed24c74417e4b8103292ee39064f7a5bfdd8b Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 00:02:58 +1100
 Subject: [PATCH 059/118] pwm: sky1: Remove clock auto-enable and probe reset
@@ -13,9 +13,6 @@ with PWM already driving the backlight from UEFI.
 
 Clocks are still properly managed during suspend/resume for power
 savings.
----
- drivers/pwm/pwm-sky1.c | 58 ++++++------------------------------------
- 1 file changed, 8 insertions(+), 50 deletions(-)
 
 diff --git a/drivers/pwm/pwm-sky1.c b/drivers/pwm/pwm-sky1.c
 index 3b55c4000359f..f6688b404952f 100644
@@ -140,3 +137,6 @@ index 3b55c4000359f..f6688b404952f 100644
  	return devm_pwmchip_add(dev, chip);
  }
  
+-- 
+2.51.0
+

@@ -1,4 +1,4 @@
-From 441999cf288c30adc29ffb483332428df129bd13 Mon Sep 17 00:00:00 2001
+From abe4edcf17d136982997fb3164e8ffcc221a20a2 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Mon, 9 Feb 2026 17:09:53 +1100
 Subject: [PATCH 102/118] remoteproc: cix_dsp_rproc: add ACPI boot support
@@ -16,9 +16,6 @@ Add ACPI support:
 - Use memremap(MEMREMAP_WB) for memory regions in system RAM (e.g.
   DSP firmware load area at 0xcde00000) since ioremap_wc() rejects
   linear-map addresses on arm64; detect via pfn_is_map_memory()
----
- drivers/remoteproc/cix_dsp_rproc.c | 98 ++++++++++++++++++++++++------
- 1 file changed, 79 insertions(+), 19 deletions(-)
 
 diff --git a/drivers/remoteproc/cix_dsp_rproc.c b/drivers/remoteproc/cix_dsp_rproc.c
 index 5c96a65c6c5da..62337c39045a9 100644
@@ -188,3 +185,6 @@ index 5c96a65c6c5da..62337c39045a9 100644
  	if (IS_ERR(rproc_priv->mb1_rst))
  		return PTR_ERR(rproc_priv->mb1_rst);
  
+-- 
+2.51.0
+

@@ -1,4 +1,4 @@
-From 18d37e7ac0b0aaa98b1973b24cb9b79dbef880b3 Mon Sep 17 00:00:00 2001
+From fb29ccb491c40c0da200e4a0a05784f50ae39567 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:08 +1100
 Subject: [PATCH 075/118] mailbox: Add ACPI fwnode support for channel lookup
@@ -10,10 +10,6 @@ reference in the package.
 For cix-mailbox, switch to devm_ioremap() instead of
 devm_ioremap_resource() because SCMI shared memory regions (CIXHA005)
 overlap the base of mailbox MMIO regions, causing -EBUSY under ACPI.
----
- drivers/mailbox/cix-mailbox.c | 18 +++++++++++++++---
- drivers/mailbox/mailbox.c     | 17 +++++++++++++++--
- 2 files changed, 30 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/mailbox/cix-mailbox.c b/drivers/mailbox/cix-mailbox.c
 index 4725288c87571..683c5bde1951f 100644
@@ -72,3 +68,6 @@ index 2acc6ec229a45..d7467307b9c9a 100644
  	if (ret) {
  		dev_err(dev, "%s: can't parse \"%s\" property\n", __func__, "mboxes");
  		return ERR_PTR(ret);
+-- 
+2.51.0
+

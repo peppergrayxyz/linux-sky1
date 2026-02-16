@@ -1,4 +1,4 @@
-From 36c3c39fb97da95a3f945c352f8c2409f563293a Mon Sep 17 00:00:00 2001
+From 35349ac68a76ffb6734b6cd89de37bcbbcbd808c Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sat, 7 Feb 2026 18:16:00 +1100
 Subject: [PATCH 074/118] firmware: arm_scmi: Add ACPI boot support for CIX
@@ -15,13 +15,6 @@ Also propagate fwnode to SCMI sub-devices, fix the transport probe
 macro to pass fwnode when no DT node exists, simplify chan_available
 for ACPI, and select 32-bit I/O operations for shared memory when
 the reg-io-width property indicates it.
----
- drivers/firmware/arm_scmi/bus.c               |  3 ++
- drivers/firmware/arm_scmi/common.h            |  3 ++
- drivers/firmware/arm_scmi/driver.c            | 52 ++++++++++++++++++-
- drivers/firmware/arm_scmi/shmem.c             | 19 +++++--
- .../firmware/arm_scmi/transports/mailbox.c    |  4 --
- 5 files changed, 73 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/firmware/arm_scmi/bus.c b/drivers/firmware/arm_scmi/bus.c
 index c7698cfaa4e83..19da052838c45 100644
@@ -188,3 +181,6 @@ index 9c3f6f28cc6bd..0502edd332b9f 100644
  	if (!of_node)
  		return true;
  
+-- 
+2.51.0
+

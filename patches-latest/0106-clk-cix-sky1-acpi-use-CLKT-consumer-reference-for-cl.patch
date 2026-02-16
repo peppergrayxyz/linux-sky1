@@ -1,4 +1,4 @@
-From 9b5ad4a8940cd696512cf979fa473528fd6d468c Mon Sep 17 00:00:00 2001
+From 9244278ddd26c85ea33753de619d87b007182daa Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Tue, 10 Feb 2026 21:19:09 +1100
 Subject: [PATCH 106/118] clk: cix: sky1-acpi: use CLKT consumer reference for
@@ -15,9 +15,6 @@ the audss clock gate and crashing with SError on register access.
 
 Parse element[2] as the consumer reference when present, so each CLKT
 clock is registered against its intended consumer device.
----
- drivers/clk/cix/clk-sky1-acpi.c | 33 ++++++++++++++++++++++++++++-----
- 1 file changed, 28 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/clk/cix/clk-sky1-acpi.c b/drivers/clk/cix/clk-sky1-acpi.c
 index 1cd096a5a8c09..4c5ca954da000 100644
@@ -63,3 +60,6 @@ index 1cd096a5a8c09..4c5ca954da000 100644
  
  out:
  	kfree(buf.pointer);
+-- 
+2.51.0
+

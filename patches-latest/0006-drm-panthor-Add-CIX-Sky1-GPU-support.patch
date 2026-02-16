@@ -1,4 +1,4 @@
-From 24680d0b3cd80471ea9d7a1633de43f800eab3ef Mon Sep 17 00:00:00 2001
+From f6d17e548831be2cf6443968a1c7a22237a4aefd Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 1 Feb 2026 01:06:44 +1100
 Subject: [PATCH 006/118] drm/panthor: Add CIX Sky1 GPU support
@@ -16,17 +16,6 @@ Sky1-specific additions:
 - Backup clock support (gpu_clk_200M, gpu_clk_400M)
 - PHBA/cache configuration for G720 on Sky1
 - OPP table existence check with graceful ENODEV fallback
----
- drivers/gpu/drm/panthor/panthor_devfreq.c |  17 +++-
- drivers/gpu/drm/panthor/panthor_device.c  | 106 ++++++++++++++++++++--
- drivers/gpu/drm/panthor/panthor_device.h  |   9 ++
- drivers/gpu/drm/panthor/panthor_drv.c     |   1 +
- drivers/gpu/drm/panthor/panthor_fw.c      |  10 +-
- drivers/gpu/drm/panthor/panthor_gpu.c     |  31 ++++++-
- drivers/gpu/drm/panthor/panthor_hw.c      |  15 +++
- drivers/gpu/drm/panthor/panthor_mmu.c     |  10 +-
- drivers/gpu/drm/panthor/panthor_regs.h    |   4 +
- 9 files changed, 182 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/gpu/drm/panthor/panthor_devfreq.c b/drivers/gpu/drm/panthor/panthor_devfreq.c
 index 2249b41ca4afe..8b8f91f651830 100644
@@ -401,3 +390,6 @@ index 08bf06c452d69..14296e2f94a98 100644
  #define CSF_GPU_LATEST_FLUSH_ID				0x10000
  
  #define CSF_DOORBELL(i)					(0x80000 + ((i) * 0x10000))
+-- 
+2.51.0
+

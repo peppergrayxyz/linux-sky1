@@ -1,4 +1,4 @@
-From a04e1653a7b45bf7ac67989c70a6cdb3c7dbedaa Mon Sep 17 00:00:00 2001
+From a5901db0e1e009349c39af491b37a36779cbc664 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 17:48:35 +1100
 Subject: [PATCH 073/118] firmware: arm_scmi: mailbox: Add ACPI channel
@@ -18,9 +18,6 @@ Add ACPI support by:
 The ACPI _DSD for SCMI (CIXHA006) contains "mboxes" with device
 references and channel indices, and "shmem" with bare device references,
 which map directly to the same channel layout used by Device Tree.
----
- .../firmware/arm_scmi/transports/mailbox.c    | 49 ++++++++++++++++---
- 1 file changed, 43 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/firmware/arm_scmi/transports/mailbox.c b/drivers/firmware/arm_scmi/transports/mailbox.c
 index ae98644069bdf..9c3f6f28cc6bd 100644
@@ -119,3 +116,6 @@ index ae98644069bdf..9c3f6f28cc6bd 100644
  			ret = -EINVAL;
  		}
  	}
+-- 
+2.51.0
+

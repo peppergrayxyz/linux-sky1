@@ -1,4 +1,4 @@
-From f76125888ac019abf46a1c50063a840b70169e83 Mon Sep 17 00:00:00 2001
+From 44bdca5c200d08d0917bb02ff2f0dd2663714187 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Fri, 6 Feb 2026 02:06:53 +1100
 Subject: [PATCH 065/118] treewide: Add ACPI device IDs for CIX Sky1 SoC
@@ -31,18 +31,6 @@ on CIX Sky1 SoC systems:
 
 These additions allow the respective hardware blocks to be enumerated
 and probed when booting with ACPI firmware.
----
- drivers/clk/cix/clk-sky1-audss.c         | 10 ++++++++++
- drivers/dma/arm-dma350.c                 | 11 +++++++++++
- drivers/i2c/busses/i2c-cadence.c         | 10 ++++++++++
- drivers/i3c/master/i3c-master-cdns.c     | 10 ++++++++++
- drivers/net/ethernet/cadence/macb_main.c | 10 ++++++++++
- drivers/reset/reset-sky1-audss.c         | 10 ++++++++++
- drivers/spi/spi-cadence-quadspi.c        | 10 ++++++++++
- drivers/spi/spi-cadence.c                | 10 ++++++++++
- drivers/usb/typec/rts5453.c              | 10 ++++++++++
- drivers/video/backlight/pwm_bl.c         | 11 ++++++++++-
- 10 files changed, 101 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/cix/clk-sky1-audss.c b/drivers/clk/cix/clk-sky1-audss.c
 index 975313767b605..378d2ff4d6e32 100644
@@ -391,3 +379,6 @@ index 237d3d3f3bb1a..1ef17e82c12d0 100644
  	},
  	.probe		= pwm_backlight_probe,
  	.remove		= pwm_backlight_remove,
+-- 
+2.51.0
+

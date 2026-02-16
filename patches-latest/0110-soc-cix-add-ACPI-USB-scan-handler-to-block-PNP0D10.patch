@@ -1,4 +1,4 @@
-From fc375a518b91a3241dfb6f3b7b4a8fa0af4c412c Mon Sep 17 00:00:00 2001
+From f8b82ce8da134c286b4a5e09e436115dd0f67976 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Thu, 12 Feb 2026 12:43:33 +1100
 Subject: [PATCH 110/118] soc: cix: add ACPI USB scan handler to block PNP0D10
@@ -10,12 +10,6 @@ initialization of clocks, resets, and PHY linkup.
 Add an ACPI scan handler that prevents PNP0D10 (generic xHCI)
 platform device creation, so xhci-plat doesn't race with the
 vendor drivers for the same hardware.
----
- drivers/soc/cix/Kconfig             | 12 +++++
- drivers/soc/cix/Makefile            |  1 +
- drivers/soc/cix/cix-acpi-usb-scan.c | 68 +++++++++++++++++++++++++++++
- 3 files changed, 81 insertions(+)
- create mode 100644 drivers/soc/cix/cix-acpi-usb-scan.c
 
 diff --git a/drivers/soc/cix/Kconfig b/drivers/soc/cix/Kconfig
 index 2da33995eb9a2..831b909787cc6 100644
@@ -123,3 +117,6 @@ index 0000000000000..36767c4feb60f
 +arch_initcall(sky1_usb_acpi_init);
 +
 +#endif /* CONFIG_ACPI */
+-- 
+2.51.0
+

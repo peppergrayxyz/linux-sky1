@@ -1,4 +1,4 @@
-From daa99703567ddf370bd067d36ff24c99545c913a Mon Sep 17 00:00:00 2001
+From e99022be9919c19b1613c1e8849ee1b4fb11cd21 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 8 Feb 2026 21:44:46 +1100
 Subject: [PATCH 091/118] PCI: sky1: Switch ACPI from MCFG quirk to vendor scan
@@ -35,18 +35,6 @@ Supporting changes:
 - phy-cix-pcie: Skip OF provider under ACPI (use lookup tables)
 - Remove MCFG quirk, sky1_pcie_ecam_ops, CIXH2020 forbidden_id_list
   entry, and pci_acpi_cadence_sky1_fixups()
----
- drivers/acpi/acpi_platform.c                  |   1 -
- drivers/acpi/pci_mcfg.c                       |   5 -
- .../pci/controller/cadence/pci-sky1-acpi.c    | 716 +++---------------
- .../pci/controller/cadence/pci-sky1-acpi.h    |  18 +
- drivers/pci/controller/cadence/pci-sky1.c     | 147 +++-
- drivers/pci/pci-acpi.c                        | 181 -----
- drivers/phy/cix/phy-cix-pcie.c                |  14 +-
- drivers/pinctrl/cix/pinctrl-sky1-base.c       |  28 +-
- include/linux/pci-ecam.h                      |   1 -
- 9 files changed, 273 insertions(+), 838 deletions(-)
- create mode 100644 drivers/pci/controller/cadence/pci-sky1-acpi.h
 
 diff --git a/drivers/acpi/acpi_platform.c b/drivers/acpi/acpi_platform.c
 index 7631935ba2ae4..48d15dd785f6e 100644
@@ -1426,3 +1414,6 @@ index 4b2bb1bb3fa9c..d930651473b4d 100644
 -extern const struct pci_ecam_ops sky1_pcie_ecam_ops; /* CIX Sky1 Cadence PCIe */
  #endif
  #endif
+-- 
+2.51.0
+

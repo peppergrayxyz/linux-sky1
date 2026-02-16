@@ -1,4 +1,4 @@
-From 336ac1020ccc0242d6998136aeb8909543d72db2 Mon Sep 17 00:00:00 2001
+From 8300803080c5c6c74719ce32ad3737d99d94d182 Mon Sep 17 00:00:00 2001
 From: Entrpi <entrpi@proton.me>
 Date: Sun, 8 Feb 2026 13:10:25 +1100
 Subject: [PATCH 090/118] PCI: sky1: Add MCFG quirk for CIX Sky1 Cadence PCIe
@@ -27,17 +27,6 @@ Includes supporting changes:
 
 Known issue: link quiesce/retrain cycle causes WiFi (x2 controller)
 link instability — needs further investigation.
----
- drivers/acpi/pci_mcfg.c                       |   6 +
- drivers/pci/controller/cadence/Makefile       |   1 +
- .../pci/controller/cadence/pci-sky1-acpi.c    | 650 ++++++++++++++++++
- drivers/pci/pci-acpi.c                        | 184 +++++
- drivers/pci/quirks.c                          |  38 +
- drivers/pci/setup-res.c                       |  23 +-
- drivers/phy/cix/phy-cix-usbdp.c               |   6 +-
- include/linux/pci-ecam.h                      |   1 +
- 8 files changed, 901 insertions(+), 8 deletions(-)
- create mode 100644 drivers/pci/controller/cadence/pci-sky1-acpi.c
 
 diff --git a/drivers/acpi/pci_mcfg.c b/drivers/acpi/pci_mcfg.c
 index 58e10a9801148..72afd41d40e18 100644
@@ -1075,3 +1064,6 @@ index d930651473b4d..4b2bb1bb3fa9c 100644
 +extern const struct pci_ecam_ops sky1_pcie_ecam_ops; /* CIX Sky1 Cadence PCIe */
  #endif
  #endif
+-- 
+2.51.0
+
