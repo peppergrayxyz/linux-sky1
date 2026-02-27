@@ -29,3 +29,4 @@
 0029-drm-trilin-dptx-tear-down-DP-core-on-HPD-disconnect-.patch
 0030-drm-trilin-dptx-reset-active_stream_cnt-on-HPD-disco.patch
 0031-media-linlon-add-missing-VIDEOBUF2_DMA_SG-and-VIDEOB.patch
+0032-drm-trilin-dptx-add-CEC-over-DP-AUX-support.patch

@@ -125,3 +125,4 @@
 0125-drm-trilin-dptx-tear-down-DP-core-on-HPD-disconnect-.patch
 0126-drm-trilin-dptx-reset-active_stream_cnt-on-HPD-disco.patch
 0127-media-linlon-add-missing-VIDEOBUF2_DMA_SG-and-VIDEOB.patch
+0128-drm-trilin-dptx-add-CEC-over-DP-AUX-support.patch
