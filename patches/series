@@ -132,3 +132,4 @@
 0132-fix-allmodconfig-build-warnings-across-CIX-drivers.patch
 0133-drm-trilin-dptx-retry-AUX-on-cold-plug-timeout.patch
 0134-ASoC-cix-skip-HDMI-audio-links-for-missing-I2S-devic.patch
+0135-drm-trilin-dptx-add-ELD-reporting-and-audio-infofram.patch
